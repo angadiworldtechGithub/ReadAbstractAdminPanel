@@ -26,22 +26,22 @@ function App() {
         <BrowserRouter>
           <Sidebar>
             <Routes>
-              <Route path="/dashboard" element={<Dashboard />}></Route>
-              <Route path="/accounting" element={<Accounting />}></Route>
-              <Route path="/channels" element={<Channels />}></Route>
-              <Route path="/books" element={<Books />}></Route>
-              <Route path="/author" element={<Author />}></Route>
-              <Route path="/subscription" element={<Subscription />}></Route>
-              <Route path="/transaction" element={<Transaction />}></Route>
-              <Route path="/comments" element={<Comments />}></Route>
+              <Route path="/Dashboard" element={<Dashboard />}></Route>
+              <Route path="/Accounting" element={<Accounting />}></Route>
+              <Route path="/Channels" element={<Channels />}></Route>
+              <Route path="/Books" element={<Books />}></Route>
+              <Route path="/Author" element={<Author />}></Route>
+              <Route path="/Subscription" element={<Subscription />}></Route>
+              <Route path="/Transaction" element={<Transaction />}></Route>
+              <Route path="/Comments" element={<Comments />}></Route>
               <Route
-                path="/usermanagement"
+                path="/Usermanagement"
                 element={<Usermanagement />}
               ></Route>
-              <Route path="/comments" element={<Comments />}></Route>
-              <Route path="/notification" element={<Notification />}></Route>
-              <Route Path="/slider" element={<Slider />}></Route>
-              <Route path="/user" element={<User />}></Route>
+              <Route path="/Comments" element={<Comments />}></Route>
+              <Route path="/Notification" element={<Notification />}></Route>
+              <Route Path="/Slider" element={<Slider />}></Route>
+              <Route path="/User" element={<User />}></Route>
               <Route path="/bookpages" element={<Bookpages />}></Route>
             </Routes>
           </Sidebar>

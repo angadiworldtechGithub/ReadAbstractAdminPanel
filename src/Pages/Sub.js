@@ -28,7 +28,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-function Subscription() {
+function Sub() {
  
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -40,7 +40,7 @@ function Subscription() {
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Button  colorScheme="green" onClick={onOpen}>
-          Add subscription
+         <Link to="/">Add subscription</Link> 
         </Button>
 
         <Modal
@@ -250,4 +250,4 @@ function Subscription() {
 }
 
 
-export default Subscription
+export default Sub
