@@ -64,7 +64,7 @@ function Channels() {
     <>
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button background="#198754" color="#fff" onClick={onOpen}>
+        <Button colorScheme="green" onClick={onOpen}>
           Add Channel
         </Button>
 
@@ -152,10 +152,10 @@ function Channels() {
                 <Td>hshnsnsnm</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Delete
                     </Button>
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Edit
                     </Button>
                   </HStack>
@@ -170,10 +170,10 @@ function Channels() {
                 </Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Delete
                     </Button>
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Edit
                     </Button>
                   </HStack>
@@ -185,10 +185,10 @@ function Channels() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Delete
                     </Button>
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Edit
                     </Button>
                   </HStack>
@@ -200,10 +200,10 @@ function Channels() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Delete
                     </Button>
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Edit
                     </Button>
                   </HStack>
@@ -215,10 +215,10 @@ function Channels() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Delete
                     </Button>
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Edit
                     </Button>
                   </HStack>
@@ -230,10 +230,10 @@ function Channels() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Delete
                     </Button>
-                    <Button color="white" bg="#198754">
+                    <Button colorScheme="green">
                       Edit
                     </Button>
                   </HStack>

@@ -112,7 +112,7 @@ export default function Sidebar({ children }) {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} background="#2D2D2D">
-                <Link to="/sub">Subscription</Link>
+                <Link to="/subscription">Subscription</Link>
               </AccordionPanel>
               <AccordionPanel pb={4} background="#2D2D2D">
                 <Link to="/transaction">Transaction</Link>

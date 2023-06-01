@@ -64,7 +64,7 @@ function Author() {
     <>
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button background="#198754" color="#fff" onClick={onOpen}>
+        <Button colorScheme="green" onClick={onOpen}>
           Add Author
         </Button>
 
@@ -103,10 +103,10 @@ function Author() {
 
             <ModalFooter>
               <HStack spacing="20px">
-                <Button color="white" bg="#198754" onClick={onClose}>
+                <Button colorScheme="green" onClick={onClose}>
                   Close
                 </Button>
-                <Button color="white" bg="#DC3545" mr={3}>
+                <Button colorScheme="red" mr={3}>
                   Add Author
                 </Button>
               </HStack>
@@ -154,10 +154,10 @@ function Author() {
                 <Td>hshnsnsnm</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Delete
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Edit
                     </Button>
                   </HStack>
@@ -172,10 +172,10 @@ function Author() {
                 </Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Delete
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Edit
                     </Button>
                   </HStack>
@@ -187,10 +187,10 @@ function Author() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Delete
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Edit
                     </Button>
                   </HStack>
@@ -202,10 +202,10 @@ function Author() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Delete
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Edit
                     </Button>
                   </HStack>
@@ -217,10 +217,10 @@ function Author() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Delete
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Edit
                     </Button>
                   </HStack>
@@ -232,10 +232,10 @@ function Author() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Delete
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button  colorScheme="red">
                       Edit
                     </Button>
                   </HStack>

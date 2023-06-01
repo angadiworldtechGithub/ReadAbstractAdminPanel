@@ -39,7 +39,7 @@ function Subscription() {
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Button colorScheme="green" onClick={onOpen}>
-          <Link to="/">Add subscription</Link>
+          Add subscription
         </Button>
 
         <Modal
@@ -105,7 +105,7 @@ function Subscription() {
                     Close
                   </Button>
                   <Button colorScheme="green" mr={1}>
-                    Add Author
+                    Add 
                   </Button>
                 </HStack>
               </ModalFooter>
