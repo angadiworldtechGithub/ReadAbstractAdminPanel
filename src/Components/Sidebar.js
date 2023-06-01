@@ -17,6 +17,7 @@ export default function Sidebar({ children }) {
         background="orange"
         color="white"
         fontSize="25px"
+        fontWeight="600"
         paddingLeft="80px"
         paddingTop="15px"
       >
@@ -121,8 +122,19 @@ export default function Sidebar({ children }) {
           </Accordion>
         </Box>
 
-        <Box minH="1000px">{children}</Box>
+        <Box minH="700px">{children}</Box>
       </Flex>
+
+      <Box
+      h="40px"
+      background="#1D1D1D" 
+      color="white"
+      fontSize="15px"
+      fontWeight="600"
+      paddingTop="15px"
+    >
+      <Box> <center>Develop &amp; Design AWT © Copyright</center> </Box>
+    </Box>
     </>
   );
 }
