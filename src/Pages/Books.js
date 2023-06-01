@@ -52,19 +52,25 @@ function Books() {
           <Table variant="simple">
             <Thead>
               <Tr border="2px Solid black">
-                <Th>Name</Th>
-                <Th>Email</Th>
-                <Th>Feedback</Th>
-                <Th>Date</Th>
+                <Th>Channel Name</Th>
+                <Th>Book Title</Th>
+                <Th>Book Image</Th>
+                <Th>Author Name</Th>
+                <Th>Publication & Year</Th>
+                <Th>Type</Th>
+                <Th>Time to Read</Th>
                 <Th>Action</Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
                 <Td>Angadi</Td>
-                <Td>Angadiworldtech@gmail.com</Td>
-                <Td>Good Growth in company Growth in company</Td>
+                <Td>Angadiworldtech</Td>
+                <Td>Good Growth</Td>
                 <Td>13/06/2023</Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
                 <Td>
                   <HStack spacing="10px">
                     <Button colorScheme='red'>
@@ -76,6 +82,9 @@ function Books() {
               <Tr>
                 <Td>feet</Td>
                 <Td>centimetres (cm)</Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
                 <Td></Td>
                 <Td></Td>
                 <Td>
@@ -91,17 +100,7 @@ function Books() {
                 <Td>metres (m)</Td>
                 <Td>0.91444</Td>
                 <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
+                <Td></Td>
                 <Td></Td>
                 <Td></Td>
                 <Td>
@@ -117,6 +116,9 @@ function Books() {
                 <Td>metres (m)</Td>
                 <Td></Td>
                 <Td></Td>
+                <Td></Td>
+                <Td></Td> 
+                <Td></Td>
                 <Td>
                   <HStack spacing="10px">
                     <Button colorScheme='red'>
@@ -128,6 +130,25 @@ function Books() {
               <Tr>
                 <Td>yards</Td>
                 <Td>metres (m)</Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td>
+                  <HStack spacing="10px">
+                    <Button colorScheme='red'>
+                      Delete
+                    </Button>
+                  </HStack>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>yards</Td>
+                <Td>metres (m)</Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
                 <Td></Td>
                 <Td></Td>
                 <Td>

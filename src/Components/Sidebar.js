@@ -78,7 +78,7 @@ export default function Sidebar({ children }) {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    <Link to="/feedback">Feedback Mangement</Link>
+                    <Link to="/comments">Feedback Mangement</Link>
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -91,12 +91,12 @@ export default function Sidebar({ children }) {
             <h2>
               <AccordionButton>
                 <Box as="span" flex="1" textAlign="left">
-                  <Link to="/Accounting">Accounting</Link>
+                  <Link to="/accounting">Accounting</Link>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-            <AccordionPanel pb={4} background="#2D2D2D"><Link to="/subscription">Subscription</Link></AccordionPanel>
+            <AccordionPanel pb={4} background="#2D2D2D"><Link to="/sub">Subscription</Link></AccordionPanel>
             <AccordionPanel pb={4} background="#2D2D2D"><Link to="/transaction">Transaction</Link></AccordionPanel>
           </AccordionItem>
 
