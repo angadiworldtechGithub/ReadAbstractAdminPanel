@@ -17,6 +17,8 @@ import User from "./Pages/User";
 import { ChakraProvider } from "@chakra-ui/react";
 import Bookpages from "./Pages/Bookpages";
 
+// ALL URLS MUST BE IN LOWER CASE ... !!! VERY IMP
+
 function App() {
   return (
     <ChakraProvider>
@@ -24,21 +26,21 @@ function App() {
         <BrowserRouter>
           <Sidebar>
             <Routes>
-              <Route path="/" element={<Dashboard />}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/accounting" element={<Accounting />}></Route>
               <Route path="/channels" element={<Channels />}></Route>
               <Route path="/books" element={<Books />}></Route>
               <Route path="/author" element={<Author />}></Route>
-              <Route path="/sub" element={<Sub />}></Route>
+              <Route path="/subscription" element={<Subscription />}></Route>
               <Route path="/transaction" element={<Transaction />}></Route>
               <Route path="/comments" element={<Comments />}></Route>
               <Route
                 path="/usermanagement"
                 element={<Usermanagement />}
               ></Route>
+              <Route path="/comments" element={<Comments />}></Route>
               <Route path="/notification" element={<Notification />}></Route>
-              <Route path="/Slider" element={<Slider />}></Route>
+              <Route Path="/slider" element={<Slider />}></Route>
               <Route path="/user" element={<User />}></Route>
               <Route path="/bookpages" element={<Bookpages />}></Route>
             </Routes>

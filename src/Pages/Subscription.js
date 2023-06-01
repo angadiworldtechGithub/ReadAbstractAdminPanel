@@ -28,7 +28,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-function Sub() {
+function Subscription() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
@@ -236,4 +236,4 @@ function Sub() {
   );
 }
 
-export default Sub;
+export default Subscription;

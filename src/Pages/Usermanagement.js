@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-function Usermanagement() {
+function UserManagement() {
   return (
     <>
       {/*Modal*/}
@@ -138,4 +138,4 @@ function Usermanagement() {
   );
 }
 
-export default Usermanagement;
+export default UserManagement;
