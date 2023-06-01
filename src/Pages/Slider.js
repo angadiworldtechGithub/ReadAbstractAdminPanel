@@ -56,8 +56,8 @@ function Slider() {
     <>
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button colorScheme='green' onClick={onOpen}>
-           Add Slider
+        <Button colorScheme="green" onClick={onOpen}>
+          Add Slider
         </Button>
 
         <Modal
@@ -81,15 +81,14 @@ function Slider() {
                   placeholder="No file chosen"
                 />
               </FormControl>
-
             </ModalBody>
 
             <ModalFooter>
               <HStack spacing="20px">
-                <Button colorScheme='red' onClick={onClose}>
+                <Button colorScheme="red" onClick={onClose}>
                   Cancle
                 </Button>
-                <Button colorScheme='green' mr={3}>
+                <Button colorScheme="green" mr={3}>
                   Save
                 </Button>
               </HStack>
@@ -123,17 +122,19 @@ function Slider() {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>inches   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem  </Td>
                 <Td>
-                <HStack spacing="20px">
-                <Button colorScheme='red' onClick={onClose}>
-                  Cancle
-                </Button>
-                <Button colorScheme='red' mr={3}>
-                  Save
-                </Button>
-              </HStack>
-                
+                  inches Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+                  Lorem{" "}
+                </Td>
+                <Td>
+                  <HStack spacing="20px">
+                    <Button colorScheme="red" onClick={onClose}>
+                      Cancle
+                    </Button>
+                    <Button colorScheme="red" mr={3}>
+                      Save
+                    </Button>
+                  </HStack>
                 </Td>
               </Tr>
               <Tr>

@@ -27,7 +27,6 @@ import {
 import { Link } from "react-router-dom";
 
 function Transaction() {
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
@@ -37,7 +36,7 @@ function Transaction() {
     <>
       {/*Modal*/}
       <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
-          Transaction Details
+        Transaction Details
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">

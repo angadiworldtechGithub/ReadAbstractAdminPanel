@@ -1,10 +1,6 @@
 import React from "react";
 import { HStack, Text } from "@chakra-ui/react";
-import {
-  Button,
-  Input,
-  Box,
-} from "@chakra-ui/react";
+import { Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -17,15 +13,13 @@ import {
 import { Link } from "react-router-dom";
 
 function Books() {
-
-
   return (
     <>
       {/*Modal*/}
       <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
-      <Button colorScheme='green'>
+        <Button colorScheme="green">
           <Link to="/bookpages">Add Books</Link>
-      </Button>
+        </Button>
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
@@ -41,7 +35,7 @@ function Books() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-             <Link to="/">Clear</Link>
+              <Link to="/">Clear</Link>
             </Button>
           </Box>
         </HStack>
@@ -73,9 +67,7 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red">Delete</Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -89,9 +81,7 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red">Delete</Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -105,25 +95,7 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td> 
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red">Delete</Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -137,9 +109,7 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red">Delete</Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -153,9 +123,21 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red">Delete</Button>
+                  </HStack>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>yards</Td>
+                <Td>metres (m)</Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td>
+                  <HStack spacing="10px">
+                    <Button colorScheme="red">Delete</Button>
                   </HStack>
                 </Td>
               </Tr>

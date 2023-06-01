@@ -1,12 +1,6 @@
 import React from "react";
 import { HStack, Text } from "@chakra-ui/react";
-import {
-
-  useDisclosure,
-  Button,
-  Input,
-  Box,
-} from "@chakra-ui/react";
+import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -57,7 +51,7 @@ function User() {
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
-           User
+          User
         </Box>
       </Box>
 
@@ -89,9 +83,9 @@ function User() {
                 <Th>Name</Th>
                 <Th>Phone Number</Th>
                 <Th>Profile Photo</Th>
-                <Th>Referral Phone Number</Th> 
-                 <Th>Status </Th>
-                 <Th>Action</Th>
+                <Th>Referral Phone Number</Th>
+                <Th>Status </Th>
+                <Th>Action</Th>
               </Tr>
             </Thead>
             <Tbody>

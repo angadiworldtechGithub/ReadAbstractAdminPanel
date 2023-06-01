@@ -1,10 +1,6 @@
 import React from "react";
 import { HStack, Text } from "@chakra-ui/react";
-import {
-  Button,
-  Input,
-  Box,
-} from "@chakra-ui/react";
+import { Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -16,10 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-function Author() {
-
- 
-
+function Comments() {
   return (
     <>
       {/*Modal*/}
@@ -40,7 +33,7 @@ function Author() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-             <Link to="/">Clear</Link>
+              <Link to="/">Clear</Link>
             </Button>
           </Box>
         </HStack>
@@ -152,4 +145,4 @@ function Author() {
   );
 }
 
-export default Author;
+export default Comments;

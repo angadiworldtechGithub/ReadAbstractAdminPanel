@@ -1,10 +1,6 @@
 import React from "react";
 import { HStack, Text } from "@chakra-ui/react";
-import {
-  Button,
-  Input,
-  Box,
-} from "@chakra-ui/react";
+import { Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -17,13 +13,11 @@ import {
 import { Link } from "react-router-dom";
 
 function Usermanagement() {
-
-
   return (
     <>
       {/*Modal*/}
       <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
-      User Feedback Management
+        User Feedback Management
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
@@ -39,7 +33,7 @@ function Usermanagement() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-             <Link to="/">Clear</Link>
+              <Link to="/">Clear</Link>
             </Button>
           </Box>
         </HStack>
