@@ -200,10 +200,10 @@ function Channels() {
                 <Td>hshnsnsnm</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button  onClick={isOpen} colorScheme="green">
+                    <Button  onClick={onOpen} colorScheme="green">
                       <Link to=''>Delete</Link>
                     </Button>
-                    <Button  onClick={isOpen} colorScheme="green">
+                    <Button  onClick={onOpen} colorScheme="green">
                       <Link to=''>Edit</Link>
                     </Button>
                   </HStack>

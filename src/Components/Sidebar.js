@@ -67,15 +67,6 @@ export default function Sidebar({ children }) {
               <AccordionPanel pb={4} background="#2D2D2D">
                 <Link to="/books">Books</Link>
               </AccordionPanel>
-              <AccordionPanel pb={4} background="#2D2D2D">
-                <Link to="/channels">Channel</Link>
-              </AccordionPanel>
-              <AccordionPanel pb={4} background="#2D2D2D">
-                <Link to="/author">Author</Link>
-              </AccordionPanel>
-              <AccordionPanel pb={4} background="#2D2D2D">
-                <Link to="/books">Books</Link>
-              </AccordionPanel>
             </AccordionItem>
 
             <AccordionItem>
