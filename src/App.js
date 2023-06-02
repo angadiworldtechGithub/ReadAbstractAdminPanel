@@ -12,6 +12,7 @@ import Subscription from "./Pages/Subscription";
 import Transaction from "./Pages/Transaction";
 import Comments from "./Pages/Comments";
 import Notification from "./Pages/Notification";
+import Csv from "./Components/Csv";
 import Slider from "./Pages/Slider";
 import User from "./Pages/User";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -26,22 +27,24 @@ function App() {
         <BrowserRouter>
           <Sidebar>
             <Routes>
-              <Route path="/Dashboard" element={<Dashboard />}></Route>
-              <Route path="/Accounting" element={<Accounting />}></Route>
-              <Route path="/Channels" element={<Channels />}></Route>
-              <Route path="/Books" element={<Books />}></Route>
-              <Route path="/Author" element={<Author />}></Route>
-              <Route path="/Subscription" element={<Subscription />}></Route>
-              <Route path="/Transaction" element={<Transaction />}></Route>
-              <Route path="/Comments" element={<Comments />}></Route>
+              <Route path="/" element={<Dashboard />}></Route>
+              <Route path="/csv" element={<Csv />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/accounting" element={<Accounting />}></Route>
+              <Route path="/channels" element={<Channels />}></Route>
+              <Route path="/books" element={<Books />}></Route>
+              <Route path="/author" element={<Author />}></Route>
+              <Route path="/subscription" element={<Subscription />}></Route>
+              <Route path="/transaction" element={<Transaction />}></Route>
+              <Route path="/comments" element={<Comments />}></Route>
               <Route
-                path="/Usermanagement"
-                element={<UserManagement />}
+                path="/usermanagement"
+                element={<Usermanagement />}
               ></Route>
-              <Route path="/Comments" element={<Comments />}></Route>
-              <Route path="/Notification" element={<Notification />}></Route>
-              <Route Path="/Slider" element={<Slider />}></Route>
-              <Route path="/User" element={<User />}></Route>
+              <Route path="/comments" element={<Comments />}></Route>
+              <Route path="/notification" element={<Notification />}></Route>
+              <Route path="/slider" element={<Slider />}></Route>
+              <Route path="/user" element={<User />}></Route>
               <Route path="/bookpages" element={<Bookpages />}></Route>
             </Routes>
           </Sidebar>

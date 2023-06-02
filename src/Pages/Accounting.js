@@ -1,6 +1,6 @@
 import React from "react";
 import { HStack, Text } from "@chakra-ui/react";
-import { Flex, Spacer ,Center,Square} from '@chakra-ui/react';
+import { Flex, Spacer, Center, Square } from "@chakra-ui/react";
 import {
   Modal,
   ModalOverlay,
@@ -15,7 +15,7 @@ import {
   FormLabel,
   Input,
   Box,
-  Select
+  Select,
 } from "@chakra-ui/react";
 import {
   Table,
@@ -29,18 +29,17 @@ import {
 import { Link } from "react-router-dom";
 
 function Accounting() {
- 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
   return (
-   <>
+    <>
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button  colorScheme="green" onClick={onOpen}>
-         <Link to="/">Add subscription</Link> 
+        <Button colorScheme="green" onClick={onOpen}>
+          <Link to="/">Add subscription</Link>
         </Button>
 
         <Modal
@@ -65,60 +64,61 @@ function Accounting() {
                 />
               </FormControl>
 
-
-              <Flex color='black' paddingTop="2px">
-              <HStack spacing="10px">
-                <Square w='180px' bg='white' paddingLeft="5px">
+              <Flex color="black" paddingTop="2px">
+                <HStack spacing="10px">
+                  <Square w="180px" bg="white" paddingLeft="5px">
                     <Text>
-                    <FormLabel>Package name</FormLabel>
-                    <Input ref={initialRef} placeholder="Package name" />
-                    <FormLabel>Package Title</FormLabel>
-                    <Input ref={initialRef} placeholder="Package Title" />
-                    <FormLabel>Package Type</FormLabel>
-                    <Select placeholder='Package Type'>
-                      <option>Students</option>
-                      <option>Yourself</option>
-                      <option>Team</option>
-                    </Select>
+                      <FormLabel>Package name</FormLabel>
+                      <Input ref={initialRef} placeholder="Package name" />
+                      <FormLabel>Package Title</FormLabel>
+                      <Input ref={initialRef} placeholder="Package Title" />
+                      <FormLabel>Package Type</FormLabel>
+                      <Select placeholder="Package Type">
+                        <option>Students</option>
+                        <option>Yourself</option>
+                        <option>Team</option>
+                      </Select>
                     </Text>
-                </Square>
-                <Square  w='180px' bg='white'  paddingLeft="5px">
-                  <Text>
-                    <FormLabel>Package Description</FormLabel>
-                    <Input ref={initialRef} placeholder="Package name" />
-                    <FormLabel>Cost Including Gst</FormLabel>
-                    <Input ref={initialRef} placeholder="Cost Including Gst" />
-                    <FormLabel>Package Subscription</FormLabel>
-                    <Select placeholder='Subscription Type'>
-                    <option>Yearly</option>
-                    <option>Monthly</option>
-                  </Select>
-
+                  </Square>
+                  <Square w="180px" bg="white" paddingLeft="5px">
+                    <Text>
+                      <FormLabel>Package Description</FormLabel>
+                      <Input ref={initialRef} placeholder="Package name" />
+                      <FormLabel>Cost Including Gst</FormLabel>
+                      <Input
+                        ref={initialRef}
+                        placeholder="Cost Including Gst"
+                      />
+                      <FormLabel>Package Subscription</FormLabel>
+                      <Select placeholder="Subscription Type">
+                        <option>Yearly</option>
+                        <option>Monthly</option>
+                      </Select>
                     </Text>
-                 </Square>
+                  </Square>
                 </HStack>
-               </Flex>
+              </Flex>
 
-            <ModalFooter>
-              <HStack spacing="20px">
-                <Button colorScheme='red' onClick={onClose}>
-                  Close
-                </Button>
-                <Button colorScheme='green' mr={1}>
-                  Add Author
-                </Button>
-              </HStack>
-            </ModalFooter>
-         </ModalBody>
-         </ModalContent>
-         </Modal>
-         </Box>
+              <ModalFooter>
+                <HStack spacing="20px">
+                  <Button colorScheme="red" onClick={onClose}>
+                    <Link to="" >Close</Link>
+                  </Button>
+                  <Button colorScheme="green" mr={1}>
+                    <Link to="" > Add Author</Link>
+                  </Button>
+                </HStack>
+              </ModalFooter>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              Export to CSV
+               <Link to="" >Export to CSV</Link>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -157,9 +157,7 @@ function Accounting() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -172,9 +170,7 @@ function Accounting() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                  <Button colorScheme='red'>
-                     Delete
-                  </Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -188,9 +184,7 @@ function Accounting() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -204,9 +198,7 @@ function Accounting() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -219,9 +211,7 @@ function Accounting() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -234,9 +224,7 @@ function Accounting() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme='red'>
-                      Delete
-                    </Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -244,10 +232,8 @@ function Accounting() {
           </Table>
         </TableContainer>
       </Box>
-
     </>
   );
 }
 
-
-export default Accounting
+export default Accounting;

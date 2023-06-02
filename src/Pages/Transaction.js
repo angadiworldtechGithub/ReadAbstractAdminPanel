@@ -27,7 +27,6 @@ import {
 import { Link } from "react-router-dom";
 
 function Transaction() {
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
@@ -37,14 +36,14 @@ function Transaction() {
     <>
       {/*Modal*/}
       <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
-          Transaction Details
+        Transaction Details
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              Export to CSV
+               <Link to="">Export to CSV</Link> 
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">

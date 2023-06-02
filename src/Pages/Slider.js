@@ -56,8 +56,8 @@ function Slider() {
     <>
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button colorScheme='green' onClick={onOpen}>
-           Add Slider
+        <Button colorScheme="green" onClick={onOpen}>
+          <Link to="">Add Slider</Link> 
         </Button>
 
         <Modal
@@ -81,16 +81,15 @@ function Slider() {
                   placeholder="No file chosen"
                 />
               </FormControl>
-
             </ModalBody>
 
             <ModalFooter>
               <HStack spacing="20px">
-                <Button colorScheme='red' onClick={onClose}>
-                  Cancle
+                <Button colorScheme="red" onClick={onClose}>
+                   <Link to="">Cancle</Link>
                 </Button>
-                <Button colorScheme='green' mr={3}>
-                  Save
+                <Button colorScheme="green" mr={3}>
+                <Link to="">Save</Link>
                 </Button>
               </HStack>
             </ModalFooter>
@@ -106,7 +105,7 @@ function Slider() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear
+              <Link to=""> Clear </Link>
             </Button>
           </Box>
         </HStack>
@@ -123,17 +122,19 @@ function Slider() {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>inches   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem  </Td>
                 <Td>
-                <HStack spacing="20px">
-                <Button colorScheme='red' onClick={onClose}>
-                  Cancle
-                </Button>
-                <Button colorScheme='red' mr={3}>
-                  Save
-                </Button>
-              </HStack>
-                
+                  inches Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+                  Lorem{" "}
+                </Td>
+                <Td>
+                  <HStack spacing="20px">
+                    <Button colorScheme="red" onClick={onClose}>
+                      <Link to=""> Cancle</Link>
+                    </Button>
+                    <Button colorScheme="red" mr={3}>
+                    <Link to=""> Save</Link>
+                    </Button>
+                  </HStack>
                 </Td>
               </Tr>
               <Tr>

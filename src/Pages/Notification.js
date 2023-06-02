@@ -27,26 +27,6 @@ import {
 import { Link } from "react-router-dom";
 
 function Notification() {
-  {
-    /*
-    const App = () => {
-    const [data,setData] = useState([]);
-
-       useEffect(() => {
-        fetchData();
-        },[]);
-
-     const App = () => {
-        axios
-          .get("http://localhost:3000/users/get")
-          .then(({data}) => {
-            setData(data);
-          })
-          .catch((error)=> alert("Error happened"));
-     };
-    */
-  }
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
@@ -56,8 +36,8 @@ function Notification() {
     <>
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button colorScheme='green' onClick={onOpen}>
-           Add Notification
+        <Button colorScheme="green" onClick={onOpen}>
+            <Link to="">Add Notification</Link>
         </Button>
 
         <Modal
@@ -81,16 +61,15 @@ function Notification() {
                   placeholder="Enter Notification"
                 />
               </FormControl>
-
             </ModalBody>
 
             <ModalFooter>
               <HStack spacing="20px">
-                <Button colorScheme='red' onClick={onClose}>
-                  Cancle
+                <Button colorScheme="red" onClick={onClose}>
+                   <Link to=""> Cancle </Link> 
                 </Button>
-                <Button colorScheme='green' mr={3}>
-                  Save
+                <Button colorScheme="green" mr={3}>
+                <Link to=""> Save </Link> 
                 </Button>
               </HStack>
             </ModalFooter>
@@ -106,7 +85,7 @@ function Notification() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear
+                <Link to="" >Clear</Link>
             </Button>
           </Box>
         </HStack>
@@ -124,18 +103,17 @@ function Notification() {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>inches   Lorem   Lorem   Lorem   Lorem   Lorem   Lorem     Lorem   Lorem  </Td>
+                <Td>inches Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </Td>
                 <Td> 31/01/2023 & 01:12:45</Td>
                 <Td>
-                <HStack spacing="20px">
-                <Button colorScheme='red' onClick={onClose}>
-                  Cancle
-                </Button>
-                <Button colorScheme='red' mr={3}>
-                  Save
-                </Button>
-              </HStack>
-                
+                  <HStack spacing="20px">
+                    <Button colorScheme="red" onClick={onClose}>
+                       <Link to="" >Cancle</Link>
+                    </Button>
+                    <Button colorScheme="red" mr={3}>
+                       <Link to="">Save</Link>
+                    </Button>
+                  </HStack>
                 </Td>
               </Tr>
               <Tr>

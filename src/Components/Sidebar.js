@@ -17,10 +17,14 @@ export default function Sidebar({ children }) {
         background="orange"
         color="white"
         fontSize="25px"
+        fontWeight="600"
         paddingLeft="80px"
         paddingTop="15px"
       >
-        <Box> Read Abstract </Box>
+        <Box>
+          {" "}
+          <Link to="/csv">Read Abstract</Link>{" "}
+        </Box>
       </Box>
       <Flex>
         <Box background="#1D1D1D" color="white" w="240px">
@@ -54,6 +58,15 @@ export default function Sidebar({ children }) {
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
+              <AccordionPanel pb={4} background="#2D2D2D">
+                <Link to="/channels">Channel</Link>
+              </AccordionPanel>
+              <AccordionPanel pb={4} background="#2D2D2D">
+                <Link to="/author">Author</Link>
+              </AccordionPanel>
+              <AccordionPanel pb={4} background="#2D2D2D">
+                <Link to="/books">Books</Link>
+              </AccordionPanel>
               <AccordionPanel pb={4} background="#2D2D2D">
                 <Link to="/channels">Channel</Link>
               </AccordionPanel>
@@ -100,6 +113,12 @@ export default function Sidebar({ children }) {
               <AccordionPanel pb={4} background="#2D2D2D">
                 <Link to="/usermanagement">User Feedback Management</Link>
               </AccordionPanel>
+              <AccordionPanel pb={4} background="#2D2D2D">
+                <Link to="/comments">Comments Management</Link>
+              </AccordionPanel>
+              <AccordionPanel pb={4} background="#2D2D2D">
+                <Link to="/usermanagement">User Feedback Management</Link>
+              </AccordionPanel>
             </AccordionItem>
 
             <AccordionItem>
@@ -121,8 +140,22 @@ export default function Sidebar({ children }) {
           </Accordion>
         </Box>
 
-        <Box minH="1000px">{children}</Box>
+        <Box minH="700px">{children}</Box>
       </Flex>
+
+      <Box
+        h="40px"
+        background="#1D1D1D"
+        color="white"
+        fontSize="15px"
+        fontWeight="600"
+        paddingTop="15px"
+      >
+        <Box>
+          {" "}
+          <center>Develop &amp; Design AWT © Copyright</center>{" "}
+        </Box>
+      </Box>
     </>
   );
 }
