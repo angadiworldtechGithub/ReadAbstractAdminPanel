@@ -25,44 +25,18 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useOutsideClick } from '@chakra-ui/react'
 
 function Channels() {
-  {
-    /*
-    const headers = [
-      {label:"Channel name" , key:"name"},
-      {label:"Channel Image" , key:"Image"},
-      {label:"Channel Description" , key:"text"},
-      {label:"Action" , key:"key"}
 
-    ]
+const { isOpen, onOpen, onClose, onChange } = useDisclosure();
 
-    const App = () => {
-    const [data,setData] = useState([]);
-
-       useEffect(() => {
-        fetchData();
-        },[]);
-
-     const App = () => {
-        axios
-          .get("http://localhost:3000/users/get")
-          .then(({data}) => {
-            setData(data);
-          })
-          .catch((error)=> alert("Error happened"));
-     };
-    */
-  }
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+const initialRef = React.useRef(null);
+const finalRef = React.useRef(null);
 
   return (
     <>
-      {/*Modal*/}
+
       <Box paddingTop="20px" paddingLeft="20px">
         <Button colorScheme="green" onClick={onOpen}>
           <Link to=''> Add Channel</Link>
@@ -73,6 +47,7 @@ function Channels() {
           finalFocusRef={finalRef}
           isOpen={isOpen}
           onClose={onClose}
+
         >
           <ModalOverlay />
           <ModalContent>
@@ -114,52 +89,10 @@ function Channels() {
       </Box>
 
       
-    <Box>
-    <Modal
-    initialFocusRef={initialRef}
-    finalFocusRef={finalRef}
-    isOpen={isOpen}
-    onClose={onClose}
-  >
-    <ModalOverlay />
-    <ModalContent>
-      <ModalHeader paddingTop="40px">Channel</ModalHeader>
-      <hr></hr>
-      <ModalCloseButton />
-
-      <ModalBody pb={6}>
-        <FormControl>
-          <FormLabel>Edit the Channel Image</FormLabel>
-          <Input
-            type="file"
-            placeholder="No file chosen"
-          />
-        </FormControl>
-
-        <FormControl>
-          <FormLabel> Channel name</FormLabel>
-          <Input ref={initialRef} placeholder="Channel name" />
-        </FormControl>
-
-        <FormControl mt={4}>
-          <FormLabel>Channel description</FormLabel>
-          <Input placeholder="Channel description" />
-        </FormControl>
-      </ModalBody>
-
-      <ModalFooter>
-        <HStack spacing="20px">
-          <Button onClick={onClose}>Close</Button>
-          <Button  onClick={onOpen}colorScheme="blue" mr={3}>
-            Edit Channel
-          </Button>
-        </HStack>
-      </ModalFooter>
-    </ModalContent>
-  </Modal>
-</Box>
-  
-
+    
+    <Box paddingTop="20px" paddingLeft="20px">
+   
+    </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
         <HStack spacing="100px">
