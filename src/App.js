@@ -7,7 +7,7 @@ import Accounting from "./Pages/Accounting";
 import Channels from "./Pages/Channels";
 import Author from "./Pages/Author";
 import Books from "./Pages/Books";
-import Usermanagement from "./Pages/Usermanagement";
+import UserManagement from "./Pages/UserManagement";
 import Subscription from "./Pages/Subscription";
 import Transaction from "./Pages/Transaction";
 import Comments from "./Pages/Comments";
@@ -28,7 +28,7 @@ function App() {
           <Sidebar>
             <Routes>
               <Route path="/" element={<Dashboard />}></Route>
-              <Route path="/csv" element={<Csv/>}></Route>
+              <Route path="/csv" element={<Csv />}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/accounting" element={<Accounting />}></Route>
               <Route path="/channels" element={<Channels />}></Route>
@@ -43,7 +43,7 @@ function App() {
               ></Route>
               <Route path="/comments" element={<Comments />}></Route>
               <Route path="/notification" element={<Notification />}></Route>
-              <Route path="/slider" element={<Slider/>}></Route>
+              <Route path="/slider" element={<Slider />}></Route>
               <Route path="/user" element={<User />}></Route>
               <Route path="/bookpages" element={<Bookpages />}></Route>
             </Routes>
