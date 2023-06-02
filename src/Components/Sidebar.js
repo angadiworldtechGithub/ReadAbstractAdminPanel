@@ -23,7 +23,7 @@ export default function Sidebar({ children }) {
       >
         <Box>
           {" "}
-          <Link to="/csv">Read Abstract</Link>{" "}
+          Read Abstract{" "}
         </Box>
       </Box>
       <Flex>

@@ -65,7 +65,7 @@ function Author() {
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Button colorScheme="green" onClick={onOpen}>
-         <Link to="" >  Add Author </Link>
+         <Link to="" >Add Author</Link>
         </Button>
 
         <Modal
