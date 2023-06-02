@@ -113,6 +113,54 @@ function Channels() {
         </Modal>
       </Box>
 
+      
+    <Box>
+    <Modal
+    initialFocusRef={initialRef}
+    finalFocusRef={finalRef}
+    isOpen={isOpen}
+    onClose={onClose}
+  >
+    <ModalOverlay />
+    <ModalContent>
+      <ModalHeader paddingTop="40px">Channel</ModalHeader>
+      <hr></hr>
+      <ModalCloseButton />
+
+      <ModalBody pb={6}>
+        <FormControl>
+          <FormLabel>Edit the Channel Image</FormLabel>
+          <Input
+            type="file"
+            placeholder="No file chosen"
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel> Channel name</FormLabel>
+          <Input ref={initialRef} placeholder="Channel name" />
+        </FormControl>
+
+        <FormControl mt={4}>
+          <FormLabel>Channel description</FormLabel>
+          <Input placeholder="Channel description" />
+        </FormControl>
+      </ModalBody>
+
+      <ModalFooter>
+        <HStack spacing="20px">
+          <Button onClick={onClose}>Close</Button>
+          <Button  onClick={onOpen}colorScheme="blue" mr={3}>
+            Edit Channel
+          </Button>
+        </HStack>
+      </ModalFooter>
+    </ModalContent>
+  </Modal>
+</Box>
+  
+
+
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
@@ -152,10 +200,10 @@ function Channels() {
                 <Td>hshnsnsnm</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button  onClick={onOpen} colorScheme="green">
+                    <Button  onClick={isOpen} colorScheme="green">
                       <Link to=''>Delete</Link>
                     </Button>
-                    <Button  onClick={onOpen} colorScheme="green">
+                    <Button  onClick={isOpen} colorScheme="green">
                       <Link to=''>Edit</Link>
                     </Button>
                   </HStack>

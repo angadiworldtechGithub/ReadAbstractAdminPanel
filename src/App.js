@@ -39,7 +39,7 @@ function App() {
               <Route path="/comments" element={<Comments />}></Route>
               <Route
                 path="/usermanagement"
-                element={<Usermanagement />}
+                element={<UserManagement />}
               ></Route>
               <Route path="/comments" element={<Comments />}></Route>
               <Route path="/notification" element={<Notification />}></Route>
