@@ -7,7 +7,7 @@ import Accounting from "./Pages/Accounting";
 import Channels from "./Pages/Channels";
 import Author from "./Pages/Author";
 import Books from "./Pages/Books";
-import Usermanagement from "./Pages/Usermanagement";
+import UserManagement from "./Pages/UserManagement";
 import Subscription from "./Pages/Subscription";
 import Transaction from "./Pages/Transaction";
 import Comments from "./Pages/Comments";
@@ -36,7 +36,7 @@ function App() {
               <Route path="/Comments" element={<Comments />}></Route>
               <Route
                 path="/Usermanagement"
-                element={<Usermanagement />}
+                element={<UserManagement />}
               ></Route>
               <Route path="/Comments" element={<Comments />}></Route>
               <Route path="/Notification" element={<Notification />}></Route>
