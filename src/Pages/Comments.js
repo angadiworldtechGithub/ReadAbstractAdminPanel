@@ -62,7 +62,7 @@ function Comments() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                      <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -76,7 +76,7 @@ function Comments() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                    <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -90,7 +90,7 @@ function Comments() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                      <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -104,7 +104,7 @@ function Comments() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                    <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -118,7 +118,7 @@ function Comments() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                    <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -132,7 +132,7 @@ function Comments() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                    <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
                 </Td>

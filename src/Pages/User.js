@@ -59,7 +59,7 @@ function User() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              Export to CSV
+              <Link to="">Export to CSV</Link>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -68,7 +68,7 @@ function User() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear
+            <Link to=""> Clear </Link>
             </Button>
           </Box>
         </HStack>
@@ -99,10 +99,10 @@ function User() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                    <Link to="">Delete</Link>
                     </Button>
                     <Button color="white" bg="#DC3545">
-                      Edit
+                    <Link to=""> Edit</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -117,28 +117,10 @@ function User() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                    <Link to="">Delete</Link>
                     </Button>
                     <Button color="white" bg="#DC3545">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
-                      Delete
-                    </Button>
-                    <Button color="white" bg="#DC3545">
-                      Edit
+                    <Link to=""> Edit</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -153,28 +135,10 @@ function User() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                    <Link to="">Delete</Link>
                     </Button>
                     <Button color="white" bg="#DC3545">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
-                      Delete
-                    </Button>
-                    <Button color="white" bg="#DC3545">
-                      Edit
+                    <Link to="">Edit</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -189,10 +153,46 @@ function User() {
                 <Td>
                   <HStack spacing="10px">
                     <Button color="white" bg="#DC3545">
-                      Delete
+                    <Link to="">Delete</Link>
                     </Button>
                     <Button color="white" bg="#DC3545">
-                      Edit
+                    <Link to="">Edit</Link>
+                    </Button>
+                  </HStack>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>yards</Td>
+                <Td>metres (m)</Td>
+                <Td>0.91444</Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td>
+                  <HStack spacing="10px">
+                    <Button color="white" bg="#DC3545">
+                       <Link to="">Delete</Link>
+                    </Button>
+                    <Button color="white" bg="#DC3545">
+                    <Link to=""> Edit</Link>
+                    </Button>
+                  </HStack>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>yards</Td>
+                <Td>metres (m)</Td>
+                <Td>0.91444</Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td>
+                  <HStack spacing="10px">
+                    <Button color="white" bg="#DC3545">
+                    <Link to="">Delete</Link>
+                    </Button>
+                    <Button color="white" bg="#DC3545">
+                      <Link to=""> Edit </Link>
                     </Button>
                   </HStack>
                 </Td>

@@ -42,7 +42,7 @@ function Books() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px Solid black" width="100%">
           <Table variant="simple">
             <Thead>
               <Tr border="2px Solid black">
@@ -57,9 +57,9 @@ function Books() {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
+              <Tr maxWidth="100%">
                 <Td>Angadi</Td>
-                <Td>Angadiworldtech</Td>
+                <Td>AngadiworldtechAngadiworldtech</Td>
                 <Td>Good Growth</Td>
                 <Td>13/06/2023</Td>
                 <Td></Td>
@@ -67,7 +67,7 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -81,7 +81,7 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -95,7 +95,7 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -109,7 +109,21 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
+                  </HStack>
+                </Td>
+              </Tr>
+              <Tr maxWidth="20px">
+                <Td maxWidth="20px">yards metresmetresmetresmetresmetresmetresmetresmetresmetres</Td>
+                <Td>metres (m)</Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td></Td>
+                <Td>
+                  <HStack spacing="10px">
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -123,21 +137,7 @@ function Books() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>

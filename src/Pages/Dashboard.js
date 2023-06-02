@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import { Grid, GridItem, HStack } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const StyledGridItem = ({ children }) => {
   return (
@@ -30,7 +31,7 @@ function Dashboard() {
         fontSize="30px"
         fontWeight="500"
       >
-        DashBoard
+        <Link to="/">DashBoard</Link>
       </Box>
 
       <Grid

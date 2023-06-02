@@ -12,6 +12,7 @@ import Subscription from "./Pages/Subscription";
 import Transaction from "./Pages/Transaction";
 import Comments from "./Pages/Comments";
 import Notification from "./Pages/Notification";
+import Csv from "./Components/Csv";
 import Slider from "./Pages/Slider";
 import User from "./Pages/User";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -27,6 +28,7 @@ function App() {
           <Sidebar>
             <Routes>
               <Route path="/" element={<Dashboard />}></Route>
+              <Route path="/csv" element={<Csv/>}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/accounting" element={<Accounting />}></Route>
               <Route path="/channels" element={<Channels />}></Route>

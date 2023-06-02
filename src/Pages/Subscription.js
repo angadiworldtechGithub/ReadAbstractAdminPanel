@@ -39,7 +39,7 @@ function Subscription() {
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Button colorScheme="green" onClick={onOpen}>
-          Add subscription
+          <Link to="">Add subscription</Link>
         </Button>
 
         <Modal
@@ -102,10 +102,10 @@ function Subscription() {
               <ModalFooter>
                 <HStack spacing="20px">
                   <Button colorScheme="red" onClick={onClose}>
-                    Close
+                     <Link to="">Close</Link>
                   </Button>
                   <Button colorScheme="green" mr={1}>
-                    Add 
+                     <Link to="">Add</Link>
                   </Button>
                 </HStack>
               </ModalFooter>
@@ -118,7 +118,7 @@ function Subscription() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              Export to CSV
+               <Link to="">Export to CSV</Link> 
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -127,7 +127,7 @@ function Subscription() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear
+               <Link to=""> Clear</Link> 
             </Button>
           </Box>
         </HStack>
@@ -157,7 +157,7 @@ function Subscription() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"> <Link to="">Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -170,7 +170,7 @@ function Subscription() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"> <Link to="">Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -184,7 +184,7 @@ function Subscription() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"> <Link to="">Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -198,7 +198,7 @@ function Subscription() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"> <Link to="">Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -211,7 +211,7 @@ function Subscription() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"> <Link to="">Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>
@@ -224,7 +224,7 @@ function Subscription() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="red">Delete</Button>
+                    <Button colorScheme="red"> <Link to="">Delete</Link></Button>
                   </HStack>
                 </Td>
               </Tr>

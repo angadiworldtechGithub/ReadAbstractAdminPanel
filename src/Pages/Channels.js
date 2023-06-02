@@ -65,7 +65,7 @@ function Channels() {
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Button colorScheme="green" onClick={onOpen}>
-          Add Channel
+          <Link to=''> Add Channel</Link>
         </Button>
 
         <Modal
@@ -117,7 +117,7 @@ function Channels() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              Export to CSV
+              Export to CSV <Link to=''> Add Channel</Link>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -126,7 +126,7 @@ function Channels() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear
+              Clear  <Link to=''> Add Channel</Link>
             </Button>
           </Box>
         </HStack>
@@ -153,10 +153,10 @@ function Channels() {
                 <Td>
                   <HStack spacing="10px">
                     <Button colorScheme="green">
-                      Delete
+                      <Link to=''> Delete </Link>
                     </Button>
                     <Button colorScheme="green">
-                      Edit
+                      <Link to=''>  Edit </Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -171,25 +171,10 @@ function Channels() {
                 <Td>
                   <HStack spacing="10px">
                     <Button colorScheme="green">
-                      Delete
+                     <Link to=''> Delete </Link>
                     </Button>
                     <Button colorScheme="green">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="green">
-                      Delete
-                    </Button>
-                    <Button colorScheme="green">
-                      Edit
+                    <Link to=''> Edit </Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -201,25 +186,10 @@ function Channels() {
                 <Td>
                   <HStack spacing="10px">
                     <Button colorScheme="green">
-                      Delete
+                    <Link to=''> Delete </Link>
                     </Button>
                     <Button colorScheme="green">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="green">
-                      Delete
-                    </Button>
-                    <Button colorScheme="green">
-                      Edit
+                     <Link to=''> Edit </Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -231,10 +201,40 @@ function Channels() {
                 <Td>
                   <HStack spacing="10px">
                     <Button colorScheme="green">
-                      Delete
+                       <Link to=''> Delete </Link>
                     </Button>
                     <Button colorScheme="green">
-                      Edit
+                       <Link to=''> Edit </Link>
+                    </Button>
+                  </HStack>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>yards</Td>
+                <Td>metres (m)</Td>
+                <Td>0.91444</Td>
+                <Td>
+                  <HStack spacing="10px">
+                    <Button colorScheme="green">
+                       <Link to=''> Delete </Link>
+                    </Button>
+                    <Button colorScheme="green">
+                       <Link to=''> Edit </Link>
+                    </Button>
+                  </HStack>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>yards</Td>
+                <Td>metres (m)</Td>
+                <Td>0.91444</Td>
+                <Td>
+                  <HStack spacing="10px">
+                    <Button colorScheme="green">
+                      <Link to=''> Delete </Link>
+                    </Button>
+                    <Button colorScheme="green">
+                    <Link to=''> Edit </Link>
                     </Button>
                   </HStack>
                 </Td>

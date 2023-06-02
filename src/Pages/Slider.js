@@ -57,7 +57,7 @@ function Slider() {
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Button colorScheme="green" onClick={onOpen}>
-          Add Slider
+          <Link to="">Add Slider</Link> 
         </Button>
 
         <Modal
@@ -86,10 +86,10 @@ function Slider() {
             <ModalFooter>
               <HStack spacing="20px">
                 <Button colorScheme="red" onClick={onClose}>
-                  Cancle
+                   <Link to="">Cancle</Link>
                 </Button>
                 <Button colorScheme="green" mr={3}>
-                  Save
+                <Link to="">Save</Link>
                 </Button>
               </HStack>
             </ModalFooter>
@@ -105,7 +105,7 @@ function Slider() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear
+              <Link to=""> Clear </Link>
             </Button>
           </Box>
         </HStack>
@@ -129,10 +129,10 @@ function Slider() {
                 <Td>
                   <HStack spacing="20px">
                     <Button colorScheme="red" onClick={onClose}>
-                      Cancle
+                      <Link to=""> Cancle</Link>
                     </Button>
                     <Button colorScheme="red" mr={3}>
-                      Save
+                    <Link to=""> Save</Link>
                     </Button>
                   </HStack>
                 </Td>

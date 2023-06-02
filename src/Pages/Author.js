@@ -65,7 +65,7 @@ function Author() {
       {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Button colorScheme="green" onClick={onOpen}>
-          Add Author
+         <Link to="" >  Add Author </Link>
         </Button>
 
         <Modal
@@ -104,10 +104,10 @@ function Author() {
             <ModalFooter>
               <HStack spacing="20px">
                 <Button colorScheme="green" onClick={onClose}>
-                  Close
+                 <Link to=""> Close</Link>
                 </Button>
                 <Button colorScheme="red" mr={3}>
-                  Add Author
+                <Link to="">Add Author</Link>
                 </Button>
               </HStack>
             </ModalFooter>
