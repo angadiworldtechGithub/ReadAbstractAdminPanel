@@ -104,7 +104,7 @@ function Channels() {
             <ModalFooter>
               <HStack spacing="20px">
                 <Button onClick={onClose}>Close</Button>
-                <Button colorScheme="blue" mr={3}>
+                <Button  onClick={onOpen}colorScheme="blue" mr={3}>
                   Add Channel
                 </Button>
               </HStack>
@@ -117,7 +117,7 @@ function Channels() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              Export to CSV <Link to=''> Add Channel</Link>
+              <Link to=''> Export to Csv</Link>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -126,7 +126,7 @@ function Channels() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear  <Link to=''> Add Channel</Link>
+                <Link to=''> Clear</Link>
             </Button>
           </Box>
         </HStack>
@@ -152,11 +152,11 @@ function Channels() {
                 <Td>hshnsnsnm</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="green">
-                      <Link to=''> Delete </Link>
+                    <Button  onClick={onOpen} colorScheme="green">
+                      <Link to=''>Delete</Link>
                     </Button>
-                    <Button colorScheme="green">
-                      <Link to=''>  Edit </Link>
+                    <Button  onClick={onOpen} colorScheme="green">
+                      <Link to=''>Edit</Link>
                     </Button>
                   </HStack>
                 </Td>
@@ -170,10 +170,10 @@ function Channels() {
                 </Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="green">
+                    <Button onClick={onOpen} colorScheme="green">
                      <Link to=''> Delete </Link>
                     </Button>
-                    <Button colorScheme="green">
+                    <Button  onClick={onOpen} colorScheme="green">
                     <Link to=''> Edit </Link>
                     </Button>
                   </HStack>
@@ -185,10 +185,10 @@ function Channels() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="green">
+                    <Button onClick={onOpen} colorScheme="green">
                     <Link to=''> Delete </Link>
                     </Button>
-                    <Button colorScheme="green">
+                    <Button  onClick={onOpen} colorScheme="green">
                      <Link to=''> Edit </Link>
                     </Button>
                   </HStack>
@@ -200,10 +200,10 @@ function Channels() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="green">
+                    <Button onClick={onOpen} colorScheme="green">
                        <Link to=''> Delete </Link>
                     </Button>
-                    <Button colorScheme="green">
+                    <Button  onClick={onOpen}colorScheme="green">
                        <Link to=''> Edit </Link>
                     </Button>
                   </HStack>
@@ -215,10 +215,10 @@ function Channels() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="green">
+                    <Button  onClick={onOpen} colorScheme="green">
                        <Link to=''> Delete </Link>
                     </Button>
-                    <Button colorScheme="green">
+                    <Button  onClick={onOpen} colorScheme="green">
                        <Link to=''> Edit </Link>
                     </Button>
                   </HStack>
@@ -230,10 +230,10 @@ function Channels() {
                 <Td>0.91444</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button colorScheme="green">
+                    <Button onClick={onOpen} colorScheme="green">
                       <Link to=''> Delete </Link>
                     </Button>
-                    <Button colorScheme="green">
+                    <Button  onClick={onOpen} colorScheme="green">
                     <Link to=''> Edit </Link>
                     </Button>
                   </HStack>

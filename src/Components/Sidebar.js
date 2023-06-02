@@ -21,7 +21,7 @@ export default function Sidebar({ children }) {
         paddingLeft="80px"
         paddingTop="15px"
       >
-        <Box> <Link to="/csv">Read Abstract</Link> </Box>
+        <Box> <Link to="">Read Abstract</Link> </Box>
       </Box>
       <Flex>
         <Box background="#1D1D1D" color="white" w="240px">
