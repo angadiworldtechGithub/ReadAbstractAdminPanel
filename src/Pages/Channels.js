@@ -25,7 +25,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useOutsideClick } from '@chakra-ui/react'
+
 
 function Channels() {
 
@@ -91,7 +91,7 @@ const finalRef = React.useRef(null);
       
     
     <Box paddingTop="20px" paddingLeft="20px">
-   
+       
     </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">

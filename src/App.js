@@ -12,23 +12,23 @@ import Subscription from "./Pages/Subscription";
 import Transaction from "./Pages/Transaction";
 import Comments from "./Pages/Comments";
 import Notification from "./Pages/Notification";
-import Csv from "./Components/Csv";
 import Slider from "./Pages/Slider";
 import User from "./Pages/User";
 import { ChakraProvider } from "@chakra-ui/react";
 import Bookpages from "./Pages/Bookpages";
+import Pagination from "./Components/Pagination";
 
 // ALL URLS MUST BE IN LOWER CASE ... !!! VERY IMP
 
 function App() {
   return (
+    
     <ChakraProvider>
       <div>
         <BrowserRouter>
           <Sidebar>
             <Routes>
               <Route path="/" element={<Dashboard />}></Route>
-              <Route path="/csv" element={<Csv />}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/accounting" element={<Accounting />}></Route>
               <Route path="/channels" element={<Channels />}></Route>
@@ -37,6 +37,7 @@ function App() {
               <Route path="/subscription" element={<Subscription />}></Route>
               <Route path="/transaction" element={<Transaction />}></Route>
               <Route path="/comments" element={<Comments />}></Route>
+              <Route path="/pagination" element={<Pagination/>}></Route>
               <Route
                 path="/usermanagement"
                 element={<UserManagement />}
@@ -51,6 +52,7 @@ function App() {
         </BrowserRouter>
       </div>
     </ChakraProvider>
+
   );
 }
 

@@ -61,7 +61,7 @@ function Comments() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
@@ -75,7 +75,7 @@ function Comments() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
@@ -89,7 +89,7 @@ function Comments() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
@@ -103,7 +103,7 @@ function Comments() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
@@ -117,7 +117,7 @@ function Comments() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to=''>Delete</Link>
                     </Button>
                   </HStack>
@@ -131,7 +131,7 @@ function Comments() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to=''>Delete</Link>
                     </Button>
                   </HStack>

@@ -98,10 +98,10 @@ function User() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to="">Delete</Link>
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to=""> Edit</Link>
                     </Button>
                   </HStack>
@@ -116,10 +116,10 @@ function User() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to="">Delete</Link>
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to=""> Edit</Link>
                     </Button>
                   </HStack>
@@ -134,10 +134,10 @@ function User() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to="">Delete</Link>
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to="">Edit</Link>
                     </Button>
                   </HStack>
@@ -152,10 +152,10 @@ function User() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to="">Delete</Link>
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to="">Edit</Link>
                     </Button>
                   </HStack>
@@ -170,10 +170,10 @@ function User() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                        <Link to="">Delete</Link>
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to=""> Edit</Link>
                     </Button>
                   </HStack>
@@ -188,10 +188,10 @@ function User() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                     <Link to="">Delete</Link>
                     </Button>
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       <Link to=""> Edit </Link>
                     </Button>
                   </HStack>
