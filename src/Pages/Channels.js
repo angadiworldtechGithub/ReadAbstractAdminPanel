@@ -3,6 +3,8 @@ import axios from "axios";
 import { HEADERS } from "../constants";
 import { HStack, Text } from "@chakra-ui/react";
 import AddChannelModal from "../Components/AddChannelModal";
+import EditChannelModal from "../Components/EditChannelModal";
+import DeleteChannelModal from "../Components/DeleteChannelModal";
 import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
@@ -16,8 +18,47 @@ import {
 import { Link } from "react-router-dom";
 
 function Channels() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isAddOpen,
+    onOpen: onAddOpen,
+    onClose: onAddClose,
+  } = useDisclosure();
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen_,
+    onClose: onEditClose_,
+  } = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen_,
+    onClose: onDeleteClose_,
+  } = useDisclosure();
+  const [editId, setEditId] = useState("");
+  const [deleteId, setDeleteId] = useState("");
+  const [channelData, setChannelData] = useState({});
   const [channels, setChannels] = useState([]);
+
+  const onEditOpen = (id, data) => () => {
+    setEditId(id);
+    setChannelData(data);
+    onEditOpen_();
+  };
+
+  const onEditClose = () => {
+    setEditId("");
+    setChannelData({});
+    onEditClose_();
+  };
+
+  const onDeleteOpen = (id) => () => {
+    setDeleteId(id);
+    onDeleteOpen_();
+  };
+
+  const onDeleteClose = () => {
+    setDeleteId("");
+    onDeleteClose_();
+  };
 
   useEffect(() => {
     (async () => {
@@ -34,10 +75,21 @@ function Channels() {
   return (
     <>
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button colorScheme="green" onClick={onOpen}>
-          <Link to="">Add Channel</Link>
+        <Button colorScheme="green" onClick={onAddOpen}>
+          Add Channel
         </Button>
-        <AddChannelModal isOpen={isOpen} onClose={onClose} />
+        <AddChannelModal isOpen={isAddOpen} onClose={onAddClose} />
+        <EditChannelModal
+          isOpen={isEditOpen}
+          onClose={onEditClose}
+          channelId={editId}
+          channelData={channelData}
+        />
+        <DeleteChannelModal
+          isOpen={isDeleteOpen}
+          onClose={onDeleteClose}
+          channelId={deleteId}
+        />
       </Box>
 
       <Box paddingTop="20px" paddingLeft="20px"></Box>
@@ -81,17 +133,23 @@ function Channels() {
                     <Td>{channel.channel}</Td>
                     <Td>
                       <img
-                        src={`${process.env.REACT_APP_STATIC_URL}/${channel.channelimage}`}
+                        src={`${process.env.REACT_APP_STATIC_URL}/channelimage/${channel.channelimage}`}
                       ></img>
                     </Td>
                     <Td>{channel.discription}</Td>
                     <Td>
                       <HStack spacing="10px">
-                        <Button onClick={onOpen} colorScheme="green">
-                          <Link to="">Delete</Link>
+                        <Button
+                          onClick={onDeleteOpen(channel._id)}
+                          colorScheme="green"
+                        >
+                          Delete
                         </Button>
-                        <Button onClick={onOpen} colorScheme="green">
-                          <Link to="">Edit</Link>
+                        <Button
+                          onClick={onEditOpen(channel._id, channel)}
+                          colorScheme="green"
+                        >
+                          Edit
                         </Button>
                       </HStack>
                     </Td>

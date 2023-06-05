@@ -15,12 +15,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-export default function EditChannelModal({
-  isOpen,
-  onClose,
-  channelId,
-  channelData,
-}) {
+export default function EditUserModal({ isOpen, onClose, userId, userData }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
@@ -35,39 +30,33 @@ export default function EditChannelModal({
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader paddingTop="40px">Edit Channel</ModalHeader>
+        <ModalHeader>User</ModalHeader>
         <hr></hr>
         <ModalCloseButton />
 
         <ModalBody pb={6}>
           <FormControl>
-            <FormLabel>Edit the Channel Image</FormLabel>
+            <FormLabel>Update Profile Photo</FormLabel>
             <Input ref={initialRef} type="file" placeholder="No file chosen" />
           </FormControl>
 
           <FormControl>
-            <FormLabel>Channel name</FormLabel>
+            <FormLabel>Name</FormLabel>
             <Input
               ref={initialRef}
-              placeholder="Channel name"
-              value={channelData.channel}
-            />
-          </FormControl>
-
-          <FormControl mt={4}>
-            <FormLabel>Channel description</FormLabel>
-            <Input
-              placeholder="Channel description"
-              value={channelData.discription}
+              placeholder="Author name"
+              value={userData.name}
             />
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
           <HStack spacing="20px">
-            <Button onClick={onClose}>Close</Button>
-            <Button onClick={onEdit} colorScheme="blue" mr={3}>
-              Add Channel
+            <Button colorScheme="green" onClick={onClose}>
+              Close
+            </Button>
+            <Button colorScheme="red" mr={3}>
+              Edit User
             </Button>
           </HStack>
         </ModalFooter>

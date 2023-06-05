@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext, useState } from "react";
 import { HStack, Text } from "@chakra-ui/react";
 import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
@@ -11,48 +11,67 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { DataContext } from "../DataContext";
+import EditUserModal from "../Components/EditUserModal";
+import DeleteUserModal from "../Components/DeleteUserModal";
 
 function User() {
-  {
-    /*
-    const headers = [
-      {label:"Channel name" , key:"name"},
-      {label:"Channel Image" , key:"Image"},
-      {label:"Channel Description" , key:"text"},
-      {label:"Action" , key:"key"}
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen_,
+    onClose: onEditClose_,
+  } = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen_,
+    onClose: onDeleteClose_,
+  } = useDisclosure();
 
-    ]
+  const [editId, setEditId] = useState("");
+  const [deleteId, setDeleteId] = useState("");
+  const [userData, setUserData] = useState({});
 
-    const App = () => {
-    const [data,setData] = useState([]);
+  const { users } = useContext(DataContext);
 
-       useEffect(() => {
-        fetchData();
-        },[]);
+  const onEditOpen = (id, data) => () => {
+    setEditId(id);
+    setUserData(data);
+    onEditOpen_();
+  };
 
-     const App = () => {
-        axios
-          .get("http://localhost:3000/users/get")
-          .then(({data}) => {
-            setData(data);
-          })
-          .catch((error)=> alert("Error happened"));
-     };
-    */
-  }
+  const onEditClose = () => {
+    setEditId("");
+    setUserData({});
+    onEditClose_();
+  };
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const onDeleteOpen = (id) => () => {
+    setDeleteId(id);
+    onDeleteOpen_();
+  };
 
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  const onDeleteClose = () => {
+    setDeleteId("");
+    onDeleteClose_();
+  };
 
   return (
     <>
-      {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
         <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
           User
         </Box>
+        <EditUserModal
+          isOpen={isEditOpen}
+          onClose={onEditClose}
+          userId={editId}
+          userData={userData}
+        />
+        <DeleteUserModal
+          isOpen={isDeleteOpen}
+          onClose={onDeleteClose}
+          userId={deleteId}
+        />
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
@@ -68,7 +87,7 @@ function User() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-            <Link to=""> Clear </Link>
+              <Link to=""> Clear </Link>
             </Button>
           </Box>
         </HStack>
@@ -82,121 +101,45 @@ function User() {
                 <Th>User Id</Th>
                 <Th>Name</Th>
                 <Th>Phone Number</Th>
+                <Th>Email</Th>
                 <Th>Profile Photo</Th>
-                <Th>Referral Phone Number</Th>
-                <Th>Status </Th>
+                <Th>Status</Th>
                 <Th>Action</Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>inches</Td>
-                <Td>millimetres (mm)</Td>
-                <Td>hshnsnsnm</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to="">Delete</Link>
-                    </Button>
-                    <Button colorScheme="red">
-                    <Link to=""> Edit</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to="">Delete</Link>
-                    </Button>
-                    <Button colorScheme="red">
-                    <Link to=""> Edit</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to="">Delete</Link>
-                    </Button>
-                    <Button colorScheme="red">
-                    <Link to="">Edit</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to="">Delete</Link>
-                    </Button>
-                    <Button colorScheme="red">
-                    <Link to="">Edit</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                       <Link to="">Delete</Link>
-                    </Button>
-                    <Button colorScheme="red">
-                    <Link to=""> Edit</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to="">Delete</Link>
-                    </Button>
-                    <Button colorScheme="red">
-                      <Link to=""> Edit </Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
+              {users.map((user) => {
+                return (
+                  <Tr>
+                    <Td>{user._id}</Td>
+                    <Td>{user.name}</Td>
+                    <Td>{user.mobilenumber}</Td>
+                    <Td>{user.email}</Td>
+                    <Td>
+                      <img
+                        src={`${process.env.REACT_APP_STATIC_URL}/profile/${user.profilephoto}`}
+                      ></img>
+                    </Td>
+                    <Td>{user.status}</Td>
+                    <Td>
+                      <HStack spacing="10px">
+                        <Button
+                          colorScheme="red"
+                          onClick={onDeleteOpen(user._id)}
+                        >
+                          Delete
+                        </Button>
+                        <Button
+                          colorScheme="red"
+                          onClick={onEditOpen(user._id, user)}
+                        >
+                          Edit
+                        </Button>
+                      </HStack>
+                    </Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>

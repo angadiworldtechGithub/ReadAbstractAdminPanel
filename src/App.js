@@ -16,15 +16,16 @@ import Slider from "./Pages/Slider";
 import User from "./Pages/User";
 import Login from "./Pages/Login";
 import { ChakraProvider } from "@chakra-ui/react";
-import Bookpages from "./Pages/Bookpages";
+import BookPage from "./Pages/BookPage";
 import Pagination from "./Components/Pagination";
+import { DataContextProvider } from "./DataContext";
 
 // ALL URLS MUST BE IN LOWER CASE ... !!! VERY IMP
 
 function App() {
   return (
     <ChakraProvider>
-      <div>
+      <DataContextProvider>
         <BrowserRouter>
           <Sidebar>
             <Routes>
@@ -46,11 +47,11 @@ function App() {
               <Route path="/notification" element={<Notification />}></Route>
               <Route path="/slider" element={<Slider />}></Route>
               <Route path="/user" element={<User />}></Route>
-              <Route path="/bookpages" element={<Bookpages />}></Route>
+              <Route path="/bookpages" element={<BookPage />}></Route>
             </Routes>
           </Sidebar>
         </BrowserRouter>
-      </div>
+      </DataContextProvider>
     </ChakraProvider>
   );
 }

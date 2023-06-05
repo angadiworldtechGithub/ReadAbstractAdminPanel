@@ -1,20 +1,8 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { HEADERS } from "../constants";
 import { HStack, Text } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Box,
-} from "@chakra-ui/react";
+import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -24,95 +12,85 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import AddAuthorModal from "../Components/AddAuthorModal";
+import EditAuthorModal from "../Components/EditAuthorModal";
+import DeleteAuthorModal from "../Components/DeleteAuthorModal";
 
 function Author() {
-  {
-    /*
-    const headers = [
-      {label:"Channel name" , key:"name"},
-      {label:"Channel Image" , key:"Image"},
-      {label:"Channel Description" , key:"text"},
-      {label:"Action" , key:"key"}
+  const {
+    isOpen: isAddOpen,
+    onOpen: onAddOpen,
+    onClose: onAddClose,
+  } = useDisclosure();
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen_,
+    onClose: onEditClose_,
+  } = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen_,
+    onClose: onDeleteClose_,
+  } = useDisclosure();
 
-    ]
+  const [editId, setEditId] = useState("");
+  const [deleteId, setDeleteId] = useState("");
+  const [authorData, setAuthorData] = useState({});
+  const [authors, setAuthors] = useState([]);
 
-    const App = () => {
-    const [data,setData] = useState([]);
+  const onEditOpen = (id, data) => () => {
+    setEditId(id);
+    setAuthorData(data);
+    onEditOpen_();
+  };
 
-       useEffect(() => {
-        fetchData();
-        },[]);
+  const onEditClose = () => {
+    setEditId("");
+    setAuthorData({});
+    onEditClose_();
+  };
 
-     const App = () => {
-        axios
-          .get("http://localhost:3000/users/get")
-          .then(({data}) => {
-            setData(data);
-          })
-          .catch((error)=> alert("Error happened"));
-     };
-    */
-  }
+  const onDeleteOpen = (id) => () => {
+    setDeleteId(id);
+    onDeleteOpen_();
+  };
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const onDeleteClose = () => {
+    setDeleteId("");
+    onDeleteClose_();
+  };
 
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/getauthors`,
+        {
+          headers: HEADERS,
+        }
+      );
+      setAuthors(data.author);
+    })();
+  }, []);
 
   return (
     <>
-      {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button colorScheme="green" onClick={onOpen}>
-         <Link to="" >Add Author</Link>
+        <Button colorScheme="green" onClick={onAddOpen}>
+          Add Author
         </Button>
 
-        <Modal
-          initialFocusRef={initialRef}
-          finalFocusRef={finalRef}
-          isOpen={isOpen}
-          onClose={onClose}
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Author</ModalHeader>
-            <hr></hr>
-            <ModalCloseButton />
-
-            <ModalBody pb={6}>
-              <FormControl>
-                <FormLabel>Add the Author Image</FormLabel>
-                <Input
-                  ref={initialRef}
-                  type="file"
-                  placeholder="No file chosen"
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel>Author name</FormLabel>
-                <Input ref={initialRef} placeholder="Author name" />
-              </FormControl>
-
-              <FormControl mt={4}>
-                <FormLabel>About Author</FormLabel>
-                <Input placeholder="About Author" />
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter>
-              <HStack spacing="20px">
-                <Button colorScheme="green" onClick={onClose}>
-                 <Link to=""> Close</Link>
-                </Button>
-                <Button colorScheme="red" mr={3}>
-                <Link to="">Add Author</Link>
-                </Button>
-              </HStack>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+        <AddAuthorModal isOpen={isAddOpen} onClose={onAddClose} />
+        <EditAuthorModal
+          isOpen={isEditOpen}
+          onClose={onEditClose}
+          editId={editId}
+          authorData={authorData}
+        />
+        <DeleteAuthorModal
+          isOpen={isDeleteOpen}
+          onClose={onDeleteClose}
+          deleteId={deleteId}
+        />
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
@@ -148,99 +126,35 @@ function Author() {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>inches</Td>
-                <Td>millimetres (mm)</Td>
-                <Td>hshnsnsnm</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button  colorScheme="red">
-                      Delete
-                    </Button>
-                    <Button  colorScheme="red">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
-                <Td>
-                  Lorem Ipsum has been the industry's standard dummy text ever
-                  since the 1500s
-                </Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button  colorScheme="red">
-                      Delete
-                    </Button>
-                    <Button  colorScheme="red">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button  colorScheme="red">
-                      Delete
-                    </Button>
-                    <Button  colorScheme="red">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button  colorScheme="red">
-                      Delete
-                    </Button>
-                    <Button  colorScheme="red">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button  colorScheme="red">
-                      Delete
-                    </Button>
-                    <Button  colorScheme="red">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button  colorScheme="red">
-                      Delete
-                    </Button>
-                    <Button  colorScheme="red">
-                      Edit
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
+              {authors.map((author) => {
+                return (
+                  <Tr key={author._id}>
+                    <Td>{author.authorname}</Td>
+                    <Td>
+                      <img
+                        src={`${process.env.REACT_APP_STATIC_URL}/authorimage/${author.authorimage}`}
+                      ></img>
+                    </Td>
+                    <Td>{author.aboutauthor}</Td>
+                    <Td>
+                      <HStack spacing="10px">
+                        <Button
+                          onClick={onDeleteOpen(author._id)}
+                          colorScheme="red"
+                        >
+                          Delete
+                        </Button>
+                        <Button
+                          onClick={onEditOpen(author._id, author)}
+                          colorScheme="red"
+                        >
+                          Edit
+                        </Button>
+                      </HStack>
+                    </Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>

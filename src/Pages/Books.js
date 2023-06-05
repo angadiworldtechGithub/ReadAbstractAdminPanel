@@ -1,6 +1,8 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { HEADERS } from "../constants";
 import { HStack, Text } from "@chakra-ui/react";
-import { Button, Input, Box } from "@chakra-ui/react";
+import { Button, Input, Box, useDisclosure } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -11,15 +13,52 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import DeleteBookModal from "../Components/DeleteBookModal";
+import { Spinner } from "@chakra-ui/react";
 
 function Books() {
+  const [deleteId, setDeleteId] = useState("");
+  const [books, setBooks] = useState([]);
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen_,
+    onClose: onDeleteClose_,
+  } = useDisclosure();
+
+  const onDeleteOpen = (id) => () => {
+    setDeleteId(id);
+    onDeleteOpen_();
+  };
+
+  const onDeleteClose = () => {
+    setDeleteId("");
+    onDeleteClose_();
+  };
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/getallbook`,
+        {
+          headers: HEADERS,
+        }
+      );
+      setBooks(data.book);
+    })();
+  }, []);
+
   return (
     <>
-      {/*Modal*/}
       <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
         <Button colorScheme="green">
           <Link to="/bookpages">Add Books</Link>
         </Button>
+
+        <DeleteBookModal
+          isOpen={isDeleteOpen}
+          onClose={onDeleteClose}
+          bookId={deleteId}
+        />
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
@@ -46,101 +85,42 @@ function Books() {
           <Table variant="simple">
             <Thead>
               <Tr border="2px Solid black">
-                <Th>Channel Name</Th>
                 <Th>Book Title</Th>
                 <Th>Book Image</Th>
                 <Th>Author Name</Th>
-                <Th>Publication & Year</Th>
-                <Th>Type</Th>
                 <Th>Time to Read</Th>
                 <Th>Action</Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr maxWidth="100%">
-                <Td>Angadi</Td>
-                <Td>AngadiworldtechAngadiworldtech</Td>
-                <Td>Good Growth</Td>
-                <Td>13/06/2023</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr maxWidth="20px">
-                <Td maxWidth="20px">yards metresmetresmetresmetresmetresmetresmetresmetresmetres</Td>
-                <Td>metres (m)</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red"><Link to="" >Delete</Link></Button>
-                  </HStack>
-                </Td>
-              </Tr>
+              {!books.length ? (
+                <Spinner />
+              ) : (
+                books.map((book) => {
+                  return (
+                    <Tr maxWidth="100%" key={book._id}>
+                      <Td>{book.title}</Td>
+                      <Td>
+                        <img
+                          src={`${process.env.REACT_APP_STATIC_URL}/bookimage/${book.bookimage}`}
+                        ></img>
+                      </Td>
+                      <Td>{book.authorname}</Td>
+                      <Td>{book.minutes}</Td>
+                      <Td>
+                        <HStack spacing="10px">
+                          <Button
+                            onClick={onDeleteOpen(book._id)}
+                            colorScheme="red"
+                          >
+                            Delete
+                          </Button>
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

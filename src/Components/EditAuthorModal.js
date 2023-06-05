@@ -15,11 +15,11 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-export default function EditChannelModal({
+export default function EditAuthorModal({
   isOpen,
   onClose,
-  channelId,
-  channelData,
+  authorId,
+  authorData,
 }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
@@ -35,39 +35,38 @@ export default function EditChannelModal({
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader paddingTop="40px">Edit Channel</ModalHeader>
+        <ModalHeader>Author</ModalHeader>
         <hr></hr>
         <ModalCloseButton />
 
         <ModalBody pb={6}>
           <FormControl>
-            <FormLabel>Edit the Channel Image</FormLabel>
+            <FormLabel>Add the Author Image</FormLabel>
             <Input ref={initialRef} type="file" placeholder="No file chosen" />
           </FormControl>
 
           <FormControl>
-            <FormLabel>Channel name</FormLabel>
+            <FormLabel>Author name</FormLabel>
             <Input
               ref={initialRef}
-              placeholder="Channel name"
-              value={channelData.channel}
+              placeholder="Author name"
+              value={authorData.authorname}
             />
           </FormControl>
 
           <FormControl mt={4}>
-            <FormLabel>Channel description</FormLabel>
-            <Input
-              placeholder="Channel description"
-              value={channelData.discription}
-            />
+            <FormLabel>About Author</FormLabel>
+            <Input placeholder="About Author" value={authorData.aboutauthor} />
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
           <HStack spacing="20px">
-            <Button onClick={onClose}>Close</Button>
-            <Button onClick={onEdit} colorScheme="blue" mr={3}>
-              Add Channel
+            <Button colorScheme="green" onClick={onClose}>
+              ModalCloseButton
+            </Button>
+            <Button colorScheme="red" mr={3}>
+              Add Author
             </Button>
           </HStack>
         </ModalFooter>
