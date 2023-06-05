@@ -133,7 +133,7 @@ function Channels() {
                     <Td>{channel.channel}</Td>
                     <Td>
                       <img
-                        src={`${process.env.REACT_APP_STATIC_URL}/channelimage/${channel.channelimage}`}
+                        src={`${process.env.REACT_APP_URL}/channelimage/${channel.channelimage}`}
                       ></img>
                     </Td>
                     <Td>{channel.discription}</Td>

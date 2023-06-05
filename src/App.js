@@ -3,7 +3,6 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Sidebar from "./Components/Sidebar";
 import Dashboard from "./Pages/Dashboard";
-import Accounting from "./Pages/Accounting";
 import Channels from "./Pages/Channels";
 import Author from "./Pages/Author";
 import Books from "./Pages/Books";
@@ -31,7 +30,6 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
-              <Route path="/accounting" element={<Accounting />}></Route>
               <Route path="/channels" element={<Channels />}></Route>
               <Route path="/books" element={<Books />}></Route>
               <Route path="/author" element={<Author />}></Route>

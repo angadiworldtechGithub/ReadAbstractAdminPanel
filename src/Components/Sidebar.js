@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-// Rename to Layout.js
+// Rename to Layout.js Add Fetch data to the header
 
 export default function Sidebar({ children }) {
   return (
@@ -109,7 +109,7 @@ export default function Sidebar({ children }) {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    <Link to="/accounting">Accounting</Link>
+                    Accounting
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>

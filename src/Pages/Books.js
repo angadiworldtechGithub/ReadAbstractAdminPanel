@@ -102,7 +102,7 @@ function Books() {
                       <Td>{book.title}</Td>
                       <Td>
                         <img
-                          src={`${process.env.REACT_APP_STATIC_URL}/bookimage/${book.bookimage}`}
+                          src={`${process.env.REACT_APP_URL}/bookimage/${book.bookimage}`}
                         ></img>
                       </Td>
                       <Td>{book.authorname}</Td>

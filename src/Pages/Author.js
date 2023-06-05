@@ -132,7 +132,7 @@ function Author() {
                     <Td>{author.authorname}</Td>
                     <Td>
                       <img
-                        src={`${process.env.REACT_APP_STATIC_URL}/authorimage/${author.authorimage}`}
+                        src={`${process.env.REACT_APP_URL}/authorimage/${author.authorimage}`}
                       ></img>
                     </Td>
                     <Td>{author.aboutauthor}</Td>

@@ -110,14 +110,14 @@ function User() {
             <Tbody>
               {users.map((user) => {
                 return (
-                  <Tr>
+                  <Tr key={user._id}>
                     <Td>{user._id}</Td>
                     <Td>{user.name}</Td>
                     <Td>{user.mobilenumber}</Td>
                     <Td>{user.email}</Td>
                     <Td>
                       <img
-                        src={`${process.env.REACT_APP_STATIC_URL}/profile/${user.profilephoto}`}
+                        src={`${process.env.REACT_APP_URL}/profile/${user.profilephoto}`}
                       ></img>
                     </Td>
                     <Td>{user.status}</Td>
