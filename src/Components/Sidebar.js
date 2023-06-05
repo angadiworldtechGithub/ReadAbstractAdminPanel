@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+// Rename to Layout.js
+
 export default function Sidebar({ children }) {
   return (
     <>
@@ -127,7 +129,6 @@ export default function Sidebar({ children }) {
             </AccordionItem>
           </Accordion>
         </Box>
-
         <Box minH="700px">{children}</Box>
       </Flex>
 

@@ -1,20 +1,9 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { HEADERS } from "../constants";
 import { HStack, Text } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Box,
-} from "@chakra-ui/react";
+import AddChannelModal from "../Components/AddChannelModal";
+import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -25,80 +14,39 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useOutsideClick } from '@chakra-ui/react'
 
 function Channels() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [channels, setChannels] = useState([]);
 
-const { isOpen, onOpen, onClose, onChange } = useDisclosure();
-
-const initialRef = React.useRef(null);
-const finalRef = React.useRef(null);
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/getallchannel`,
+        {
+          headers: HEADERS,
+        }
+      );
+      setChannels(data.channel);
+    })();
+  }, []);
 
   return (
     <>
-
       <Box paddingTop="20px" paddingLeft="20px">
         <Button colorScheme="green" onClick={onOpen}>
-          <Link to=''> Add Channel</Link>
+          <Link to="">Add Channel</Link>
         </Button>
-
-        <Modal
-          initialFocusRef={initialRef}
-          finalFocusRef={finalRef}
-          isOpen={isOpen}
-          onClose={onClose}
-
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader paddingTop="40px">Channel</ModalHeader>
-            <hr></hr>
-            <ModalCloseButton />
-
-            <ModalBody pb={6}>
-              <FormControl>
-                <FormLabel>Add the Channel Image</FormLabel>
-                <Input
-                  ref={initialRef}
-                  type="file"
-                  placeholder="No file chosen"
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel> Channel name</FormLabel>
-                <Input ref={initialRef} placeholder="Channel name" />
-              </FormControl>
-
-              <FormControl mt={4}>
-                <FormLabel>Channel description</FormLabel>
-                <Input placeholder="Channel description" />
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter>
-              <HStack spacing="20px">
-                <Button onClick={onClose}>Close</Button>
-                <Button  onClick={onOpen}colorScheme="blue" mr={3}>
-                  Add Channel
-                </Button>
-              </HStack>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+        <AddChannelModal isOpen={isOpen} onClose={onClose} />
       </Box>
 
-      
-    
-    <Box paddingTop="20px" paddingLeft="20px">
-   
-    </Box>
+      <Box paddingTop="20px" paddingLeft="20px"></Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              <Link to=''> Export to Csv</Link>
+              <Link to="">Export to Csv</Link>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -107,7 +55,7 @@ const finalRef = React.useRef(null);
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-                <Link to=''> Clear</Link>
+              <Link to="">Clear</Link>
             </Button>
           </Box>
         </HStack>
@@ -127,99 +75,29 @@ const finalRef = React.useRef(null);
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>inches</Td>
-                <Td>millimetres (mm)</Td>
-                <Td>hshnsnsnm</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button  onClick={onOpen} colorScheme="green">
-                      <Link to=''>Delete</Link>
-                    </Button>
-                    <Button  onClick={onOpen} colorScheme="green">
-                      <Link to=''>Edit</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
-                <Td>
-                  Lorem Ipsum has been the industry's standard dummy text ever
-                  since the 1500s
-                </Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button onClick={onOpen} colorScheme="green">
-                     <Link to=''> Delete </Link>
-                    </Button>
-                    <Button  onClick={onOpen} colorScheme="green">
-                    <Link to=''> Edit </Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button onClick={onOpen} colorScheme="green">
-                    <Link to=''> Delete </Link>
-                    </Button>
-                    <Button  onClick={onOpen} colorScheme="green">
-                     <Link to=''> Edit </Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button onClick={onOpen} colorScheme="green">
-                       <Link to=''> Delete </Link>
-                    </Button>
-                    <Button  onClick={onOpen}colorScheme="green">
-                       <Link to=''> Edit </Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button  onClick={onOpen} colorScheme="green">
-                       <Link to=''> Delete </Link>
-                    </Button>
-                    <Button  onClick={onOpen} colorScheme="green">
-                       <Link to=''> Edit </Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button onClick={onOpen} colorScheme="green">
-                      <Link to=''> Delete </Link>
-                    </Button>
-                    <Button  onClick={onOpen} colorScheme="green">
-                    <Link to=''> Edit </Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
+              {channels.map((channel) => {
+                return (
+                  <Tr key={channel._id}>
+                    <Td>{channel.channel}</Td>
+                    <Td>
+                      <img
+                        src={`${process.env.REACT_APP_STATIC_URL}/${channel.channelimage}`}
+                      ></img>
+                    </Td>
+                    <Td>{channel.discription}</Td>
+                    <Td>
+                      <HStack spacing="10px">
+                        <Button onClick={onOpen} colorScheme="green">
+                          <Link to="">Delete</Link>
+                        </Button>
+                        <Button onClick={onOpen} colorScheme="green">
+                          <Link to="">Edit</Link>
+                        </Button>
+                      </HStack>
+                    </Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>
