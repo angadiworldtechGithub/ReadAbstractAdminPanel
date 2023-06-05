@@ -17,6 +17,7 @@ import User from "./Pages/User";
 import Login from "./Pages/Login";
 import { ChakraProvider } from "@chakra-ui/react";
 import Bookpages from "./Pages/Bookpages";
+import Pagination from "./Components/Pagination";
 
 // ALL URLS MUST BE IN LOWER CASE ... !!! VERY IMP
 
@@ -36,6 +37,7 @@ function App() {
               <Route path="/subscription" element={<Subscription />}></Route>
               <Route path="/transaction" element={<Transaction />}></Route>
               <Route path="/comments" element={<Comments />}></Route>
+              <Route path="/pagination" element={<Pagination />}></Route>
               <Route
                 path="/usermanagement"
                 element={<UserManagement />}

@@ -59,7 +59,7 @@ function UserManagement() {
                 <Td>13/06/2023</Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       Delete
                     </Button>
                   </HStack>
@@ -72,7 +72,7 @@ function UserManagement() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       Delete
                     </Button>
                   </HStack>
@@ -85,7 +85,7 @@ function UserManagement() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       Delete
                     </Button>
                   </HStack>
@@ -98,7 +98,7 @@ function UserManagement() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       Delete
                     </Button>
                   </HStack>
@@ -111,7 +111,7 @@ function UserManagement() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       Delete
                     </Button>
                   </HStack>
@@ -124,7 +124,7 @@ function UserManagement() {
                 <Td></Td>
                 <Td>
                   <HStack spacing="10px">
-                    <Button color="white" bg="#DC3545">
+                    <Button colorScheme="red">
                       Delete
                     </Button>
                   </HStack>

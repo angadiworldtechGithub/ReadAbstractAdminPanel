@@ -103,12 +103,6 @@ export default function Sidebar({ children }) {
               <AccordionPanel pb={4} background="#2D2D2D">
                 <Link to="/usermanagement">User Feedback Management</Link>
               </AccordionPanel>
-              <AccordionPanel pb={4} background="#2D2D2D">
-                <Link to="/comments">Comments Management</Link>
-              </AccordionPanel>
-              <AccordionPanel pb={4} background="#2D2D2D">
-                <Link to="/usermanagement">User Feedback Management</Link>
-              </AccordionPanel>
             </AccordionItem>
 
             <AccordionItem>
