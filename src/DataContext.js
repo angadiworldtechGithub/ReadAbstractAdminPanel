@@ -15,6 +15,9 @@ export function DataContextProvider({ children }) {
   const [channels, setChannels] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [subscriptions, setSubscriptions] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [sliders, setSliders] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -61,6 +64,27 @@ export function DataContextProvider({ children }) {
       setChannels(channel);
 
       const {
+        data: { comment },
+      } = await axios.get(`${process.env.REACT_APP_API_URL}/getcommentall`, {
+        headers: HEADERS,
+      });
+      setComments(comment ?? []);
+
+      const {
+        data: { slider },
+      } = await axios.get(`${process.env.REACT_APP_API_URL}/getallslider`, {
+        headers: HEADERS,
+      });
+      setSliders(slider ?? []);
+
+      const {
+        data: { notification },
+      } = await axios.get(`${process.env.REACT_APP_API_URL}/getnotifcation`, {
+        headers: HEADERS,
+      });
+      setNotifications(notification ?? []);
+
+      const {
         data: { book },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getallbook`, {
         headers: HEADERS,
@@ -71,7 +95,17 @@ export function DataContextProvider({ children }) {
   }, []);
   return (
     <DataContext.Provider
-      value={{ users, transactions, books, subscriptions, authors, channels }}
+      value={{
+        users,
+        transactions,
+        books,
+        subscriptions,
+        authors,
+        channels,
+        comments,
+        notifications,
+        sliders,
+      }}
     >
       {children}
     </DataContext.Provider>

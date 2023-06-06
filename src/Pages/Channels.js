@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { HEADERS } from "../constants";
+import { useContext, useMemo, useState } from "react";
+import { CSVLink } from "react-csv";
+import shortid from "shortid";
 import { HStack, Text } from "@chakra-ui/react";
 import AddChannelModal from "../Components/AddChannelModal";
 import EditChannelModal from "../Components/EditChannelModal";
@@ -17,6 +17,14 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataContext";
+
+const CHANNEL_HEADERS = [
+  "Channel Name",
+  "Channel Image",
+  "Channel Description",
+];
+
+const CHANNEL_KEYS = ["channel", "channelimage", "discription"];
 
 function Channels() {
   const {
@@ -38,6 +46,14 @@ function Channels() {
   const [deleteId, setDeleteId] = useState("");
   const [channelData, setChannelData] = useState({});
   const { channels } = useContext(DataContext);
+
+  const csvData = useMemo(() => {
+    const data = [CHANNEL_HEADERS];
+    channels.forEach((book) => {
+      data.push(CHANNEL_KEYS.map((key) => book[key]));
+    });
+    return data;
+  }, [channels]);
 
   const onEditOpen = (id, data) => () => {
     setEditId(id);
@@ -87,7 +103,12 @@ function Channels() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              <Link to="">Export to Csv</Link>
+              <CSVLink
+                data={csvData}
+                filename={`channels_${shortid.generate()}.csv`}
+              >
+                Export to Csv
+              </CSVLink>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">

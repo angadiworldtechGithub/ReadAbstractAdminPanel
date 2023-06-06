@@ -1,20 +1,6 @@
-import React from "react";
+import { useContext } from "react";
 import { HStack, Text } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Box,
-} from "@chakra-ui/react";
+import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -25,56 +11,25 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import AddNotificationModal from "../Components/AddNotificationModal";
+import { DataContext } from "../DataContext";
 
 function Notification() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isAddOpen,
+    onOpen: onAddOpen,
+    onClose: onAddClose,
+  } = useDisclosure();
 
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  const { notifications } = useContext(DataContext);
 
   return (
     <>
-      {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button colorScheme="green" onClick={onOpen}>
-            <Link to="">Add Notification</Link>
+        <Button colorScheme="green" onClick={onAddOpen}>
+          Add Notification
         </Button>
-
-        <Modal
-          initialFocusRef={initialRef}
-          finalFocusRef={finalRef}
-          isOpen={isOpen}
-          onClose={onClose}
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Notification</ModalHeader>
-            <hr></hr>
-            <ModalCloseButton />
-
-            <ModalBody pb={6}>
-              <FormControl>
-                <FormLabel>Notification</FormLabel>
-                <Input
-                  ref={initialRef}
-                  type="text"
-                  placeholder="Enter Notification"
-                />
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter>
-              <HStack spacing="20px">
-                <Button colorScheme="red" onClick={onClose}>
-                   <Link to=""> Cancle </Link> 
-                </Button>
-                <Button colorScheme="green" mr={3}>
-                <Link to=""> Save </Link> 
-                </Button>
-              </HStack>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+        <AddNotificationModal isOpen={isAddOpen} onClose={onAddClose} />
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
@@ -85,7 +40,7 @@ function Notification() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-                <Link to="" >Clear</Link>
+              <Link to="">Clear</Link>
             </Button>
           </Box>
         </HStack>
@@ -98,44 +53,17 @@ function Notification() {
               <Tr border="2px Solid black">
                 <Th>Notification</Th>
                 <Th>Date & Time</Th>
-                <Th>Action</Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>inches Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </Td>
-                <Td> 31/01/2023 & 01:12:45</Td>
-                <Td>
-                  <HStack spacing="20px">
-                    <Button colorScheme="red" onClick={onClose}>
-                       <Link to="" >Cancle</Link>
-                    </Button>
-                    <Button colorScheme="red" mr={3}>
-                       <Link to="">Save</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
+              {notifications.map((notification) => {
+                return (
+                  <Tr>
+                    <Td>{notification.text}</Td>
+                    <Td>{notification.createdAt}</Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>

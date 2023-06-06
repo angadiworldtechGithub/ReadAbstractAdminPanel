@@ -1,6 +1,7 @@
-import React from "react";
-import { HStack, Text } from "@chakra-ui/react";
+import { useMemo, useState } from "react";
+import { HStack, Text, useDisclosure } from "@chakra-ui/react";
 import { Button, Input, Box } from "@chakra-ui/react";
+import { CSVLink } from "react-csv";
 import {
   Table,
   Thead,
@@ -11,20 +12,63 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import shortid from "shortid";
+import { DataContext } from "../DataContext";
+import { useContext } from "react";
+import DeleteCommentModal from "../Components/DeleteCommentModal";
+
+const COMMENT_HEADERS = ["User ID", "Book ID", "Comment"];
+const COMMENT_KEYS = ["userid", "bookid", "comment"];
 
 function Comments() {
+  const { comments } = useContext(DataContext);
+  const csvData = useMemo(() => {
+    const data = [COMMENT_HEADERS];
+    comments.forEach((comment) => {
+      data.push(COMMENT_KEYS.map((key) => comment[key]));
+    });
+    return data;
+  }, [comments]);
+
+  const [deleteId, setDeleteId] = useState("");
+
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen_,
+    onClose: onDeleteClose_,
+  } = useDisclosure();
+
+  const onDeleteOpen = (id) => () => {
+    console.log(id);
+    setDeleteId(id);
+    onDeleteOpen_();
+  };
+
+  const onDeleteClose = () => {
+    setDeleteId("");
+    onDeleteClose_();
+  };
   return (
     <>
-      {/*Modal*/}
       <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
-        Comments Management
+        Comments
+        <DeleteCommentModal
+          onOpen={isDeleteOpen}
+          onClose={onDeleteClose}
+          commentId={deleteId}
+        />
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              <Link to="/">Export to CSV</Link>
+              <CSVLink
+                data={csvData}
+                filename={`comments${shortid.generate()}.csv`}
+              >
+                Export to CSV
+              </CSVLink>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -44,99 +88,32 @@ function Comments() {
           <Table variant="simple">
             <Thead>
               <Tr border="2px Solid black">
-                <Th>User Name</Th>
-                <Th>User Email</Th>
-                <Th>Book Name</Th>
-                <Th>Book Rating</Th>
+                <Th>User Id</Th>
+                <Th>Book Id</Th>
                 <Th>Comment</Th>
                 <Th>Action</Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>inches</Td>
-                <Td>millimetres (mm)</Td>
-                <Td>hshnsnsnm</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                      <Link to=''>Delete</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to=''>Delete</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                      <Link to=''>Delete</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to=''>Delete</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to=''>Delete</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
-                <Td>0.91444</Td>
-                <Td></Td>
-                <Td></Td>
-                <Td>
-                  <HStack spacing="10px">
-                    <Button colorScheme="red">
-                    <Link to=''>Delete</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
+              {comments.map((comment) => {
+                return (
+                  <Tr key={comment._id}>
+                    <Td>{comment.userid}</Td>
+                    <Td>{comment.bookid}</Td>
+                    <Td>{comment.comment}</Td>
+                    <Td>
+                      <HStack spacing="10px">
+                        <Button
+                          colorScheme="red"
+                          onClick={onDeleteOpen(comment._id)}
+                        >
+                          Delete
+                        </Button>
+                      </HStack>
+                    </Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>

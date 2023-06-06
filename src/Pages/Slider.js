@@ -1,100 +1,57 @@
-import React from "react";
+import { useContext, useState } from "react";
 import { HStack, Text } from "@chakra-ui/react";
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
   Button,
-  FormControl,
-  FormLabel,
   Input,
   Box,
-} from "@chakra-ui/react";
-import {
   Table,
-  Thead,
-  Tbody,
   Tr,
+  Thead,
   Th,
+  Tbody,
   Td,
-  TableContainer,
 } from "@chakra-ui/react";
+import { TableContainer } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import AddSliderModal from "../Components/AddSliderModal";
+import { DataContext } from "../DataContext";
 
 function Slider() {
-  {
-    /*
-    const App = () => {
-    const [data,setData] = useState([]);
+  const {
+    isOpen: isAddOpen,
+    onOpen: onAddOpen,
+    onClose: onAddClose,
+  } = useDisclosure();
 
-       useEffect(() => {
-        fetchData();
-        },[]);
+  const [deleteId, setDeleteId] = useState("");
 
-     const App = () => {
-        axios
-          .get("http://localhost:3000/users/get")
-          .then(({data}) => {
-            setData(data);
-          })
-          .catch((error)=> alert("Error happened"));
-     };
-    */
-  }
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen_,
+    onClose: onDeleteClose_,
+  } = useDisclosure();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const onDeleteOpen = (id) => () => {
+    setDeleteId(id);
+    onDeleteOpen_();
+  };
 
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  const onDeleteClose = () => {
+    setDeleteId("");
+    onDeleteClose_();
+  };
+
+  const { sliders } = useContext(DataContext);
 
   return (
     <>
-      {/*Modal*/}
       <Box paddingTop="20px" paddingLeft="20px">
-        <Button colorScheme="green" onClick={onOpen}>
-          <Link to="">Add Slider</Link> 
+        <Button colorScheme="green" onClick={onAddOpen}>
+          <Link to="">Add Slider</Link>
         </Button>
 
-        <Modal
-          initialFocusRef={initialRef}
-          finalFocusRef={finalRef}
-          isOpen={isOpen}
-          onClose={onClose}
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Slider</ModalHeader>
-            <hr></hr>
-            <ModalCloseButton />
-
-            <ModalBody pb={6}>
-              <FormControl>
-                <FormLabel>Add the Slider Image</FormLabel>
-                <Input
-                  ref={initialRef}
-                  type="file"
-                  placeholder="No file chosen"
-                />
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter>
-              <HStack spacing="20px">
-                <Button colorScheme="red" onClick={onClose}>
-                   <Link to="">Cancle</Link>
-                </Button>
-                <Button colorScheme="green" mr={3}>
-                <Link to="">Save</Link>
-                </Button>
-              </HStack>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+        <AddSliderModal isOpen={isAddOpen} onClose={onAddClose} />
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
@@ -110,7 +67,6 @@ function Slider() {
           </Box>
         </HStack>
       </Box>
-
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
         <TableContainer border="2px Solid black">
           <Table variant="simple">
@@ -121,42 +77,27 @@ function Slider() {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>
-                  inches Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
-                  Lorem{" "}
-                </Td>
-                <Td>
-                  <HStack spacing="20px">
-                    <Button colorScheme="red" onClick={onClose}>
-                      <Link to=""> Cancle</Link>
-                    </Button>
-                    <Button colorScheme="red" mr={3}>
-                    <Link to=""> Save</Link>
-                    </Button>
-                  </HStack>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td></Td>
-                <Td></Td>
-              </Tr>
+              {sliders.map((slider) => {
+                return (
+                  <Tr>
+                    <Td>
+                      <img
+                        src={`${process.env.REACT_APP_URL}/slider/${slider.slider}`}
+                      ></img>
+                    </Td>
+                    <Td>
+                      <HStack spacing="20px">
+                        <Button
+                          colorScheme="red"
+                          onClick={onDeleteOpen(slider._id)}
+                        >
+                          <Link to=""> Delete</Link>
+                        </Button>
+                      </HStack>
+                    </Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>
