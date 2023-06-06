@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { HEADERS } from "../constants";
+import { useState, useContext, useMemo } from "react";
+import { CSVLink } from "react-csv";
+import shortid from "shortid";
 import { HStack, Text } from "@chakra-ui/react";
 import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
@@ -16,6 +16,9 @@ import AddAuthorModal from "../Components/AddAuthorModal";
 import EditAuthorModal from "../Components/EditAuthorModal";
 import DeleteAuthorModal from "../Components/DeleteAuthorModal";
 import { DataContext } from "../DataContext";
+
+const AUTHOR_HEADERS = ["Author Name", "Author Image", "About Author"];
+const AUTHOR_KEYS = ["authorname", "authorimage", "aboutauthor"];
 
 function Author() {
   const {
@@ -39,6 +42,14 @@ function Author() {
   const [authorData, setAuthorData] = useState({});
 
   const { authors } = useContext(DataContext);
+
+  const csvData = useMemo(() => {
+    const data = [AUTHOR_HEADERS];
+    authors.forEach((author) => {
+      data.push(AUTHOR_KEYS.map((key) => author[key]));
+    });
+    return data;
+  }, [authors]);
 
   const onEditOpen = (id, data) => () => {
     setEditId(id);
@@ -87,7 +98,12 @@ function Author() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              Export to CSV
+              <CSVLink
+                data={csvData}
+                filename={`authors_${shortid.generate()}.csv`}
+              >
+                Export to CSV
+              </CSVLink>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -107,11 +123,15 @@ function Author() {
           <Table variant="simple">
             <Thead>
               <Tr border="2px Solid black">
-                <Th>Author Name</Th>
-                <Th>Author Image</Th>
-                <Box maxWidth="100%">
-                  <Th>About author</Th>
-                </Box>
+                {AUTHOR_HEADERS.map((header) => {
+                  if (header === "About Author") {
+                    return (
+                      <Box maxWidth="100%">
+                        <Th>About Author</Th>
+                      </Box>
+                    );
+                  } else return <Th>{header}</Th>;
+                })}
                 <Th>Action</Th>
               </Tr>
             </Thead>

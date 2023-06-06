@@ -1,4 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useMemo } from "react";
+import { CSVLink } from "react-csv";
+import shortid from "shortid";
 import { HStack, Text } from "@chakra-ui/react";
 import { Button, Input, Box, useDisclosure } from "@chakra-ui/react";
 import {
@@ -15,9 +17,25 @@ import DeleteBookModal from "../Components/DeleteBookModal";
 import { Spinner } from "@chakra-ui/react";
 import { DataContext } from "../DataContext";
 
+const BOOK_HEADERS = [
+  "Book Title",
+  "Book Image",
+  "Author Name",
+  "Time to Read",
+];
+
+const BOOK_KEYS = ["title", "bookimage", "authorname", "minutes"];
+
 function Books() {
   const [deleteId, setDeleteId] = useState("");
   const { books } = useContext(DataContext);
+  const csvData = useMemo(() => {
+    const data = [BOOK_HEADERS];
+    books.forEach((book) => {
+      data.push(BOOK_KEYS.map((key) => book[key]));
+    });
+    return data;
+  }, [books]);
   const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen_,
@@ -52,7 +70,12 @@ function Books() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              <Link to="/">Export to CSV</Link>
+              <CSVLink
+                data={csvData}
+                filename={`books_${shortid.generate()}.csv`}
+              >
+                Export to CSV
+              </CSVLink>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -72,10 +95,9 @@ function Books() {
           <Table variant="simple">
             <Thead>
               <Tr border="2px Solid black">
-                <Th>Book Title</Th>
-                <Th>Book Image</Th>
-                <Th>Author Name</Th>
-                <Th>Time to Read</Th>
+                {BOOK_HEADERS.map((header) => (
+                  <Th>{header}</Th>
+                ))}
                 <Th>Action</Th>
               </Tr>
             </Thead>
