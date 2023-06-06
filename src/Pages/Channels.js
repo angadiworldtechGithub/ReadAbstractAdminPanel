@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { HEADERS } from "../constants";
 import { HStack, Text } from "@chakra-ui/react";
@@ -16,6 +16,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { DataContext } from "../DataContext";
 
 function Channels() {
   const {
@@ -36,7 +37,7 @@ function Channels() {
   const [editId, setEditId] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [channelData, setChannelData] = useState({});
-  const [channels, setChannels] = useState([]);
+  const { channels } = useContext(DataContext);
 
   const onEditOpen = (id, data) => () => {
     setEditId(id);
@@ -59,18 +60,6 @@ function Channels() {
     setDeleteId("");
     onDeleteClose_();
   };
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/getallchannel`,
-        {
-          headers: HEADERS,
-        }
-      );
-      setChannels(data.channel);
-    })();
-  }, []);
 
   return (
     <>

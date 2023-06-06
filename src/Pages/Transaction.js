@@ -15,6 +15,7 @@ import { DataContext } from "../DataContext";
 
 function Transaction() {
   const { transactions } = useContext(DataContext);
+  console.log(transactions);
 
   return (
     <>

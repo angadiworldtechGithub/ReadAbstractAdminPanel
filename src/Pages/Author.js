@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { HEADERS } from "../constants";
 import { HStack, Text } from "@chakra-ui/react";
@@ -15,6 +15,7 @@ import {
 import AddAuthorModal from "../Components/AddAuthorModal";
 import EditAuthorModal from "../Components/EditAuthorModal";
 import DeleteAuthorModal from "../Components/DeleteAuthorModal";
+import { DataContext } from "../DataContext";
 
 function Author() {
   const {
@@ -36,7 +37,8 @@ function Author() {
   const [editId, setEditId] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [authorData, setAuthorData] = useState({});
-  const [authors, setAuthors] = useState([]);
+
+  const { authors } = useContext(DataContext);
 
   const onEditOpen = (id, data) => () => {
     setEditId(id);
@@ -59,18 +61,6 @@ function Author() {
     setDeleteId("");
     onDeleteClose_();
   };
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/getauthors`,
-        {
-          headers: HEADERS,
-        }
-      );
-      setAuthors(data.author);
-    })();
-  }, []);
 
   return (
     <>

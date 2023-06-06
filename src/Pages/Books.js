@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { HEADERS } from "../constants";
+import { useState, useContext } from "react";
 import { HStack, Text } from "@chakra-ui/react";
 import { Button, Input, Box, useDisclosure } from "@chakra-ui/react";
 import {
@@ -15,10 +13,11 @@ import {
 import { Link } from "react-router-dom";
 import DeleteBookModal from "../Components/DeleteBookModal";
 import { Spinner } from "@chakra-ui/react";
+import { DataContext } from "../DataContext";
 
 function Books() {
   const [deleteId, setDeleteId] = useState("");
-  const [books, setBooks] = useState([]);
+  const { books } = useContext(DataContext);
   const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen_,
@@ -34,18 +33,6 @@ function Books() {
     setDeleteId("");
     onDeleteClose_();
   };
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/getallbook`,
-        {
-          headers: HEADERS,
-        }
-      );
-      setBooks(data.book);
-    })();
-  }, []);
 
   return (
     <>
