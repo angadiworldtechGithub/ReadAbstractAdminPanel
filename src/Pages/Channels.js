@@ -17,6 +17,8 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataContext";
+import { HEADERS } from "../constants";
+import axios from "axios";
 
 const CHANNEL_HEADERS = [
   "Channel Name",
@@ -45,7 +47,7 @@ function Channels() {
   const [editId, setEditId] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [channelData, setChannelData] = useState({});
-  const { channels } = useContext(DataContext);
+  const { channels, setChannels } = useContext(DataContext);
 
   const csvData = useMemo(() => {
     const data = [CHANNEL_HEADERS];
@@ -72,7 +74,15 @@ function Channels() {
     onDeleteOpen_();
   };
 
-  const onDeleteClose = () => {
+  const onDelete = async () => {
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/deletechannel/${deleteId}`,
+      {},
+      {
+        headers: HEADERS,
+      }
+    );
+    setChannels([...channels.filter((channel) => channel._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
   };
@@ -92,8 +102,8 @@ function Channels() {
         />
         <DeleteChannelModal
           isOpen={isDeleteOpen}
-          onClose={onDeleteClose}
-          channelId={deleteId}
+          onClose={onDeleteClose_}
+          onDelete={onDelete}
         />
       </Box>
 

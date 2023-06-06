@@ -6,20 +6,14 @@ import {
   ModalContent,
   ModalHeader,
   ModalFooter,
-  ModalBody,
   ModalCloseButton,
   Button,
-  FormControl,
-  FormLabel,
-  Input,
   HStack,
 } from "@chakra-ui/react";
 
-export default function DeleteChannelModal({ isOpen, onClose, channelId }) {
+export default function DeleteChannelModal({ isOpen, onClose, onDelete }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-
-  const onDelete = () => {};
 
   return (
     <Modal

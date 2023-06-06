@@ -11,11 +11,9 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-export default function DeleteCommentModal({ isOpen, onClose, commentId }) {
+export default function DeleteSliderModal({ isOpen, onClose, onDelete }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-
-  const onDelete = () => {};
 
   return (
     <Modal
@@ -26,7 +24,7 @@ export default function DeleteCommentModal({ isOpen, onClose, commentId }) {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader paddingTop="40px">Delete Comment</ModalHeader>
+        <ModalHeader paddingTop="40px">Delete Slider</ModalHeader>
         <hr></hr>
         <ModalCloseButton />
 
@@ -34,7 +32,7 @@ export default function DeleteCommentModal({ isOpen, onClose, commentId }) {
           <HStack spacing="20px">
             <Button onClick={onClose}>Close</Button>
             <Button onClick={onDelete} colorScheme="blue" mr={3}>
-              Delete Comment
+              Delete Slider
             </Button>
           </HStack>
         </ModalFooter>

@@ -41,7 +41,7 @@ export default function AddChannelModal({ isOpen, onClose }) {
           </FormControl>
 
           <FormControl>
-            <FormLabel> Channel name</FormLabel>
+            <FormLabel>Channel name</FormLabel>
             <Input ref={initialRef} placeholder="Channel name" />
           </FormControl>
 

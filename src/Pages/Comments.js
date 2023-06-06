@@ -39,7 +39,6 @@ function Comments() {
   } = useDisclosure();
 
   const onDeleteOpen = (id) => () => {
-    console.log(id);
     setDeleteId(id);
     onDeleteOpen_();
   };
@@ -48,12 +47,14 @@ function Comments() {
     setDeleteId("");
     onDeleteClose_();
   };
+
+  console.log(isDeleteOpen);
   return (
     <>
       <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
         Comments
         <DeleteCommentModal
-          onOpen={isDeleteOpen}
+          isOpen={isDeleteOpen}
           onClose={onDeleteClose}
           commentId={deleteId}
         />

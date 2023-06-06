@@ -16,8 +16,13 @@ import { TableContainer } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AddSliderModal from "../Components/AddSliderModal";
 import { DataContext } from "../DataContext";
+import DeleteSliderModal from "../Components/DeleteSliderModal";
+import { HEADERS } from "../constants";
+import axios from "axios";
 
 function Slider() {
+  const { sliders, setSliders } = useContext(DataContext);
+
   const {
     isOpen: isAddOpen,
     onOpen: onAddOpen,
@@ -37,12 +42,18 @@ function Slider() {
     onDeleteOpen_();
   };
 
-  const onDeleteClose = () => {
+  const onDelete = async () => {
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/deleteslider/${deleteId}`,
+      {},
+      {
+        headers: HEADERS,
+      }
+    );
+    setSliders([...sliders.filter((slider) => slider._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
   };
-
-  const { sliders } = useContext(DataContext);
 
   return (
     <>
@@ -52,6 +63,11 @@ function Slider() {
         </Button>
 
         <AddSliderModal isOpen={isAddOpen} onClose={onAddClose} />
+        <DeleteSliderModal
+          isOpen={isDeleteOpen}
+          onClose={onDeleteClose_}
+          onDelete={onDelete}
+        />
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
@@ -79,7 +95,7 @@ function Slider() {
             <Tbody>
               {sliders.map((slider) => {
                 return (
-                  <Tr>
+                  <Tr key={slider._id}>
                     <Td>
                       <img
                         src={`${process.env.REACT_APP_URL}/slider/${slider.slider}`}

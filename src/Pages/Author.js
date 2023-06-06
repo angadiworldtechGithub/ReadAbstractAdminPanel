@@ -16,6 +16,8 @@ import AddAuthorModal from "../Components/AddAuthorModal";
 import EditAuthorModal from "../Components/EditAuthorModal";
 import DeleteAuthorModal from "../Components/DeleteAuthorModal";
 import { DataContext } from "../DataContext";
+import { HEADERS } from "../constants";
+import axios from "axios";
 
 const AUTHOR_HEADERS = ["Author Name", "Author Image", "About Author"];
 const AUTHOR_KEYS = ["authorname", "authorimage", "aboutauthor"];
@@ -41,7 +43,7 @@ function Author() {
   const [deleteId, setDeleteId] = useState("");
   const [authorData, setAuthorData] = useState({});
 
-  const { authors } = useContext(DataContext);
+  const { authors, setAuthors } = useContext(DataContext);
 
   const csvData = useMemo(() => {
     const data = [AUTHOR_HEADERS];
@@ -68,7 +70,15 @@ function Author() {
     onDeleteOpen_();
   };
 
-  const onDeleteClose = () => {
+  const onDelete = async () => {
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/deleteauthor/${deleteId}`,
+      {},
+      {
+        headers: HEADERS,
+      }
+    );
+    setAuthors([...authors.filter((author) => author._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
   };
@@ -89,8 +99,8 @@ function Author() {
         />
         <DeleteAuthorModal
           isOpen={isDeleteOpen}
-          onClose={onDeleteClose}
-          deleteId={deleteId}
+          onClose={onDeleteClose_}
+          onDelete={onDelete}
         />
       </Box>
 

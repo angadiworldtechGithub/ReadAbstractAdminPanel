@@ -101,10 +101,13 @@ export function DataContextProvider({ children }) {
         books,
         subscriptions,
         authors,
+        setAuthors,
         channels,
+        setChannels,
         comments,
         notifications,
         sliders,
+        setSliders,
       }}
     >
       {children}
