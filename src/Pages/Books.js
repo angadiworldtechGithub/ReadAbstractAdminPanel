@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import DeleteBookModal from "../Components/DeleteBookModal";
 import { Spinner } from "@chakra-ui/react";
 import { DataContext } from "../DataContext";
+import axios from "axios";
+import { HEADERS } from "../constants";
 
 const BOOK_HEADERS = [
   "Book Title",
@@ -28,7 +30,7 @@ const BOOK_KEYS = ["title", "bookimage", "authorname", "minutes"];
 
 function Books() {
   const [deleteId, setDeleteId] = useState("");
-  const { books } = useContext(DataContext);
+  const { books, setBooks } = useContext(DataContext);
   const csvData = useMemo(() => {
     const data = [BOOK_HEADERS];
     books.forEach((book) => {
@@ -47,7 +49,15 @@ function Books() {
     onDeleteOpen_();
   };
 
-  const onDeleteClose = () => {
+  const onDelete = async () => {
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/deletebook/${deleteId}`,
+      {},
+      {
+        headers: HEADERS,
+      }
+    );
+    setBooks([...books.filter((book) => book._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
   };
@@ -61,8 +71,8 @@ function Books() {
 
         <DeleteBookModal
           isOpen={isDeleteOpen}
-          onClose={onDeleteClose}
-          bookId={deleteId}
+          onClose={onDeleteClose_}
+          onDelete={onDelete}
         />
       </Box>
 

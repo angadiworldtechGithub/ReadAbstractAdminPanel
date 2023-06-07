@@ -42,7 +42,7 @@ function Author() {
   const [editId, setEditId] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [authorData, setAuthorData] = useState({});
-
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const { authors, setAuthors } = useContext(DataContext);
 
   const csvData = useMemo(() => {
@@ -71,6 +71,7 @@ function Author() {
   };
 
   const onDelete = async () => {
+    setDeleteLoading(true);
     await axios.post(
       `${process.env.REACT_APP_API_URL}/deleteauthor/${deleteId}`,
       {},
@@ -81,6 +82,7 @@ function Author() {
     setAuthors([...authors.filter((author) => author._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
+    setDeleteLoading(false);
   };
 
   return (
@@ -90,7 +92,11 @@ function Author() {
           Add Author
         </Button>
 
-        <AddAuthorModal isOpen={isAddOpen} onClose={onAddClose} />
+        <AddAuthorModal
+          isOpen={isAddOpen}
+          onClose={onAddClose}
+          setAuthors={setAuthors}
+        />
         <EditAuthorModal
           isOpen={isEditOpen}
           onClose={onEditClose}
@@ -101,6 +107,7 @@ function Author() {
           isOpen={isDeleteOpen}
           onClose={onDeleteClose_}
           onDelete={onDelete}
+          loading={deleteLoading}
         />
       </Box>
 

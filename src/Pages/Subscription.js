@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 import { HStack, Text } from "@chakra-ui/react";
 import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
@@ -14,6 +14,18 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../DataContext";
 import AddSubscriptionModal from "../Components/AddSubscriptionModal";
 import DeleteSubscriptionModal from "../Components/DeleteSubscriptionModal";
+import axios from "axios";
+import { HEADERS } from "../constants";
+import { CSVLink } from "react-csv";
+import shortid from "shortid";
+
+const SUBSCRIPTION_HEADERS = [
+  "Package Name",
+  "Package Type",
+  "Package Photo",
+  "Cost",
+];
+const SUBSCRIPTION_KEYS = ["packagename", "type", "packagephoto", "cost"];
 
 function Subscription() {
   const {
@@ -29,17 +41,35 @@ function Subscription() {
 
   const [deleteId, setDeleteId] = useState("");
 
-  const { subscriptions } = useContext(DataContext);
+  const { subscriptions, setSubscriptions } = useContext(DataContext);
 
   const onDeleteOpen = (id) => () => {
     setDeleteId(id);
     onDeleteOpen_();
   };
 
-  const onDeleteClose = () => {
+  const onDelete = async () => {
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/deletesubscription/${deleteId}`,
+      {},
+      {
+        headers: HEADERS,
+      }
+    );
+    setSubscriptions([
+      ...subscriptions.filter((subscription) => subscription._id !== deleteId),
+    ]);
     setDeleteId("");
     onDeleteClose_();
   };
+
+  const csvData = useMemo(() => {
+    const data = [SUBSCRIPTION_HEADERS];
+    subscriptions.forEach((comment) => {
+      data.push(SUBSCRIPTION_KEYS.map((key) => comment[key]));
+    });
+    return data;
+  }, [subscriptions]);
 
   return (
     <>
@@ -51,8 +81,8 @@ function Subscription() {
         <AddSubscriptionModal isOpen={isAddOpen} onClose={onAddClose} />
         <DeleteSubscriptionModal
           isOpen={isDeleteOpen}
-          onClose={onDeleteClose}
-          deleteId={deleteId}
+          onClose={onDeleteClose_}
+          onDelete={onDelete}
         />
       </Box>
 
@@ -60,7 +90,12 @@ function Subscription() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              <Link to="">Export to CSV</Link>
+              <CSVLink
+                data={csvData}
+                filename={`subscriptions_${shortid.generate()}.csv`}
+              >
+                Export to CSV
+              </CSVLink>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
@@ -69,7 +104,7 @@ function Subscription() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              <Link to=""> Clear</Link>
+              <Link to="">Clear</Link>
             </Button>
           </Box>
         </HStack>

@@ -9,6 +9,15 @@ export const DataContext = createContext();
 // add rest of the data fetch apis here
 
 export function DataContextProvider({ children }) {
+  const [dashboard, setDashboard] = useState({
+    channelCount: 0,
+    bookCount: 0,
+    authorCount: 0,
+    userCount: 0,
+    freeUserCount: 0,
+    subscribedUserCount: 0,
+  });
+
   const [books, setBooks] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [users, setUsers] = useState([]);
@@ -18,9 +27,26 @@ export function DataContextProvider({ children }) {
   const [comments, setComments] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [sliders, setSliders] = useState([]);
+  const [feedback, setFeedback] = useState([]);
 
   useEffect(() => {
     (async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/adminfunction/dashboard`,
+        {
+          headers: HEADERS,
+        }
+      );
+
+      setDashboard({
+        channelCount: data.channelCount,
+        bookCount: data.bookCount,
+        authorCount: data.authorCount,
+        userCount: data.userCount,
+        freeUserCount: data.userCount - data.transactionCount,
+        subscribedUserCount: data.transactionCount,
+      });
+
       const {
         data: { user },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/alluser`, {
@@ -96,18 +122,27 @@ export function DataContextProvider({ children }) {
   return (
     <DataContext.Provider
       value={{
+        dashboard,
         users,
+        setUsers,
         transactions,
+        setTransactions,
         books,
+        setBooks,
         subscriptions,
+        setSubscriptions,
         authors,
         setAuthors,
         channels,
         setChannels,
         comments,
+        setComments,
         notifications,
+        setNotifications,
         sliders,
         setSliders,
+        feedback,
+        setFeedback,
       }}
     >
       {children}

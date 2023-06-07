@@ -1,5 +1,6 @@
-import { useRef } from "react";
-
+import { useRef, useState } from "react";
+import axios from "axios";
+import { FILE_HEADERS } from "../constants";
 import {
   Modal,
   ModalOverlay,
@@ -14,12 +15,37 @@ import {
   Input,
   HStack,
 } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 
-export default function AddChannelModal({ isOpen, onClose }) {
+export default function AddChannelModal({ isOpen, onClose, setChannels }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const onAdd = () => {};
+  const onAdd = async () => {
+    if (initialRef.current.files.length && name !== "" && description !== "") {
+      setLoading(true);
+      console.log(initialRef.current.files[0]);
+      const {
+        data: { channel },
+      } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/postchannel`,
+        {
+          channelimage: initialRef.current.files[0],
+          channel: name,
+          channeldiscription: description,
+        },
+        {
+          headers: FILE_HEADERS,
+        }
+      );
+      setChannels((channels) => [...channels.concat([{ ...channel }])]);
+      onClose();
+      setLoading(false);
+    }
+  };
 
   return (
     <Modal
@@ -42,12 +68,24 @@ export default function AddChannelModal({ isOpen, onClose }) {
 
           <FormControl>
             <FormLabel>Channel name</FormLabel>
-            <Input ref={initialRef} placeholder="Channel name" />
+            <Input
+              placeholder="Channel name"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
           </FormControl>
 
           <FormControl mt={4}>
             <FormLabel>Channel description</FormLabel>
-            <Input placeholder="Channel description" />
+            <Input
+              placeholder="Channel description"
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
           </FormControl>
         </ModalBody>
 
@@ -55,7 +93,7 @@ export default function AddChannelModal({ isOpen, onClose }) {
           <HStack spacing="20px">
             <Button onClick={onClose}>Close</Button>
             <Button onClick={onAdd} colorScheme="blue" mr={3}>
-              Add Channel
+              {loading ? <Spinner /> : "Save"}
             </Button>
           </HStack>
         </ModalFooter>

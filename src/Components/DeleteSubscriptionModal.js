@@ -6,24 +6,21 @@ import {
   ModalContent,
   ModalHeader,
   ModalFooter,
-  ModalBody,
   ModalCloseButton,
   Button,
-  FormControl,
-  FormLabel,
-  Input,
   HStack,
 } from "@chakra-ui/react";
+
+import { Spinner } from "@chakra-ui/react";
 
 export default function DeleteSubscriptionModal({
   isOpen,
   onClose,
-  subscriptionId,
+  onDelete,
+  loading,
 }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-
-  const onDelete = () => {};
 
   return (
     <Modal
@@ -42,7 +39,7 @@ export default function DeleteSubscriptionModal({
           <HStack spacing="20px">
             <Button onClick={onClose}>Close</Button>
             <Button onClick={onDelete} colorScheme="blue" mr={3}>
-              Delete Subscription
+              {loading ? <Spinner /> : "Delete Subscription"}
             </Button>
           </HStack>
         </ModalFooter>

@@ -11,7 +11,14 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-export default function DeleteChannelModal({ isOpen, onClose, onDelete }) {
+import { Spinner } from "@chakra-ui/react";
+
+export default function DeleteChannelModal({
+  isOpen,
+  onClose,
+  onDelete,
+  loading,
+}) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
@@ -32,7 +39,7 @@ export default function DeleteChannelModal({ isOpen, onClose, onDelete }) {
           <HStack spacing="20px">
             <Button onClick={onClose}>Close</Button>
             <Button onClick={onDelete} colorScheme="blue" mr={3}>
-              Delete Channel
+              {loading ? <Spinner /> : "Delete Channel"}
             </Button>
           </HStack>
         </ModalFooter>

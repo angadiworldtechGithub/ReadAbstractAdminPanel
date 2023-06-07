@@ -15,13 +15,15 @@ import { Link } from "react-router-dom";
 import shortid from "shortid";
 import { DataContext } from "../DataContext";
 import { useContext } from "react";
+import axios from "axios";
+import { HEADERS } from "../constants";
 import DeleteCommentModal from "../Components/DeleteCommentModal";
 
 const COMMENT_HEADERS = ["User ID", "Book ID", "Comment"];
 const COMMENT_KEYS = ["userid", "bookid", "comment"];
 
 function Comments() {
-  const { comments } = useContext(DataContext);
+  const { comments, setComments } = useContext(DataContext);
   const csvData = useMemo(() => {
     const data = [COMMENT_HEADERS];
     comments.forEach((comment) => {
@@ -43,20 +45,27 @@ function Comments() {
     onDeleteOpen_();
   };
 
-  const onDeleteClose = () => {
+  const onDelete = async () => {
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/deletecomment/${deleteId}`,
+      {},
+      {
+        headers: HEADERS,
+      }
+    );
+    setComments([...comments.filter((comment) => comment._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
   };
 
-  console.log(isDeleteOpen);
   return (
     <>
       <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
         Comments
         <DeleteCommentModal
           isOpen={isDeleteOpen}
-          onClose={onDeleteClose}
-          commentId={deleteId}
+          onClose={onDeleteClose_}
+          onDelete={onDelete}
         />
       </Box>
 
@@ -66,7 +75,7 @@ function Comments() {
             <Button color="green" bg="white" border="2px Solid green">
               <CSVLink
                 data={csvData}
-                filename={`comments${shortid.generate()}.csv`}
+                filename={`comments_${shortid.generate()}.csv`}
               >
                 Export to CSV
               </CSVLink>

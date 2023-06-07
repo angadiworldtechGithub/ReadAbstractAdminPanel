@@ -9,9 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-// Rename to Layout.js Add Fetch data to the header
-
-export default function Sidebar({ children }) {
+export default function Layout({ children }) {
   return (
     <>
       <Box
@@ -52,7 +50,7 @@ export default function Sidebar({ children }) {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    <Link to="/channels">Channels</Link>
+                    Channels
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -92,7 +90,7 @@ export default function Sidebar({ children }) {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    <Link to="/comments">Feedback Mangement</Link>
+                    User Data Mangement
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -101,7 +99,7 @@ export default function Sidebar({ children }) {
                 <Link to="/comments">Comments Management</Link>
               </AccordionPanel>
               <AccordionPanel pb={4} background="#2D2D2D">
-                <Link to="/usermanagement">User Feedback Management</Link>
+                <Link to="/usermanagement">Feedback Management</Link>
               </AccordionPanel>
             </AccordionItem>
 

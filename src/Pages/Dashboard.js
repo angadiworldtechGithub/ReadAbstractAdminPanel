@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useContext } from "react";
 import { Box } from "@chakra-ui/react";
 import { Grid, GridItem, HStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { HEADERS } from "../constants";
+import { DataContext } from "../DataContext";
 
 const StyledGridItem = ({ children }) => {
   return (
@@ -25,34 +24,7 @@ const StyledGridItem = ({ children }) => {
 };
 
 function Dashboard() {
-  const [data, setData] = useState({
-    channelCount: 0,
-    bookCount: 0,
-    authorCount: 0,
-    userCount: 0,
-    freeUserCount: 0,
-    subscribedUserCount: 0,
-  });
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/adminfunction/dashboard`,
-        {
-          headers: HEADERS,
-        }
-      );
-      setData({
-        channelCount: data.channelCount,
-        bookCount: data.bookCount,
-        authorCount: data.authorCount,
-        userCount: data.userCount,
-        freeUserCount: data.userCount - data.transactionCount,
-        subscribedUserCount: data.transactionCount,
-      });
-    })();
-  }, []);
-
+  const { dashboard } = useContext(DataContext);
   return (
     <div>
       <Box
@@ -75,17 +47,17 @@ function Dashboard() {
           <HStack spacing="20px">
             <StyledGridItem>
               Total Channels
-              <h1>{data.channelCount}</h1>
+              <h1>{dashboard.channelCount}</h1>
             </StyledGridItem>
 
             <StyledGridItem>
               Total Books
-              <h1>{data.bookCount}</h1>
+              <h1>{dashboard.bookCount}</h1>
             </StyledGridItem>
 
             <StyledGridItem>
               Total Authors
-              <h1>{data.authorCount}</h1>
+              <h1>{dashboard.authorCount}</h1>
             </StyledGridItem>
           </HStack>
         </Box>
@@ -102,17 +74,17 @@ function Dashboard() {
           <HStack spacing="30px">
             <StyledGridItem>
               Total Users
-              <h1>{data.userCount}</h1>
+              <h1>{dashboard.userCount}</h1>
             </StyledGridItem>
 
             <StyledGridItem>
               Total Free Users
-              <h1>{data.freeUserCount}</h1>
+              <h1>{dashboard.freeUserCount}</h1>
             </StyledGridItem>
 
             <StyledGridItem>
               Total Subscribed Users
-              <h1>{data.subscribedUserCount}</h1>
+              <h1>{dashboard.subscribedUserCount}</h1>
             </StyledGridItem>
           </HStack>
         </Box>

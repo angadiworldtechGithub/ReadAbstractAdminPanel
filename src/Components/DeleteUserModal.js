@@ -11,11 +11,16 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-export default function DeleteUserModal({ isOpen, onClose, userId }) {
+import { Spinner } from "@chakra-ui/react";
+
+export default function DeleteUserModal({
+  isOpen,
+  onClose,
+  onDelete,
+  loading,
+}) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-
-  const onDelete = () => {};
 
   return (
     <Modal
@@ -34,7 +39,7 @@ export default function DeleteUserModal({ isOpen, onClose, userId }) {
           <HStack spacing="20px">
             <Button onClick={onClose}>Close</Button>
             <Button onClick={onDelete} colorScheme="blue" mr={3}>
-              Delete User
+              {loading ? <Spinner /> : "Delete User"}
             </Button>
           </HStack>
         </ModalFooter>

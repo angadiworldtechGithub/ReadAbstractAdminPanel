@@ -62,7 +62,11 @@ function Slider() {
           <Link to="">Add Slider</Link>
         </Button>
 
-        <AddSliderModal isOpen={isAddOpen} onClose={onAddClose} />
+        <AddSliderModal
+          isOpen={isAddOpen}
+          onClose={onAddClose}
+          setSliders={setSliders}
+        />
         <DeleteSliderModal
           isOpen={isDeleteOpen}
           onClose={onDeleteClose_}

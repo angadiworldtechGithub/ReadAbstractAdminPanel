@@ -44,6 +44,7 @@ function Channels() {
     onOpen: onDeleteOpen_,
     onClose: onDeleteClose_,
   } = useDisclosure();
+
   const [editId, setEditId] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [channelData, setChannelData] = useState({});
@@ -93,7 +94,11 @@ function Channels() {
         <Button colorScheme="green" onClick={onAddOpen}>
           Add Channel
         </Button>
-        <AddChannelModal isOpen={isAddOpen} onClose={onAddClose} />
+        <AddChannelModal
+          isOpen={isAddOpen}
+          onClose={onAddClose}
+          setChannels={setChannels}
+        />
         <EditChannelModal
           isOpen={isEditOpen}
           onClose={onEditClose}

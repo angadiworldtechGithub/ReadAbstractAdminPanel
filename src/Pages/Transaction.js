@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { HStack, Text } from "@chakra-ui/react";
 import { Button, Input, Box } from "@chakra-ui/react";
 import {
@@ -10,11 +10,35 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import { DataContext } from "../DataContext";
+import { CSVLink } from "react-csv";
+import shortid from "shortid";
+
+const TRANSACTION_HEADERS = [
+  "User Id",
+  "Subscription Id",
+  "Transaction Id",
+  "Placed On",
+  "Status",
+];
+const TRANSACTION_KEYS = [
+  "userid",
+  "packageid",
+  "transactionid",
+  "date",
+  "status",
+];
 
 function Transaction() {
   const { transactions } = useContext(DataContext);
+
+  const csvData = useMemo(() => {
+    const data = [TRANSACTION_HEADERS];
+    transactions.forEach((transaction) => {
+      data.push(TRANSACTION_KEYS.map((key) => transaction[key]));
+    });
+    return data;
+  }, [transactions]);
 
   return (
     <>
@@ -26,7 +50,12 @@ function Transaction() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              <Link to="">Export to CSV</Link>
+              <CSVLink
+                data={csvData}
+                filename={`transactions_${shortid.generate()}.csv`}
+              >
+                Export to CSV
+              </CSVLink>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">

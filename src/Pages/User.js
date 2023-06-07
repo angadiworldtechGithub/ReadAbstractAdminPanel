@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 import { HStack, Text } from "@chakra-ui/react";
 import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
@@ -14,6 +14,27 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../DataContext";
 import EditUserModal from "../Components/EditUserModal";
 import DeleteUserModal from "../Components/DeleteUserModal";
+import { CSVLink } from "react-csv";
+import shortid from "shortid";
+import axios from "axios";
+import { HEADERS } from "../constants";
+
+const USER_HEADERS = [
+  "User Id",
+  "Name",
+  "Phone Number",
+  "Email",
+  "Profile Photo",
+  "Status",
+];
+const USER_KEYS = [
+  "_id",
+  "name",
+  "mobilenumber",
+  "email",
+  "profilephoto",
+  "status",
+];
 
 function User() {
   const {
@@ -30,8 +51,8 @@ function User() {
   const [editId, setEditId] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [userData, setUserData] = useState({});
-
-  const { users } = useContext(DataContext);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const { users, setUsers } = useContext(DataContext);
 
   const onEditOpen = (id, data) => () => {
     setEditId(id);
@@ -50,10 +71,28 @@ function User() {
     onDeleteOpen_();
   };
 
-  const onDeleteClose = () => {
+  const onDelete = async () => {
+    setDeleteLoading(true);
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/deleteuser/${deleteId}`,
+      {},
+      {
+        headers: HEADERS,
+      }
+    );
+    setUsers([...users.filter((user) => user._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
+    setDeleteLoading(false);
   };
+
+  const csvData = useMemo(() => {
+    const data = [USER_HEADERS];
+    users.forEach((comment) => {
+      data.push(USER_KEYS.map((key) => comment[key]));
+    });
+    return data;
+  }, [users]);
 
   return (
     <>
@@ -69,8 +108,9 @@ function User() {
         />
         <DeleteUserModal
           isOpen={isDeleteOpen}
-          onClose={onDeleteClose}
-          userId={deleteId}
+          onClose={onDeleteClose_}
+          onDelete={onDelete}
+          loading={deleteLoading}
         />
       </Box>
 
@@ -78,7 +118,12 @@ function User() {
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
             <Button color="green" bg="white" border="2px Solid green">
-              <Link to="">Export to CSV</Link>
+              <CSVLink
+                data={csvData}
+                filename={`users_${shortid.generate()}.csv`}
+              >
+                Export to CSV
+              </CSVLink>
             </Button>
           </Box>
           <Box w="170px" h="15" bg="white" paddingBottom="35px">
