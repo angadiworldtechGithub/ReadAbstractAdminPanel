@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Box } from "@chakra-ui/react";
 import { Grid, GridItem, HStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
 
 const StyledGridItem = ({ children }) => {
   return (

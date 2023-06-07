@@ -11,7 +11,8 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
 import axios from "axios";
@@ -23,6 +24,7 @@ const FEEDBACK_KEYS = ["userid", "feedback", "rating", "placeddate"];
 
 export default function Feedback() {
   const { feedbacks, setFeedbacks } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
 
   const csvData = useMemo(() => {
     const data = [FEEDBACK_HEADERS];
@@ -52,7 +54,7 @@ export default function Feedback() {
       `${process.env.REACT_APP_API_URL}/deletefeedback/${deleteId}`,
       {},
       {
-        headers: HEADERS,
+        headers: HEADERS(token),
       }
     );
     setFeedbacks([
@@ -80,7 +82,7 @@ export default function Feedback() {
             <Button color="green" bg="white" border="2px Solid green">
               <CSVLink
                 data={csvData}
-                filename={`comments_${shortid.generate()}.csv`}
+                filename={`feedbacks_${shortid.generate()}.csv`}
               >
                 Export to CSV
               </CSVLink>

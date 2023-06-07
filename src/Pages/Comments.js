@@ -13,7 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import shortid from "shortid";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
 import axios from "axios";
 import { HEADERS } from "../constants";
@@ -24,6 +25,7 @@ const COMMENT_KEYS = ["userid", "bookid", "comment"];
 
 function Comments() {
   const { comments, setComments } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
   const csvData = useMemo(() => {
     const data = [COMMENT_HEADERS];
     comments.forEach((comment) => {
@@ -52,7 +54,7 @@ function Comments() {
       `${process.env.REACT_APP_API_URL}/deletecomment/${deleteId}`,
       {},
       {
-        headers: HEADERS,
+        headers: HEADERS(token),
       }
     );
     setComments([...comments.filter((comment) => comment._id !== deleteId)]);

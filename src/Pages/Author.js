@@ -15,7 +15,8 @@ import {
 import AddAuthorModal from "../Components/AddAuthorModal";
 import EditAuthorModal from "../Components/EditAuthorModal";
 import DeleteAuthorModal from "../Components/DeleteAuthorModal";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
 import { HEADERS } from "../constants";
 import axios from "axios";
 
@@ -44,6 +45,7 @@ function Author() {
   const [authorData, setAuthorData] = useState({});
   const [deleteLoading, setDeleteLoading] = useState(false);
   const { authors, setAuthors } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
 
   const csvData = useMemo(() => {
     const data = [AUTHOR_HEADERS];
@@ -76,7 +78,7 @@ function Author() {
       `${process.env.REACT_APP_API_URL}/deleteauthor/${deleteId}`,
       {},
       {
-        headers: HEADERS,
+        headers: HEADERS(token),
       }
     );
     setAuthors([...authors.filter((author) => author._id !== deleteId)]);

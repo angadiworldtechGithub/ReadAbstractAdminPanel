@@ -16,6 +16,7 @@
     "react-paginate": "^8.2.0",
     "react-router-dom": "^6.11.2",
     "shortid": "^2.2.16",
+    "use-local-storage-state": "^18.3.3",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },

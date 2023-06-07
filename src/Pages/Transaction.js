@@ -10,7 +10,7 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
 

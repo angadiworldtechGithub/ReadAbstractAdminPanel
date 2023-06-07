@@ -24,7 +24,7 @@ import { Spinner } from "@chakra-ui/react";
 import { FILE_HEADERS } from "../constants";
 import axios from "axios";
 import { useContext } from "react";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
 
 export default function AddSubscriptionModal({ isOpen, onClose }) {
   const initialRef = useRef(null);

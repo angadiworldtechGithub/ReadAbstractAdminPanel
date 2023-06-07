@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AddNotificationModal from "../Components/AddNotificationModal";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
 
 function Notification() {
   const {

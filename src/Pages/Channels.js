@@ -16,7 +16,8 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
 import { HEADERS } from "../constants";
 import axios from "axios";
 
@@ -49,6 +50,7 @@ function Channels() {
   const [deleteId, setDeleteId] = useState("");
   const [channelData, setChannelData] = useState({});
   const { channels, setChannels } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
 
   const csvData = useMemo(() => {
     const data = [CHANNEL_HEADERS];
@@ -80,7 +82,7 @@ function Channels() {
       `${process.env.REACT_APP_API_URL}/deletechannel/${deleteId}`,
       {},
       {
-        headers: HEADERS,
+        headers: HEADERS(token),
       }
     );
     setChannels([...channels.filter((channel) => channel._id !== deleteId)]);

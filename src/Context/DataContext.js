@@ -1,6 +1,7 @@
-import { createContext, useState, useEffect } from "react";
-import { HEADERS } from "./constants";
+import { createContext, useState, useEffect, useContext } from "react";
+import { HEADERS } from "../constants";
 import axios from "axios";
+import { AuthContext } from "./AuthContext";
 
 export const DataContext = createContext();
 
@@ -13,6 +14,8 @@ export function DataContextProvider({ children }) {
     freeUserCount: 0,
     subscribedUserCount: 0,
   });
+
+  const { token } = useContext(AuthContext);
 
   const [books, setBooks] = useState([]);
   const [authors, setAuthors] = useState([]);
@@ -31,7 +34,7 @@ export function DataContextProvider({ children }) {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/adminfunction/dashboard`,
         {
-          headers: HEADERS,
+          headers: HEADERS(token),
         }
       );
 
@@ -47,7 +50,7 @@ export function DataContextProvider({ children }) {
       const {
         data: { user },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/alluser`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
 
       setUsers(user);
@@ -55,7 +58,7 @@ export function DataContextProvider({ children }) {
       const {
         data: { transaction },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/gettransactions`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
 
       setTransactions(transaction);
@@ -65,7 +68,7 @@ export function DataContextProvider({ children }) {
       } = await axios.get(
         `${process.env.REACT_APP_API_URL}/getallsubscription`,
         {
-          headers: HEADERS,
+          headers: HEADERS(token),
         }
       );
 
@@ -74,7 +77,7 @@ export function DataContextProvider({ children }) {
       const {
         data: { author },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getauthors`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
 
       setAuthors(author);
@@ -82,42 +85,42 @@ export function DataContextProvider({ children }) {
       const {
         data: { channel },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getallchannel`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
       setChannels(channel);
 
       const {
         data: { comment },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getcommentall`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
       setComments(comment ?? []);
 
       const {
         data: { slider },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getallslider`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
       setSliders(slider ?? []);
 
       const {
         data: { notification },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getnotifcation`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
       setNotifications(notification ?? []);
 
       const {
         data: { feedback },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getfeedback`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
       setFeedbacks(feedback);
 
       const {
         data: { book },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getallbook`, {
-        headers: HEADERS,
+        headers: HEADERS(token),
       });
 
       setBooks(book);

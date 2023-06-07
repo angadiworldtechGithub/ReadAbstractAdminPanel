@@ -11,7 +11,8 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
 import EditUserModal from "../Components/EditUserModal";
 import DeleteUserModal from "../Components/DeleteUserModal";
 import { CSVLink } from "react-csv";
@@ -53,6 +54,7 @@ function User() {
   const [userData, setUserData] = useState({});
   const [deleteLoading, setDeleteLoading] = useState(false);
   const { users, setUsers } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
 
   const onEditOpen = (id, data) => () => {
     setEditId(id);
@@ -77,7 +79,7 @@ function User() {
       `${process.env.REACT_APP_API_URL}/deleteuser/${deleteId}`,
       {},
       {
-        headers: HEADERS,
+        headers: HEADERS(token),
       }
     );
     setUsers([...users.filter((user) => user._id !== deleteId)]);

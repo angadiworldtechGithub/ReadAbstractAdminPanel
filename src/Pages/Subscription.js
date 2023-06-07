@@ -11,7 +11,8 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
 import AddSubscriptionModal from "../Components/AddSubscriptionModal";
 import DeleteSubscriptionModal from "../Components/DeleteSubscriptionModal";
 import axios from "axios";
@@ -43,6 +44,7 @@ function Subscription() {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const { subscriptions, setSubscriptions } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
 
   const onDeleteOpen = (id) => () => {
     setDeleteId(id);
@@ -55,7 +57,7 @@ function Subscription() {
       `${process.env.REACT_APP_API_URL}/deletesubscription/${deleteId}`,
       {},
       {
-        headers: HEADERS,
+        headers: HEADERS(token),
       }
     );
     setSubscriptions([

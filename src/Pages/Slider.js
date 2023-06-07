@@ -15,7 +15,7 @@ import {
 import { TableContainer } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AddSliderModal from "../Components/AddSliderModal";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../Context/DataContext";
 import DeleteSliderModal from "../Components/DeleteSliderModal";
 import { HEADERS } from "../constants";
 import axios from "axios";

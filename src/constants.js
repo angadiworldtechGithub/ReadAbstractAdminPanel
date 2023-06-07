@@ -1,8 +1,8 @@
-export const HEADERS = {
-  Authorization: `Bearer ${process.env.REACT_APP_TEMP_TOKEN}`,
-};
+export const HEADERS = (token) => ({
+  Authorization: `Bearer ${token}`,
+});
 
-export const FILE_HEADERS = {
-  ...HEADERS,
+export const FILE_HEADERS = (token) => ({
+  ...HEADERS(token),
   "Content-Type": "multipart/form-data",
-};
+});
