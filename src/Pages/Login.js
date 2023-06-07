@@ -1,23 +1,27 @@
-import { HEADERS } from "../constants";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import { AuthContext } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setToken } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onLogin = async () => {
-    const {
-      data: { token, status },
-    } = await axios.post(`${process.env.REACT_APP_API_URL}/adminsignin`, {
-      email,
-      password,
-    });
-    if (status === 200) {
+    try {
+      const {
+        data: { token },
+      } = await axios.post(`${process.env.REACT_APP_API_URL}/adminsignin`, {
+        email,
+        password,
+      });
       setToken(token);
+      navigate("/dashboard");
+    } catch (error) {
+      alert("Cannot Sign In");
     }
   };
 

@@ -29,103 +29,109 @@ export function DataContextProvider({ children }) {
   const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      // switch to callbacks
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/adminfunction/dashboard`,
-        {
+    console.log(token);
+    if (token && token !== "") {
+      (async () => {
+        // switch to callbacks
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/adminfunction/dashboard`,
+          {
+            headers: HEADERS(token),
+          }
+        );
+
+        setDashboard({
+          channelCount: data.channelCount,
+          bookCount: data.bookCount,
+          authorCount: data.authorCount,
+          userCount: data.userCount,
+          freeUserCount: data.userCount - data.transactionCount,
+          subscribedUserCount: data.transactionCount,
+        });
+
+        const {
+          data: { user },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}/alluser`, {
           headers: HEADERS(token),
-        }
-      );
+        });
 
-      setDashboard({
-        channelCount: data.channelCount,
-        bookCount: data.bookCount,
-        authorCount: data.authorCount,
-        userCount: data.userCount,
-        freeUserCount: data.userCount - data.transactionCount,
-        subscribedUserCount: data.transactionCount,
-      });
+        setUsers(user);
 
-      const {
-        data: { user },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/alluser`, {
-        headers: HEADERS(token),
-      });
+        const {
+          data: { transaction },
+        } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/gettransactions`,
+          {
+            headers: HEADERS(token),
+          }
+        );
 
-      setUsers(user);
+        setTransactions(transaction);
 
-      const {
-        data: { transaction },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/gettransactions`, {
-        headers: HEADERS(token),
-      });
+        const {
+          data: { payment },
+        } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/getallsubscription`,
+          {
+            headers: HEADERS(token),
+          }
+        );
 
-      setTransactions(transaction);
+        setSubscriptions(payment);
 
-      const {
-        data: { payment },
-      } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/getallsubscription`,
-        {
+        const {
+          data: { author },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}/getauthors`, {
           headers: HEADERS(token),
-        }
-      );
+        });
 
-      setSubscriptions(payment);
+        setAuthors(author);
 
-      const {
-        data: { author },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/getauthors`, {
-        headers: HEADERS(token),
-      });
+        const {
+          data: { channel },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}/getallchannel`, {
+          headers: HEADERS(token),
+        });
+        setChannels(channel);
 
-      setAuthors(author);
+        const {
+          data: { comment },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}/getcommentall`, {
+          headers: HEADERS(token),
+        });
+        setComments(comment ?? []);
 
-      const {
-        data: { channel },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/getallchannel`, {
-        headers: HEADERS(token),
-      });
-      setChannels(channel);
+        const {
+          data: { slider },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}/getallslider`, {
+          headers: HEADERS(token),
+        });
+        setSliders(slider ?? []);
 
-      const {
-        data: { comment },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/getcommentall`, {
-        headers: HEADERS(token),
-      });
-      setComments(comment ?? []);
+        const {
+          data: { notification },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}/getnotifcation`, {
+          headers: HEADERS(token),
+        });
+        setNotifications(notification ?? []);
 
-      const {
-        data: { slider },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/getallslider`, {
-        headers: HEADERS(token),
-      });
-      setSliders(slider ?? []);
+        const {
+          data: { feedback },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}/getfeedback`, {
+          headers: HEADERS(token),
+        });
+        setFeedbacks(feedback);
 
-      const {
-        data: { notification },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/getnotifcation`, {
-        headers: HEADERS(token),
-      });
-      setNotifications(notification ?? []);
+        const {
+          data: { book },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}/getallbook`, {
+          headers: HEADERS(token),
+        });
 
-      const {
-        data: { feedback },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/getfeedback`, {
-        headers: HEADERS(token),
-      });
-      setFeedbacks(feedback);
-
-      const {
-        data: { book },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}/getallbook`, {
-        headers: HEADERS(token),
-      });
-
-      setBooks(book);
-    })();
-  }, []);
+        setBooks(book);
+      })();
+    }
+  }, [token]);
   return (
     <DataContext.Provider
       value={{

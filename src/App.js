@@ -17,9 +17,9 @@ import Login from "./Pages/Login";
 import { ChakraProvider } from "@chakra-ui/react";
 import BookPage from "./Pages/BookPage";
 import Pagination from "./Components/Pagination";
-import { DataContextProvider } from "./DataContext";
+import { DataContextProvider } from "./Context/DataContext";
 import Protect from "./Protect";
-import { AuthContext, AuthContextProvider } from "./Context/AuthContext";
+import { AuthContextProvider } from "./Context/AuthContext";
 
 // ALL URLS MUST BE IN LOWER CASE ... !!! VERY IMP
 

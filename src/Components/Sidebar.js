@@ -6,10 +6,14 @@ import {
   AccordionIcon,
   Box,
   Flex,
+  Button,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Layout({ children }) {
+  const { setToken } = useContext(AuthContext);
   return (
     <>
       <Box
@@ -22,6 +26,14 @@ export default function Layout({ children }) {
         paddingTop="15px"
       >
         <Box> Read Abstract </Box>
+        <Button
+          float="right"
+          onDoubleClick={() => {
+            setToken("");
+          }}
+        >
+          Sign Out
+        </Button>
       </Box>
       <Flex>
         <Box background="#1D1D1D" color="white" minW="240px">
