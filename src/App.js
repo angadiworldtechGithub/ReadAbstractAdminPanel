@@ -6,7 +6,7 @@ import Dashboard from "./Pages/Dashboard";
 import Channels from "./Pages/Channels";
 import Author from "./Pages/Author";
 import Books from "./Pages/Books";
-import UserManagement from "./Pages/UserManagement";
+import Feedback from "./Pages/Feedback";
 import Subscription from "./Pages/Subscription";
 import Transaction from "./Pages/Transaction";
 import Comments from "./Pages/Comments";
@@ -37,10 +37,7 @@ function App() {
               <Route path="/transaction" element={<Transaction />}></Route>
               <Route path="/comments" element={<Comments />}></Route>
               <Route path="/pagination" element={<Pagination />}></Route>
-              <Route
-                path="/usermanagement"
-                element={<UserManagement />}
-              ></Route>
+              <Route path="/feedback" element={<Feedback />}></Route>
               <Route path="/comments" element={<Comments />}></Route>
               <Route path="/notification" element={<Notification />}></Route>
               <Route path="/slider" element={<Slider />}></Route>

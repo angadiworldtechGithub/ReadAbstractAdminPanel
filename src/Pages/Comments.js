@@ -33,6 +33,7 @@ function Comments() {
   }, [comments]);
 
   const [deleteId, setDeleteId] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const {
     isOpen: isDeleteOpen,
@@ -46,6 +47,7 @@ function Comments() {
   };
 
   const onDelete = async () => {
+    setDeleteLoading(true);
     await axios.post(
       `${process.env.REACT_APP_API_URL}/deletecomment/${deleteId}`,
       {},
@@ -56,6 +58,7 @@ function Comments() {
     setComments([...comments.filter((comment) => comment._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
+    setDeleteLoading(false);
   };
 
   return (
@@ -66,6 +69,7 @@ function Comments() {
           isOpen={isDeleteOpen}
           onClose={onDeleteClose_}
           onDelete={onDelete}
+          loading={deleteLoading}
         />
       </Box>
 

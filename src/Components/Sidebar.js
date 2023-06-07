@@ -99,7 +99,7 @@ export default function Layout({ children }) {
                 <Link to="/comments">Comments Management</Link>
               </AccordionPanel>
               <AccordionPanel pb={4} background="#2D2D2D">
-                <Link to="/usermanagement">Feedback Management</Link>
+                <Link to="/feedback">Feedback Management</Link>
               </AccordionPanel>
             </AccordionItem>
 

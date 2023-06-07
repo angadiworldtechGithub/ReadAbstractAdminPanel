@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import {
   Modal,
@@ -15,14 +15,61 @@ import {
   HStack,
   Flex,
   Square,
-  Link,
   Text,
   Select,
+  Stack,
 } from "@chakra-ui/react";
+
+import { Spinner } from "@chakra-ui/react";
+import { FILE_HEADERS } from "../constants";
+import axios from "axios";
+import { useContext } from "react";
+import { DataContext } from "../DataContext";
 
 export default function AddSubscriptionModal({ isOpen, onClose }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+
+  const [name, setName] = useState("");
+  const [type, setType] = useState("student");
+  const [cost, setCost] = useState("");
+  const [description, setDescription] = useState("");
+  const [subscription_, setSubscription_] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const { setSubscriptions } = useContext(DataContext);
+
+  const onAdd = async () => {
+    if (
+      initialRef.current.files.length &&
+      name !== "" &&
+      description !== "" &&
+      subscription_ !== ""
+    ) {
+      setLoading(true);
+      const {
+        data: { subscription },
+      } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/postsubscription`,
+        {
+          packagename: name,
+          discription: description,
+          packagetype: type,
+          cost,
+          subscription: subscription_,
+          packagephoto: initialRef.current.files[0],
+        },
+        {
+          headers: FILE_HEADERS,
+        }
+      );
+      setSubscriptions((subscriptions) => [
+        ...subscriptions.concat([{ ...subscription }]),
+      ]);
+      setLoading(false);
+      onClose();
+    }
+  };
 
   return (
     <Modal
@@ -33,7 +80,7 @@ export default function AddSubscriptionModal({ isOpen, onClose }) {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader> Package Details</ModalHeader>
+        <ModalHeader>Package Details</ModalHeader>
         <hr></hr>
         <ModalCloseButton />
 
@@ -43,45 +90,71 @@ export default function AddSubscriptionModal({ isOpen, onClose }) {
             <Input ref={initialRef} type="file" placeholder="No file chosen" />
           </FormControl>
 
-          <Flex color="black" paddingTop="2px">
-            <HStack spacing="10px">
-              <Square w="180px" bg="white" paddingLeft="5px">
-                <Text>
-                  <FormLabel>Package name</FormLabel>
-                  <Input ref={initialRef} placeholder="Package name" />
-                  <FormLabel>Package Title</FormLabel>
-                  <Input ref={initialRef} placeholder="Package Title" />
-                  <FormLabel>Package Type</FormLabel>
-                  <Select placeholder="Package Type">
-                    <option>Students</option>
-                    <option>Yourself</option>
-                    <option>Team</option>
-                  </Select>
-                </Text>
-              </Square>
-              <Square w="180px" bg="white" paddingLeft="5px">
-                <Text>
-                  <FormLabel>Package Description</FormLabel>
-                  <Input ref={initialRef} placeholder="Package name" />
-                  <FormLabel>Cost Including Gst</FormLabel>
-                  <Input ref={initialRef} placeholder="Cost Including Gst" />
-                  <FormLabel>Package Subscription</FormLabel>
-                  <Select placeholder="Subscription Type">
-                    <option>Yearly</option>
-                    <option>Monthly</option>
-                  </Select>
-                </Text>
-              </Square>
-            </HStack>
-          </Flex>
+          <Stack color="black" paddingTop="2px">
+            <Square w="180px" bg="white" paddingLeft="5px">
+              <Text>
+                <FormLabel>Package Name</FormLabel>
+                <Input
+                  placeholder="Package Name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <FormLabel>Package Type</FormLabel>
+                <Select
+                  placeholder="Package Type"
+                  value={type}
+                  onChange={(e) => {
+                    setType(e.target.value);
+                  }}
+                >
+                  <option value="student">Students</option>
+                  <option value="yourself">Yourself</option>
+                  <option value="team">Team</option>
+                </Select>
+              </Text>
+            </Square>
+            <Square w="180px" bg="white" paddingLeft="5px">
+              <Text>
+                <FormLabel>Package Description</FormLabel>
+                <Input
+                  placeholder="Package Description"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                />
+                <FormLabel>Cost Including Gst</FormLabel>
+                <Input
+                  placeholder="Cost Including Gst"
+                  value={cost}
+                  onChange={(e) => {
+                    setCost(e.target.value);
+                  }}
+                />
+                <FormLabel>Package Subscription</FormLabel>
+                <Select
+                  placeholder="Subscription Type"
+                  value={subscription_}
+                  onChange={(e) => {
+                    setSubscription_(e.target.value);
+                  }}
+                >
+                  <option value="yearly">Yearly</option>
+                  <option value="monthly">Monthly</option>
+                </Select>
+              </Text>
+            </Square>
+          </Stack>
 
           <ModalFooter>
             <HStack spacing="20px">
               <Button colorScheme="red" onClick={onClose}>
-                <Link to="">Close</Link>
+                Close
               </Button>
-              <Button colorScheme="green" mr={1}>
-                <Link to="">Add</Link>
+              <Button colorScheme="green" mr={1} onClick={onAdd}>
+                {loading ? <Spinner /> : "Add"}
               </Button>
             </HStack>
           </ModalFooter>

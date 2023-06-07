@@ -30,6 +30,7 @@ const BOOK_KEYS = ["title", "bookimage", "authorname", "minutes"];
 
 function Books() {
   const [deleteId, setDeleteId] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const { books, setBooks } = useContext(DataContext);
   const csvData = useMemo(() => {
     const data = [BOOK_HEADERS];
@@ -50,6 +51,7 @@ function Books() {
   };
 
   const onDelete = async () => {
+    setDeleteLoading(true);
     await axios.post(
       `${process.env.REACT_APP_API_URL}/deletebook/${deleteId}`,
       {},
@@ -60,6 +62,7 @@ function Books() {
     setBooks([...books.filter((book) => book._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
+    setDeleteLoading(false);
   };
 
   return (
@@ -73,6 +76,7 @@ function Books() {
           isOpen={isDeleteOpen}
           onClose={onDeleteClose_}
           onDelete={onDelete}
+          loading={deleteLoading}
         />
       </Box>
 

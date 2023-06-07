@@ -21,7 +21,7 @@ function Notification() {
     onClose: onAddClose,
   } = useDisclosure();
 
-  const { notifications } = useContext(DataContext);
+  const { notifications, setNotifications } = useContext(DataContext);
 
   return (
     <>
@@ -29,7 +29,11 @@ function Notification() {
         <Button colorScheme="green" onClick={onAddOpen}>
           Add Notification
         </Button>
-        <AddNotificationModal isOpen={isAddOpen} onClose={onAddClose} />
+        <AddNotificationModal
+          isOpen={isAddOpen}
+          onClose={onAddClose}
+          setNotifications={setNotifications}
+        />
       </Box>
 
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">

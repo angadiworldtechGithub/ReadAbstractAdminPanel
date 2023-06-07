@@ -2,11 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import { HEADERS } from "./constants";
 import axios from "axios";
 
-// push all use effect hooks here
-
 export const DataContext = createContext();
-
-// add rest of the data fetch apis here
 
 export function DataContextProvider({ children }) {
   const [dashboard, setDashboard] = useState({
@@ -27,10 +23,11 @@ export function DataContextProvider({ children }) {
   const [comments, setComments] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [sliders, setSliders] = useState([]);
-  const [feedback, setFeedback] = useState([]);
+  const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
     (async () => {
+      // switch to callbacks
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/adminfunction/dashboard`,
         {
@@ -111,6 +108,13 @@ export function DataContextProvider({ children }) {
       setNotifications(notification ?? []);
 
       const {
+        data: { feedback },
+      } = await axios.get(`${process.env.REACT_APP_API_URL}/getfeedback`, {
+        headers: HEADERS,
+      });
+      setFeedbacks(feedback);
+
+      const {
         data: { book },
       } = await axios.get(`${process.env.REACT_APP_API_URL}/getallbook`, {
         headers: HEADERS,
@@ -141,8 +145,8 @@ export function DataContextProvider({ children }) {
         setNotifications,
         sliders,
         setSliders,
-        feedback,
-        setFeedback,
+        feedbacks,
+        setFeedbacks,
       }}
     >
       {children}

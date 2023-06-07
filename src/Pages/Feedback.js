@@ -1,6 +1,6 @@
-import { useContext, useState, useMemo } from "react";
-import { HStack, Text } from "@chakra-ui/react";
-import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
+import { useMemo, useState, useContext } from "react";
+import { HStack, Text, useDisclosure } from "@chakra-ui/react";
+import { Button, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -12,37 +12,34 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataContext";
-import AddSubscriptionModal from "../Components/AddSubscriptionModal";
-import DeleteSubscriptionModal from "../Components/DeleteSubscriptionModal";
-import axios from "axios";
-import { HEADERS } from "../constants";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
+import axios from "axios";
+import { HEADERS } from "../constants";
+import DeleteFeedbackModal from "../Components/DeleteFeedbackModal";
 
-const SUBSCRIPTION_HEADERS = [
-  "Package Name",
-  "Package Type",
-  "Package Photo",
-  "Cost",
-];
-const SUBSCRIPTION_KEYS = ["packagename", "type", "packagephoto", "cost"];
+const FEEDBACK_HEADERS = ["User Id", "Feedback", "Rating", "Date"];
+const FEEDBACK_KEYS = ["userid", "feedback", "rating", "placeddate"];
 
-function Subscription() {
-  const {
-    isOpen: isAddOpen,
-    onOpen: onAddOpen,
-    onClose: onAddClose,
-  } = useDisclosure();
+export default function Feedback() {
+  const { feedbacks, setFeedbacks } = useContext(DataContext);
+
+  const csvData = useMemo(() => {
+    const data = [FEEDBACK_HEADERS];
+    feedbacks.forEach((comment) => {
+      data.push(FEEDBACK_KEYS.map((key) => comment[key]));
+    });
+    return data;
+  }, [feedbacks]);
+
+  const [deleteId, setDeleteId] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
   const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen_,
     onClose: onDeleteClose_,
   } = useDisclosure();
-
-  const [deleteId, setDeleteId] = useState("");
-  const [deleteLoading, setDeleteLoading] = useState(false);
-
-  const { subscriptions, setSubscriptions } = useContext(DataContext);
 
   const onDeleteOpen = (id) => () => {
     setDeleteId(id);
@@ -52,37 +49,24 @@ function Subscription() {
   const onDelete = async () => {
     setDeleteLoading(true);
     await axios.post(
-      `${process.env.REACT_APP_API_URL}/deletesubscription/${deleteId}`,
+      `${process.env.REACT_APP_API_URL}/deletefeedback/${deleteId}`,
       {},
       {
         headers: HEADERS,
       }
     );
-    setSubscriptions([
-      ...subscriptions.filter((subscription) => subscription._id !== deleteId),
+    setFeedbacks([
+      ...feedbacks.filter((feedback) => feedback._id !== deleteId),
     ]);
     setDeleteId("");
     onDeleteClose_();
     setDeleteLoading(false);
   };
-
-  const csvData = useMemo(() => {
-    const data = [SUBSCRIPTION_HEADERS];
-    subscriptions.forEach((comment) => {
-      data.push(SUBSCRIPTION_KEYS.map((key) => comment[key]));
-    });
-    return data;
-  }, [subscriptions]);
-
   return (
     <>
-      <Box paddingTop="20px" paddingLeft="20px">
-        <Button colorScheme="green" onClick={onAddOpen}>
-          Add subscription
-        </Button>
-
-        <AddSubscriptionModal isOpen={isAddOpen} onClose={onAddClose} />
-        <DeleteSubscriptionModal
+      <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
+        Feedback
+        <DeleteFeedbackModal
           isOpen={isDeleteOpen}
           onClose={onDeleteClose_}
           onDelete={onDelete}
@@ -96,7 +80,7 @@ function Subscription() {
             <Button color="green" bg="white" border="2px Solid green">
               <CSVLink
                 data={csvData}
-                filename={`subscriptions_${shortid.generate()}.csv`}
+                filename={`comments_${shortid.generate()}.csv`}
               >
                 Export to CSV
               </CSVLink>
@@ -108,7 +92,7 @@ function Subscription() {
           </Box>
           <Box w="180px" h="10" bg="white" paddingTop="25px">
             <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              <Link to="">Clear</Link>
+              <Link to="/">Clear</Link>
             </Button>
           </Box>
         </HStack>
@@ -119,30 +103,26 @@ function Subscription() {
           <Table variant="simple">
             <Thead>
               <Tr border="2px Solid black">
-                <Th>Package Name</Th>
-                <Th>Package Type</Th>
-                <Th>Package Photo</Th>
-                <Th>Cost</Th>
+                <Th>User Id</Th>
+                <Th>Feedback</Th>
+                <Th>Rating</Th>
+                <Th>Date</Th>
                 <Th>Action</Th>
               </Tr>
             </Thead>
             <Tbody>
-              {subscriptions.map((subscription) => {
+              {feedbacks.map((feedback) => {
                 return (
                   <Tr>
-                    <Td>{subscription.packagename}</Td>
-                    <Td>{subscription.packagetype ?? "----------"}</Td>
-                    <Td>
-                      <img
-                        src={`${process.env.REACT_APP_URL}/package/${subscription.packagephoto}`}
-                      ></img>
-                    </Td>
-                    <Td>{subscription.cost}</Td>
+                    <Td>{feedback.userid}</Td>
+                    <Td>{feedback.feedback}</Td>
+                    <Td>{feedback.rating}</Td>
+                    <Td>{feedback.placeddate}</Td>
                     <Td>
                       <HStack spacing="10px">
                         <Button
                           colorScheme="red"
-                          onClick={onDeleteOpen(subscription._id)}
+                          onClick={onDeleteOpen(feedback._id)}
                         >
                           Delete
                         </Button>
@@ -158,5 +138,3 @@ function Subscription() {
     </>
   );
 }
-
-export default Subscription;

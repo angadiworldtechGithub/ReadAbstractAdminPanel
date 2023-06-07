@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -13,10 +13,43 @@ import {
   HStack,
   Input,
 } from "@chakra-ui/react";
+import { HEADERS } from "../constants";
+import axios from "axios";
+import { Spinner } from "@chakra-ui/react";
 
-export default function AddNotificationModal({ isOpen, onClose }) {
+export default function AddNotificationModal({
+  isOpen,
+  onClose,
+  setNotifications,
+}) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+  const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const onAdd = async () => {
+    if (text !== "") {
+      setLoading(true);
+      const {
+        data: { notification },
+      } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/postnotification`,
+        {
+          text,
+        },
+        {
+          headers: HEADERS,
+        }
+      );
+      setNotifications((notifications) => [
+        ...notifications.concat([{ ...notification }]),
+      ]);
+      onClose();
+      setText("");
+      setLoading(false);
+    }
+  };
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -34,9 +67,12 @@ export default function AddNotificationModal({ isOpen, onClose }) {
           <FormControl>
             <FormLabel>Notification</FormLabel>
             <Input
-              ref={initialRef}
               type="text"
               placeholder="Enter Notification"
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value);
+              }}
             />
           </FormControl>
         </ModalBody>
@@ -46,8 +82,8 @@ export default function AddNotificationModal({ isOpen, onClose }) {
             <Button colorScheme="red" onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="green" mr={3}>
-              Save
+            <Button colorScheme="green" mr={3} onClick={onAdd}>
+              {loading ? <Spinner /> : "Save"}
             </Button>
           </HStack>
         </ModalFooter>
