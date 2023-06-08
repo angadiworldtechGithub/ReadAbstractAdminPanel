@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import axios from "axios";
 import { FILE_HEADERS } from "../constants";
 import {
@@ -16,6 +16,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function AddChannelModal({ isOpen, onClose, setChannels }) {
   const initialRef = useRef(null);
@@ -23,6 +24,8 @@ export default function AddChannelModal({ isOpen, onClose, setChannels }) {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+
+  const { token } = useContext(AuthContext);
 
   const onAdd = async () => {
     if (initialRef.current.files.length && name !== "" && description !== "") {
@@ -38,7 +41,7 @@ export default function AddChannelModal({ isOpen, onClose, setChannels }) {
           channeldiscription: description,
         },
         {
-          headers: FILE_HEADERS,
+          headers: FILE_HEADERS(token),
         }
       );
       setChannels((channels) => [...channels.concat([{ ...channel }])]);

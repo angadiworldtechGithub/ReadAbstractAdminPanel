@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
-import { HStack, Text, useDisclosure } from "@chakra-ui/react";
-import { Button, Input, Box } from "@chakra-ui/react";
 import { CSVLink } from "react-csv";
 import {
+  Button,
+  Box,
+  HStack,
+  useDisclosure,
   Table,
   Thead,
   Tbody,
@@ -13,21 +15,26 @@ import {
   Center,
   Spinner,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import shortid from "shortid";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
-import axios from "axios";
 import { HEADERS } from "../constants";
 import DeleteCommentModal from "../Components/DeleteCommentModal";
+import Search from "../Components/Search";
+import axios from "axios";
 
 const COMMENT_HEADERS = ["User ID", "Book ID", "Comment"];
 const COMMENT_KEYS = ["userid", "bookid", "comment"];
 
 function Comments() {
+  const [deleteId, setDeleteId] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [filteredComments, setFilteredComments] = useState([]);
+
   const { comments, setComments } = useContext(DataContext);
   const { token } = useContext(AuthContext);
+
   const csvData = useMemo(() => {
     const data = [COMMENT_HEADERS];
     comments.forEach((comment) => {
@@ -35,9 +42,6 @@ function Comments() {
     });
     return data;
   }, [comments]);
-
-  const [deleteId, setDeleteId] = useState("");
-  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const {
     isOpen: isDeleteOpen,
@@ -89,15 +93,11 @@ function Comments() {
               </CSVLink>
             </Button>
           </Box>
-          <Box w="170px" h="15" bg="white" paddingBottom="35px">
-            <Text>Search this table</Text>
-            <Input w="250px" border="3px Solid skyblue" placeholder="Search" />
-          </Box>
-          <Box w="180px" h="10" bg="white" paddingTop="25px">
-            <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              <Link to="/">Clear</Link>
-            </Button>
-          </Box>
+          <Search
+            setFilteredList={setFilteredComments}
+            list={comments}
+            key_={"comment"}
+          />
         </HStack>
       </Box>
 
@@ -118,7 +118,7 @@ function Comments() {
                   <Spinner />
                 </Center>
               ) : (
-                comments.map((comment) => {
+                filteredComments.map((comment) => {
                   return (
                     <Tr key={comment._id}>
                       <Td>{comment.userid}</Td>

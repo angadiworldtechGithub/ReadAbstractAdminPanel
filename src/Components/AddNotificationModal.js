@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -16,6 +16,7 @@ import {
 import { HEADERS } from "../constants";
 import axios from "axios";
 import { Spinner } from "@chakra-ui/react";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function AddNotificationModal({
   isOpen,
@@ -26,6 +27,8 @@ export default function AddNotificationModal({
   const finalRef = useRef(null);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { token } = useContext(AuthContext);
 
   const onAdd = async () => {
     if (text !== "") {
@@ -38,7 +41,7 @@ export default function AddNotificationModal({
           text,
         },
         {
-          headers: HEADERS,
+          headers: HEADERS(token),
         }
       );
       setNotifications((notifications) => [

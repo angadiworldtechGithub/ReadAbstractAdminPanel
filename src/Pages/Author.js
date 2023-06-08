@@ -1,9 +1,10 @@
 import { useState, useContext, useMemo } from "react";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
-import { HStack, Text } from "@chakra-ui/react";
-import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
 import {
+  useDisclosure,
+  Button,
+  HStack,
   Table,
   Thead,
   Tbody,
@@ -13,12 +14,14 @@ import {
   Center,
   Spinner,
   TableContainer,
+  Box,
 } from "@chakra-ui/react";
 import AddAuthorModal from "../Components/AddAuthorModal";
 import EditAuthorModal from "../Components/EditAuthorModal";
 import DeleteAuthorModal from "../Components/DeleteAuthorModal";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
+import Search from "../Components/Search";
 import { HEADERS } from "../constants";
 import axios from "axios";
 
@@ -46,6 +49,8 @@ function Author() {
   const [deleteId, setDeleteId] = useState("");
   const [authorData, setAuthorData] = useState({});
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [filteredAuthors, setFilteredAuthors] = useState([]);
+
   const { authors, setAuthors } = useContext(DataContext);
   const { token } = useContext(AuthContext);
 
@@ -127,15 +132,11 @@ function Author() {
               </CSVLink>
             </Button>
           </Box>
-          <Box w="170px" h="15" bg="white" paddingBottom="35px">
-            <Text>Search this table</Text>
-            <Input w="250px" border="3px Solid skyblue" placeholder="Search" />
-          </Box>
-          <Box w="180px" h="10" bg="white" paddingTop="25px">
-            <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear
-            </Button>
-          </Box>
+          <Search
+            setFilteredList={setFilteredAuthors}
+            list={authors}
+            key_={"authorname"}
+          />
         </HStack>
       </Box>
 
@@ -162,7 +163,7 @@ function Author() {
                   <Spinner />
                 </Center>
               ) : (
-                authors.map((author) => {
+                filteredAuthors.map((author) => {
                   return (
                     <Tr key={author._id}>
                       <Td>{author.authorname}</Td>

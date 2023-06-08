@@ -1,9 +1,12 @@
 import { useState, useContext, useMemo } from "react";
+import axios from "axios";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
-import { HStack, Text } from "@chakra-ui/react";
-import { Button, Input, Box, useDisclosure } from "@chakra-ui/react";
 import {
+  HStack,
+  Button,
+  Box,
+  useDisclosure,
   Table,
   Thead,
   Tbody,
@@ -12,14 +15,14 @@ import {
   Td,
   TableContainer,
   Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import DeleteBookModal from "../Components/DeleteBookModal";
-import { Spinner } from "@chakra-ui/react";
 import { DataContext } from "../Context/DataContext";
-import axios from "axios";
-import { HEADERS } from "../constants";
 import { AuthContext } from "../Context/AuthContext";
+import { HEADERS } from "../constants";
+import Search from "../Components/Search";
 
 const BOOK_HEADERS = [
   "Book Title",
@@ -33,8 +36,11 @@ const BOOK_KEYS = ["title", "bookimage", "authorname", "minutes"];
 function Books() {
   const [deleteId, setDeleteId] = useState("");
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+
   const { books, setBooks } = useContext(DataContext);
   const { token } = useContext(AuthContext);
+
   const csvData = useMemo(() => {
     const data = [BOOK_HEADERS];
     books.forEach((book) => {
@@ -42,6 +48,7 @@ function Books() {
     });
     return data;
   }, [books]);
+
   const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen_,
@@ -95,15 +102,11 @@ function Books() {
               </CSVLink>
             </Button>
           </Box>
-          <Box w="170px" h="15" bg="white" paddingBottom="35px">
-            <Text>Search this table</Text>
-            <Input w="250px" border="3px Solid skyblue" placeholder="Search" />
-          </Box>
-          <Box w="180px" h="10" bg="white" paddingTop="25px">
-            <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              <Link to="/">Clear</Link>
-            </Button>
-          </Box>
+          <Search
+            setFilteredList={setFilteredBooks}
+            list={books}
+            key_={"title"}
+          />
         </HStack>
       </Box>
 
@@ -124,7 +127,7 @@ function Books() {
                   <Spinner />
                 </Center>
               ) : (
-                books.map((book) => {
+                filteredBooks.map((book) => {
                   return (
                     <Tr maxWidth="100%" key={book._id}>
                       <Td>{book.title}</Td>

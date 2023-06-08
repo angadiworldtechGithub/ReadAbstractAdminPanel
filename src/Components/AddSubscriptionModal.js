@@ -24,6 +24,7 @@ import { FILE_HEADERS } from "../constants";
 import axios from "axios";
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function AddSubscriptionModal({ isOpen, onClose }) {
   const initialRef = useRef(null);
@@ -37,6 +38,7 @@ export default function AddSubscriptionModal({ isOpen, onClose }) {
 
   const [loading, setLoading] = useState(false);
   const { setSubscriptions } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
 
   const onAdd = async () => {
     if (
@@ -59,7 +61,7 @@ export default function AddSubscriptionModal({ isOpen, onClose }) {
           packagephoto: initialRef.current.files[0],
         },
         {
-          headers: FILE_HEADERS,
+          headers: FILE_HEADERS(token),
         }
       );
       setSubscriptions((subscriptions) => [

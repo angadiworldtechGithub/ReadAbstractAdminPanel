@@ -16,11 +16,15 @@ import {
 import { FILE_HEADERS } from "../constants";
 import axios from "axios";
 import { Spinner } from "@chakra-ui/react";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function AddSliderModal({ isOpen, onClose, setSliders }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
   const [loading, setLoading] = useState(false);
+
+  const { token } = useContext(AuthContext);
 
   const onSave = async () => {
     if (initialRef.current.files.length) {
@@ -34,7 +38,7 @@ export default function AddSliderModal({ isOpen, onClose, setSliders }) {
           slider: initialRef.current.files[0],
         },
         {
-          headers: FILE_HEADERS,
+          headers: FILE_HEADERS(token),
         }
       );
       setSliders((sliders) => [...sliders.concat([{ slider: slider.slider }])]);

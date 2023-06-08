@@ -1,7 +1,10 @@
-import { useContext, useMemo } from "react";
-import { HStack, Text } from "@chakra-ui/react";
-import { Button, Input, Box } from "@chakra-ui/react";
+import { useContext, useState, useMemo } from "react";
+import { CSVLink } from "react-csv";
+import shortid from "shortid";
 import {
+  Button,
+  Box,
+  HStack,
   Table,
   Thead,
   Tbody,
@@ -9,10 +12,11 @@ import {
   Th,
   Td,
   TableContainer,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { DataContext } from "../Context/DataContext";
-import { CSVLink } from "react-csv";
-import shortid from "shortid";
+import Search from "../Components/Search";
 
 const TRANSACTION_HEADERS = [
   "User Id",
@@ -31,6 +35,7 @@ const TRANSACTION_KEYS = [
 
 function Transaction() {
   const { transactions } = useContext(DataContext);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
 
   const csvData = useMemo(() => {
     const data = [TRANSACTION_HEADERS];
@@ -58,15 +63,11 @@ function Transaction() {
               </CSVLink>
             </Button>
           </Box>
-          <Box w="170px" h="15" bg="white" paddingBottom="35px">
-            <Text>Search this table</Text>
-            <Input w="250px" border="3px Solid skyblue" placeholder="Search" />
-          </Box>
-          <Box w="180px" h="10" bg="white" paddingTop="25px">
-            <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              Clear
-            </Button>
-          </Box>
+          <Search
+            setFilteredList={setFilteredTransactions}
+            list={transactions}
+            key_={"userid"}
+          />
         </HStack>
       </Box>
 
@@ -83,17 +84,23 @@ function Transaction() {
               </Tr>
             </Thead>
             <Tbody>
-              {transactions.map((transaction) => {
-                return (
-                  <Tr>
-                    <Td>{transaction.userid}</Td>
-                    <Td>{transaction.packageid}</Td>
-                    <Td>{transaction.transactionid ?? "---------"}</Td>
-                    <Td>{transaction.date}</Td>
-                    <Td>{transaction.status}</Td>
-                  </Tr>
-                );
-              })}
+              {!transactions.length ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                filteredTransactions.map((transaction) => {
+                  return (
+                    <Tr>
+                      <Td>{transaction.userid}</Td>
+                      <Td>{transaction.packageid}</Td>
+                      <Td>{transaction.transactionid ?? "---------"}</Td>
+                      <Td>{transaction.date}</Td>
+                      <Td>{transaction.status}</Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

@@ -106,15 +106,6 @@ function Subscription() {
               </CSVLink>
             </Button>
           </Box>
-          <Box w="170px" h="15" bg="white" paddingBottom="35px">
-            <Text>Search this table</Text>
-            <Input w="250px" border="3px Solid skyblue" placeholder="Search" />
-          </Box>
-          <Box w="180px" h="10" bg="white" paddingTop="25px">
-            <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              <Link to="">Clear</Link>
-            </Button>
-          </Box>
         </HStack>
       </Box>
 

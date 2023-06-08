@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { FILE_HEADERS } from "../constants";
 import {
   Modal,
@@ -16,13 +16,17 @@ import {
 } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 import axios from "axios";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function AddAuthorModal({ isOpen, onClose, setAuthors }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
+
+  const { token } = useContext(AuthContext);
 
   const onAdd = async () => {
     if (initialRef.current.files.length && name !== "" && about !== "") {
@@ -37,7 +41,7 @@ export default function AddAuthorModal({ isOpen, onClose, setAuthors }) {
           aboutauthor: about,
         },
         {
-          headers: FILE_HEADERS,
+          headers: FILE_HEADERS(token),
         }
       );
       setAuthors((authors) => [...authors.concat([{ ...author }])]);

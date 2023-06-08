@@ -1,7 +1,12 @@
 import { useMemo, useState, useContext } from "react";
-import { HStack, Text, useDisclosure } from "@chakra-ui/react";
-import { Button, Input, Box } from "@chakra-ui/react";
+import { CSVLink } from "react-csv";
+import shortid from "shortid";
+import axios from "axios";
 import {
+  Button,
+  Box,
+  HStack,
+  useDisclosure,
   Table,
   Thead,
   Tbody,
@@ -12,20 +17,18 @@ import {
   Center,
   Spinner,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
-import { CSVLink } from "react-csv";
-import shortid from "shortid";
-import axios from "axios";
 import { HEADERS } from "../constants";
 import DeleteFeedbackModal from "../Components/DeleteFeedbackModal";
+import Search from "../Components/Search";
 
 const FEEDBACK_HEADERS = ["User Id", "Feedback", "Rating", "Date"];
 const FEEDBACK_KEYS = ["userid", "feedback", "rating", "placeddate"];
 
 export default function Feedback() {
   const { feedbacks, setFeedbacks } = useContext(DataContext);
+  const [filteredFeedback, setFilteredFeedback] = useState([]);
   const { token } = useContext(AuthContext);
 
   const csvData = useMemo(() => {
@@ -90,15 +93,11 @@ export default function Feedback() {
               </CSVLink>
             </Button>
           </Box>
-          <Box w="170px" h="15" bg="white" paddingBottom="35px">
-            <Text>Search this table</Text>
-            <Input w="250px" border="3px Solid skyblue" placeholder="Search" />
-          </Box>
-          <Box w="180px" h="10" bg="white" paddingTop="25px">
-            <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              <Link to="/">Clear</Link>
-            </Button>
-          </Box>
+          <Search
+            setFilteredList={setFilteredFeedback}
+            list={feedbacks}
+            key_={"feedback"}
+          />
         </HStack>
       </Box>
 
@@ -120,7 +119,7 @@ export default function Feedback() {
                   <Spinner />
                 </Center>
               ) : (
-                feedbacks.map((feedback) => {
+                filteredFeedback.map((feedback) => {
                   return (
                     <Tr>
                       <Td>{feedback.userid}</Td>

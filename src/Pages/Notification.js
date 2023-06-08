@@ -1,7 +1,8 @@
-import { useContext } from "react";
-import { HStack, Text } from "@chakra-ui/react";
-import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
+import { useContext, useState } from "react";
 import {
+  useDisclosure,
+  Button,
+  Box,
   Table,
   Thead,
   Tbody,
@@ -11,10 +12,11 @@ import {
   TableContainer,
   Center,
   Spinner,
+  HStack,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import AddNotificationModal from "../Components/AddNotificationModal";
 import { DataContext } from "../Context/DataContext";
+import Search from "../Components/Search";
 
 function Notification() {
   const {
@@ -22,6 +24,8 @@ function Notification() {
     onOpen: onAddOpen,
     onClose: onAddClose,
   } = useDisclosure();
+
+  const [filteredNotifications, setFilteredNotifications] = useState([]);
 
   const { notifications, setNotifications } = useContext(DataContext);
 
@@ -37,18 +41,13 @@ function Notification() {
           setNotifications={setNotifications}
         />
       </Box>
-
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
         <HStack spacing="100px">
-          <Box w="170px" h="15" bg="white" paddingBottom="35px">
-            <Text>Search this table</Text>
-            <Input w="250px" border="3px Solid skyblue" placeholder="Search" />
-          </Box>
-          <Box w="180px" h="10" bg="white" paddingTop="25px">
-            <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              <Link to="">Clear</Link>
-            </Button>
-          </Box>
+          <Search
+            setFilteredList={setFilteredNotifications}
+            list={notifications}
+            key_={"text"}
+          />
         </HStack>
       </Box>
 
@@ -67,7 +66,7 @@ function Notification() {
                   <Spinner />
                 </Center>
               ) : (
-                notifications.map((notification) => {
+                filteredNotifications.map((notification) => {
                   return (
                     <Tr>
                       <Td>{notification.text}</Td>

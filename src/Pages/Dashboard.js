@@ -29,7 +29,7 @@ function Dashboard() {
     <div>
       <Box
         paddingLeft="80px"
-        paddingTop="20px"
+        paddingTop="10px"
         fontSize="30px"
         fontWeight="500"
       >
@@ -40,7 +40,7 @@ function Dashboard() {
         templateColumns="repeat(4, 1fr)"
         gap={10}
         paddingLeft="80px"
-        paddingTop="60px"
+        paddingTop="20px"
         paddingRight="60px"
       >
         <Box>
@@ -67,9 +67,9 @@ function Dashboard() {
         templateColumns="repeat(4, 1fr)"
         gap={10}
         paddingLeft="80px"
-        paddingTop="60px"
+        paddingTop="20px"
         paddingRight="60px"
-        paddingBottom="60px"
+        paddingBottom="30px"
       >
         <Box>
           <HStack spacing="20px">

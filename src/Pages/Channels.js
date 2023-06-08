@@ -1,12 +1,11 @@
 import { useContext, useMemo, useState } from "react";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
-import { HStack, Text } from "@chakra-ui/react";
-import AddChannelModal from "../Components/AddChannelModal";
-import EditChannelModal from "../Components/EditChannelModal";
-import DeleteChannelModal from "../Components/DeleteChannelModal";
-import { useDisclosure, Input, Box } from "@chakra-ui/react";
+import axios from "axios";
 import {
+  HStack,
+  useDisclosure,
+  Box,
   Table,
   Thead,
   Tbody,
@@ -18,11 +17,13 @@ import {
   Button,
   Spinner,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import AddChannelModal from "../Components/AddChannelModal";
+import EditChannelModal from "../Components/EditChannelModal";
+import DeleteChannelModal from "../Components/DeleteChannelModal";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
 import { HEADERS } from "../constants";
-import axios from "axios";
+import Search from "../Components/Search";
 
 const CHANNEL_HEADERS = [
   "Channel Name",
@@ -38,11 +39,13 @@ function Channels() {
     onOpen: onAddOpen,
     onClose: onAddClose,
   } = useDisclosure();
+
   const {
     isOpen: isEditOpen,
     onOpen: onEditOpen_,
     onClose: onEditClose_,
   } = useDisclosure();
+
   const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen_,
@@ -52,6 +55,8 @@ function Channels() {
   const [editId, setEditId] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [channelData, setChannelData] = useState({});
+  const [filteredChannels, setFilteredChannels] = useState([]);
+
   const { channels, setChannels } = useContext(DataContext);
   const { token } = useContext(AuthContext);
 
@@ -117,8 +122,6 @@ function Channels() {
         />
       </Box>
 
-      <Box paddingTop="20px" paddingLeft="20px"></Box>
-
       <Box paddingLeft="20px" paddingTop="10px" paddingBottom="35px">
         <HStack spacing="100px">
           <Box w="70px" h="10" bg="white" paddingTop="25px">
@@ -131,15 +134,11 @@ function Channels() {
               </CSVLink>
             </Button>
           </Box>
-          <Box w="170px" h="15" bg="white" paddingBottom="35px">
-            <Text>Search this table</Text>
-            <Input w="250px" border="3px Solid skyblue" placeholder="Search" />
-          </Box>
-          <Box w="180px" h="10" bg="white" paddingTop="25px">
-            <Button color="skyblue" bg="white" border="2px Solid skyblue">
-              <Link to="">Clear</Link>
-            </Button>
-          </Box>
+          <Search
+            setFilteredList={setFilteredChannels}
+            list={channels}
+            key_={"channel"}
+          />
         </HStack>
       </Box>
 
