@@ -71,10 +71,10 @@ function Transaction() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px solid black">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 <Th>User Id</Th>
                 <Th>Subscription Id</Th>
                 <Th>Transaction Id</Th>

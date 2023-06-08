@@ -1,6 +1,18 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Center,
+  Stack,
+  Card,
+  AbsoluteCenter,
+  CardBody,
+  CardHeader,
+  Heading,
+} from "@chakra-ui/react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -26,28 +38,41 @@ export default function Login() {
   };
 
   return (
-    <>
-      <FormControl>
-        <FormLabel>Email address</FormLabel>
-        <Input
-          type="email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-      </FormControl>
-      <Button onClick={onLogin}>Login</Button>
-    </>
+    <AbsoluteCenter>
+      <Card padding="10">
+        <CardHeader>
+          <Center>
+            <Heading size="md">Admin Login</Heading>
+          </Center>
+        </CardHeader>
+        <CardBody>
+          <Stack spacing="4">
+            <FormControl>
+              <FormLabel>Email address</FormLabel>
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Password</FormLabel>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            </FormControl>
+            <Button colorScheme="teal" size="md" onClick={onLogin}>
+              Login
+            </Button>
+          </Stack>
+        </CardBody>
+      </Card>
+    </AbsoluteCenter>
   );
 }

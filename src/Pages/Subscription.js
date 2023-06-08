@@ -9,6 +9,8 @@ import {
   Th,
   Td,
   TableContainer,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../Context/DataContext";
@@ -117,10 +119,10 @@ function Subscription() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px solid black">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 <Th>Package Name</Th>
                 <Th>Package Type</Th>
                 <Th>Package Photo</Th>
@@ -129,30 +131,36 @@ function Subscription() {
               </Tr>
             </Thead>
             <Tbody>
-              {subscriptions.map((subscription) => {
-                return (
-                  <Tr>
-                    <Td>{subscription.packagename}</Td>
-                    <Td>{subscription.packagetype ?? "----------"}</Td>
-                    <Td>
-                      <img
-                        src={`${process.env.REACT_APP_URL}/package/${subscription.packagephoto}`}
-                      ></img>
-                    </Td>
-                    <Td>{subscription.cost}</Td>
-                    <Td>
-                      <HStack spacing="10px">
-                        <Button
-                          colorScheme="red"
-                          onClick={onDeleteOpen(subscription._id)}
-                        >
-                          Delete
-                        </Button>
-                      </HStack>
-                    </Td>
-                  </Tr>
-                );
-              })}
+              {!subscriptions.length ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                subscriptions.map((subscription) => {
+                  return (
+                    <Tr>
+                      <Td>{subscription.packagename}</Td>
+                      <Td>{subscription.packagetype ?? "----------"}</Td>
+                      <Td>
+                        <img
+                          src={`${process.env.REACT_APP_URL}/package/${subscription.packagephoto}`}
+                        ></img>
+                      </Td>
+                      <Td>{subscription.cost}</Td>
+                      <Td>
+                        <HStack spacing="10px">
+                          <Button
+                            colorScheme="red"
+                            onClick={onDeleteOpen(subscription._id)}
+                          >
+                            Delete
+                          </Button>
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

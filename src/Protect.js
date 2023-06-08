@@ -14,7 +14,7 @@ export default function Protect({ children }) {
     } else if (token !== "" && location.pathname === "/") {
       navigate("/dashboard");
     }
-  }, [token, location]);
+  }, [token, location, navigate]);
 
   return <>{children}</>;
 }

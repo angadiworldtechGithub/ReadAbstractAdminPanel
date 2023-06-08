@@ -10,6 +10,8 @@ import {
   Tr,
   Th,
   Td,
+  Center,
+  Spinner,
   TableContainer,
 } from "@chakra-ui/react";
 import AddAuthorModal from "../Components/AddAuthorModal";
@@ -138,10 +140,10 @@ function Author() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px solid black">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 {AUTHOR_HEADERS.map((header) => {
                   if (header === "About Author") {
                     return (
@@ -155,35 +157,41 @@ function Author() {
               </Tr>
             </Thead>
             <Tbody>
-              {authors.map((author) => {
-                return (
-                  <Tr key={author._id}>
-                    <Td>{author.authorname}</Td>
-                    <Td>
-                      <img
-                        src={`${process.env.REACT_APP_URL}/authorimage/${author.authorimage}`}
-                      ></img>
-                    </Td>
-                    <Td>{author.aboutauthor}</Td>
-                    <Td>
-                      <HStack spacing="10px">
-                        <Button
-                          onClick={onDeleteOpen(author._id)}
-                          colorScheme="red"
-                        >
-                          Delete
-                        </Button>
-                        <Button
-                          onClick={onEditOpen(author._id, author)}
-                          colorScheme="red"
-                        >
-                          Edit
-                        </Button>
-                      </HStack>
-                    </Td>
-                  </Tr>
-                );
-              })}
+              {!authors.length ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                authors.map((author) => {
+                  return (
+                    <Tr key={author._id}>
+                      <Td>{author.authorname}</Td>
+                      <Td>
+                        <img
+                          src={`${process.env.REACT_APP_URL}/authorimage/${author.authorimage}`}
+                        ></img>
+                      </Td>
+                      <Td>{author.aboutauthor}</Td>
+                      <Td>
+                        <HStack spacing="10px">
+                          <Button
+                            onClick={onDeleteOpen(author._id)}
+                            colorScheme="red"
+                          >
+                            Delete
+                          </Button>
+                          <Button
+                            onClick={onEditOpen(author._id, author)}
+                            colorScheme="red"
+                          >
+                            Edit
+                          </Button>
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

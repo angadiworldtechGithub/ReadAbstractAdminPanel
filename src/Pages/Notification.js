@@ -9,6 +9,8 @@ import {
   Th,
   Td,
   TableContainer,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AddNotificationModal from "../Components/AddNotificationModal";
@@ -51,23 +53,29 @@ function Notification() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px solid black">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 <Th>Notification</Th>
                 <Th>Date & Time</Th>
               </Tr>
             </Thead>
             <Tbody>
-              {notifications.map((notification) => {
-                return (
-                  <Tr>
-                    <Td>{notification.text}</Td>
-                    <Td>{notification.createdAt}</Td>
-                  </Tr>
-                );
-              })}
+              {!notifications.length ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                notifications.map((notification) => {
+                  return (
+                    <Tr>
+                      <Td>{notification.text}</Td>
+                      <Td>{notification.createdAt}</Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

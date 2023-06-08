@@ -9,6 +9,8 @@ import {
   Th,
   Td,
   TableContainer,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../Context/DataContext";
@@ -99,7 +101,7 @@ function User() {
   return (
     <>
       <Box paddingTop="20px" paddingLeft="20px">
-        <Box padding="20px 20px 20px 20px" fontSize="30px" fontWeight="600">
+        <Box padding="15px 15px 15px 15px" fontSize="30px" fontWeight="600">
           User
         </Box>
         <EditUserModal
@@ -141,10 +143,10 @@ function User() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px solid black">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 <Th>User Id</Th>
                 <Th>Name</Th>
                 <Th>Phone Number</Th>
@@ -155,38 +157,44 @@ function User() {
               </Tr>
             </Thead>
             <Tbody>
-              {users.map((user) => {
-                return (
-                  <Tr key={user._id}>
-                    <Td>{user._id}</Td>
-                    <Td>{user.name}</Td>
-                    <Td>{user.mobilenumber}</Td>
-                    <Td>{user.email}</Td>
-                    <Td>
-                      <img
-                        src={`${process.env.REACT_APP_URL}/profile/${user.profilephoto}`}
-                      ></img>
-                    </Td>
-                    <Td>{user.status}</Td>
-                    <Td>
-                      <HStack spacing="10px">
-                        <Button
-                          colorScheme="red"
-                          onClick={onDeleteOpen(user._id)}
-                        >
-                          Delete
-                        </Button>
-                        <Button
-                          colorScheme="red"
-                          onClick={onEditOpen(user._id, user)}
-                        >
-                          Edit
-                        </Button>
-                      </HStack>
-                    </Td>
-                  </Tr>
-                );
-              })}
+              {!users.length ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                users.map((user) => {
+                  return (
+                    <Tr key={user._id}>
+                      <Td>{user._id}</Td>
+                      <Td>{user.name}</Td>
+                      <Td>{user.mobilenumber}</Td>
+                      <Td>{user.email}</Td>
+                      <Td>
+                        <img
+                          src={`${process.env.REACT_APP_URL}/profile/${user.profilephoto}`}
+                        ></img>
+                      </Td>
+                      <Td>{user.status}</Td>
+                      <Td>
+                        <HStack spacing="10px">
+                          <Button
+                            colorScheme="red"
+                            onClick={onDeleteOpen(user._id)}
+                          >
+                            Delete
+                          </Button>
+                          <Button
+                            colorScheme="red"
+                            onClick={onEditOpen(user._id, user)}
+                          >
+                            Edit
+                          </Button>
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

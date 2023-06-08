@@ -33,7 +33,7 @@ function Dashboard() {
         fontSize="30px"
         fontWeight="500"
       >
-        <Link to="/">DashBoard</Link>
+        <Link to="/">Dashboard</Link>
       </Box>
 
       <Grid
@@ -69,9 +69,10 @@ function Dashboard() {
         paddingLeft="80px"
         paddingTop="60px"
         paddingRight="60px"
+        paddingBottom="60px"
       >
         <Box>
-          <HStack spacing="30px">
+          <HStack spacing="20px">
             <StyledGridItem>
               Total Users
               <h1>{dashboard.userCount}</h1>

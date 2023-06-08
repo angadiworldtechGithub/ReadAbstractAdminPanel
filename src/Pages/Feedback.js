@@ -9,6 +9,8 @@ import {
   Th,
   Td,
   TableContainer,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../Context/DataContext";
@@ -101,10 +103,10 @@ export default function Feedback() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px solid black">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 <Th>User Id</Th>
                 <Th>Feedback</Th>
                 <Th>Rating</Th>
@@ -113,26 +115,32 @@ export default function Feedback() {
               </Tr>
             </Thead>
             <Tbody>
-              {feedbacks.map((feedback) => {
-                return (
-                  <Tr>
-                    <Td>{feedback.userid}</Td>
-                    <Td>{feedback.feedback}</Td>
-                    <Td>{feedback.rating}</Td>
-                    <Td>{feedback.placeddate}</Td>
-                    <Td>
-                      <HStack spacing="10px">
-                        <Button
-                          colorScheme="red"
-                          onClick={onDeleteOpen(feedback._id)}
-                        >
-                          Delete
-                        </Button>
-                      </HStack>
-                    </Td>
-                  </Tr>
-                );
-              })}
+              {!feedbacks.length ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                feedbacks.map((feedback) => {
+                  return (
+                    <Tr>
+                      <Td>{feedback.userid}</Td>
+                      <Td>{feedback.feedback}</Td>
+                      <Td>{feedback.rating}</Td>
+                      <Td>{feedback.placeddate}</Td>
+                      <Td>
+                        <HStack spacing="10px">
+                          <Button
+                            colorScheme="red"
+                            onClick={onDeleteOpen(feedback._id)}
+                          >
+                            Delete
+                          </Button>
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

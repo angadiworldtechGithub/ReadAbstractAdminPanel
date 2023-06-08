@@ -10,6 +10,8 @@ import {
   Th,
   Td,
   TableContainer,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import shortid from "shortid";
@@ -100,10 +102,10 @@ function Comments() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px solid black">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 <Th>User Id</Th>
                 <Th>Book Id</Th>
                 <Th>Comment</Th>
@@ -111,25 +113,31 @@ function Comments() {
               </Tr>
             </Thead>
             <Tbody>
-              {comments.map((comment) => {
-                return (
-                  <Tr key={comment._id}>
-                    <Td>{comment.userid}</Td>
-                    <Td>{comment.bookid}</Td>
-                    <Td>{comment.comment}</Td>
-                    <Td>
-                      <HStack spacing="10px">
-                        <Button
-                          colorScheme="red"
-                          onClick={onDeleteOpen(comment._id)}
-                        >
-                          Delete
-                        </Button>
-                      </HStack>
-                    </Td>
-                  </Tr>
-                );
-              })}
+              {!comments.length ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                comments.map((comment) => {
+                  return (
+                    <Tr key={comment._id}>
+                      <Td>{comment.userid}</Td>
+                      <Td>{comment.bookid}</Td>
+                      <Td>{comment.comment}</Td>
+                      <Td>
+                        <HStack spacing="10px">
+                          <Button
+                            colorScheme="red"
+                            onClick={onDeleteOpen(comment._id)}
+                          >
+                            Delete
+                          </Button>
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

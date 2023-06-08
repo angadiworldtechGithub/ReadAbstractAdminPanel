@@ -5,7 +5,7 @@ import { HStack, Text } from "@chakra-ui/react";
 import AddChannelModal from "../Components/AddChannelModal";
 import EditChannelModal from "../Components/EditChannelModal";
 import DeleteChannelModal from "../Components/DeleteChannelModal";
-import { useDisclosure, Button, Input, Box } from "@chakra-ui/react";
+import { useDisclosure, Input, Box } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -14,6 +14,9 @@ import {
   Th,
   Td,
   TableContainer,
+  Center,
+  Button,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../Context/DataContext";
@@ -141,10 +144,10 @@ function Channels() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black">
+        <TableContainer border="2px solid black">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 <Th>Channel Name</Th>
                 <Th>Channel Image</Th>
                 <Box maxWidth="100%">
@@ -154,35 +157,41 @@ function Channels() {
               </Tr>
             </Thead>
             <Tbody>
-              {channels.map((channel) => {
-                return (
-                  <Tr key={channel._id}>
-                    <Td>{channel.channel}</Td>
-                    <Td>
-                      <img
-                        src={`${process.env.REACT_APP_URL}/channelimage/${channel.channelimage}`}
-                      ></img>
-                    </Td>
-                    <Td>{channel.discription}</Td>
-                    <Td>
-                      <HStack spacing="10px">
-                        <Button
-                          onClick={onDeleteOpen(channel._id)}
-                          colorScheme="green"
-                        >
-                          Delete
-                        </Button>
-                        <Button
-                          onClick={onEditOpen(channel._id, channel)}
-                          colorScheme="green"
-                        >
-                          Edit
-                        </Button>
-                      </HStack>
-                    </Td>
-                  </Tr>
-                );
-              })}
+              {!channels.length ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                channels.map((channel) => {
+                  return (
+                    <Tr key={channel._id}>
+                      <Td>{channel.channel}</Td>
+                      <Td>
+                        <img
+                          src={`${process.env.REACT_APP_URL}/channelimage/${channel.channelimage}`}
+                        ></img>
+                      </Td>
+                      <Td>{channel.discription}</Td>
+                      <Td>
+                        <HStack spacing="10px">
+                          <Button
+                            onClick={onDeleteOpen(channel._id)}
+                            colorScheme="green"
+                          >
+                            Delete
+                          </Button>
+                          <Button
+                            onClick={onEditOpen(channel._id, channel)}
+                            colorScheme="green"
+                          >
+                            Edit
+                          </Button>
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  );
+                })
+              )}
             </Tbody>
           </Table>
         </TableContainer>

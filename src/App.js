@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Sidebar from "./Components/Sidebar";
+import Layout from "./Components/Layout";
+import Header from "./Components/Header";
 import Dashboard from "./Pages/Dashboard";
 import Channels from "./Pages/Channels";
 import Author from "./Pages/Author";
@@ -30,7 +31,7 @@ function App() {
         <DataContextProvider>
           <BrowserRouter>
             <Protect>
-              <Sidebar>
+              <Layout>
                 <Routes>
                   <Route path="/" element={<Login />}></Route>
                   <Route path="/dashboard" element={<Dashboard />}></Route>
@@ -54,7 +55,7 @@ function App() {
                   <Route path="/user" element={<User />}></Route>
                   <Route path="/bookpages" element={<BookPage />}></Route>
                 </Routes>
-              </Sidebar>
+              </Layout>
             </Protect>
           </BrowserRouter>
         </DataContextProvider>

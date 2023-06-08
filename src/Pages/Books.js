@@ -11,6 +11,7 @@ import {
   Th,
   Td,
   TableContainer,
+  Center,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import DeleteBookModal from "../Components/DeleteBookModal";
@@ -107,10 +108,10 @@ function Books() {
       </Box>
 
       <Box maxWidth="100wv" padding="20px 20px 20px 20px">
-        <TableContainer border="2px Solid black" width="100%">
+        <TableContainer border="2px solid black" width="100%">
           <Table variant="simple">
             <Thead>
-              <Tr border="2px Solid black">
+              <Tr borderBottom="2px solid black">
                 {BOOK_HEADERS.map((header) => (
                   <Th>{header}</Th>
                 ))}
@@ -119,7 +120,9 @@ function Books() {
             </Thead>
             <Tbody>
               {!books.length ? (
-                <Spinner />
+                <Center>
+                  <Spinner />
+                </Center>
               ) : (
                 books.map((book) => {
                   return (
