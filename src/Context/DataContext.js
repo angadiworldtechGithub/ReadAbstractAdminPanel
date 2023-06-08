@@ -29,7 +29,6 @@ export function DataContextProvider({ children }) {
   const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
-    console.log(token);
     if (token && token !== "") {
       (async () => {
         // switch to callbacks

@@ -63,6 +63,8 @@ function Author() {
   }, [authors]);
 
   const onEditOpen = (id, data) => () => {
+    console.log(data);
+    console.log(id);
     setEditId(id);
     setAuthorData(data);
     onEditOpen_();
@@ -109,7 +111,7 @@ function Author() {
         <EditAuthorModal
           isOpen={isEditOpen}
           onClose={onEditClose}
-          editId={editId}
+          authorId={editId}
           authorData={authorData}
         />
         <DeleteAuthorModal

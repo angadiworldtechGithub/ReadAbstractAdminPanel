@@ -8,7 +8,6 @@ export default function Protect({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(token);
     if (token === "" && location.pathname !== "/") {
       navigate("/");
     } else if (token !== "" && location.pathname === "/") {

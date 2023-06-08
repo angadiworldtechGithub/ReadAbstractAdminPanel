@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState, useMemo } from "react";
 import axios from "axios";
 import {
   Modal,
@@ -29,14 +29,18 @@ export default function EditAuthorModal({
   const finalRef = useRef(null);
 
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState(authorData.authorname);
-  const [about, setAbout] = useState(authorData.aboutauthor);
-
+  const [name, setName] = useState("");
+  const [about, setAbout] = useState("");
   const { setAuthors } = useContext(DataContext);
   const { token } = useContext(AuthContext);
 
+  useMemo(() => {
+    setName(authorData.authorname);
+    setAbout(authorData.aboutauthor);
+  }, [isOpen]);
+
   const onEdit = async () => {
-    if (initialRef.current.files.length && name !== "" && about !== "") {
+    if (name !== "" && about !== "") {
       setLoading(true);
       const {
         data: { author },
@@ -53,7 +57,7 @@ export default function EditAuthorModal({
       );
       setAuthors((authors) => {
         const index = authors.findIndex((author_) => author_.id === authorId);
-        authors[index] = { ...authors[index], ...author };
+        authors[index] = { ...author };
         return [...authors];
       });
       onClose();
