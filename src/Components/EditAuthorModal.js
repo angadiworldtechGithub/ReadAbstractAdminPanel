@@ -1,5 +1,5 @@
-import { useRef } from "react";
-
+import { useContext, useRef, useState } from "react";
+import axios from "axios";
 import {
   Modal,
   ModalOverlay,
@@ -14,6 +14,10 @@ import {
   Input,
   HStack,
 } from "@chakra-ui/react";
+import { DataContext } from "../Context/DataContext";
+import SpinnerButton from "./SpinnerButton";
+import { FILE_HEADERS } from "../utilities";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function EditAuthorModal({
   isOpen,
@@ -24,7 +28,38 @@ export default function EditAuthorModal({
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
-  const onEdit = () => {};
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState(authorData.authorname);
+  const [about, setAbout] = useState(authorData.aboutauthor);
+
+  const { setAuthors } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
+
+  const onEdit = async () => {
+    if (initialRef.current.files.length && name !== "" && about !== "") {
+      setLoading(true);
+      const {
+        data: { author },
+      } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/editauthor/${authorId}`,
+        {
+          authorimage: initialRef.current.files[0],
+          authorname: name,
+          aboutauthor: about,
+        },
+        {
+          headers: FILE_HEADERS(token),
+        }
+      );
+      setAuthors((authors) => {
+        const index = authors.findIndex((author_) => author_.id === authorId);
+        authors[index] = { ...authors[index], ...author };
+        return [...authors];
+      });
+      onClose();
+      setLoading(false);
+    }
+  };
 
   return (
     <Modal
@@ -48,26 +83,39 @@ export default function EditAuthorModal({
           <FormControl>
             <FormLabel>Author name</FormLabel>
             <Input
-              ref={initialRef}
               placeholder="Author name"
-              value={authorData.authorname}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </FormControl>
 
           <FormControl mt={4}>
             <FormLabel>About Author</FormLabel>
-            <Input placeholder="About Author" value={authorData.aboutauthor} />
+            <Input
+              placeholder="About Author"
+              value={about}
+              onChange={(e) => {
+                setAbout(e.target.value);
+              }}
+            />
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
           <HStack spacing="20px">
             <Button colorScheme="green" onClick={onClose}>
-              ModalCloseButton
+              Close
             </Button>
-            <Button colorScheme="red" mr={3}>
-              Add Author
-            </Button>
+            <SpinnerButton
+              loading={loading}
+              colorScheme="red"
+              mr={3}
+              onClick={onEdit}
+            >
+              Edit Author
+            </SpinnerButton>
           </HStack>
         </ModalFooter>
       </ModalContent>

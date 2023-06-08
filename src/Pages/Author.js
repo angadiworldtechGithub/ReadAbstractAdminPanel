@@ -22,7 +22,7 @@ import DeleteAuthorModal from "../Components/DeleteAuthorModal";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
 import Search from "../Components/Search";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 import axios from "axios";
 
 const AUTHOR_HEADERS = ["Author Name", "Author Image", "About Author"];

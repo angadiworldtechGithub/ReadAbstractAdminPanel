@@ -19,7 +19,7 @@ import shortid from "shortid";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 import DeleteCommentModal from "../Components/DeleteCommentModal";
 import Search from "../Components/Search";
 import axios from "axios";

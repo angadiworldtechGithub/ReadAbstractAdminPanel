@@ -18,7 +18,7 @@ import { AuthContext } from "../Context/AuthContext";
 import AddSubscriptionModal from "../Components/AddSubscriptionModal";
 import DeleteSubscriptionModal from "../Components/DeleteSubscriptionModal";
 import axios from "axios";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
 

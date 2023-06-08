@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 import DeleteFeedbackModal from "../Components/DeleteFeedbackModal";
 import Search from "../Components/Search";
 

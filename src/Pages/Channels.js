@@ -22,7 +22,7 @@ import EditChannelModal from "../Components/EditChannelModal";
 import DeleteChannelModal from "../Components/DeleteChannelModal";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 import Search from "../Components/Search";
 
 const CHANNEL_HEADERS = [

@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Spinner } from "@chakra-ui/react";
-import { FILE_HEADERS } from "../constants";
+import { FILE_HEADERS } from "../utilities";
 import axios from "axios";
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";

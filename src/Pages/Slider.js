@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import AddSliderModal from "../Components/AddSliderModal";
 import { DataContext } from "../Context/DataContext";
 import DeleteSliderModal from "../Components/DeleteSliderModal";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 import axios from "axios";
 
 function Slider() {

@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
 

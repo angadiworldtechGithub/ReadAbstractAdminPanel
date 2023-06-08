@@ -20,7 +20,7 @@ import DeleteUserModal from "../Components/DeleteUserModal";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
 import axios from "axios";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 
 const USER_HEADERS = [
   "User Id",

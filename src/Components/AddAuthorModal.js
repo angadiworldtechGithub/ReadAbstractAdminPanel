@@ -1,5 +1,5 @@
 import { useRef, useState, useContext } from "react";
-import { FILE_HEADERS } from "../constants";
+import { FILE_HEADERS } from "../utilities";
 import {
   Modal,
   ModalOverlay,

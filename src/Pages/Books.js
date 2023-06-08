@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 import DeleteBookModal from "../Components/DeleteBookModal";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
-import { HEADERS } from "../constants";
+import { HEADERS } from "../utilities";
 import Search from "../Components/Search";
 
 const BOOK_HEADERS = [

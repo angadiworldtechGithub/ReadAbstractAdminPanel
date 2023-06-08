@@ -13,7 +13,7 @@ import {
   HStack,
   Input,
 } from "@chakra-ui/react";
-import { FILE_HEADERS } from "../constants";
+import { FILE_HEADERS } from "../utilities";
 import axios from "axios";
 import { Spinner } from "@chakra-ui/react";
 import { useContext } from "react";
