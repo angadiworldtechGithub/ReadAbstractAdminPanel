@@ -170,7 +170,7 @@ function Channels() {
                           src={`${process.env.REACT_APP_URL}/channelimage/${channel.channelimage}`}
                         ></img>
                       </Td>
-                      <Td>{channel.discription}</Td>
+                      <Td>{channel.channeldiscription}</Td>
                       <Td>
                         <HStack spacing="10px">
                           <Button

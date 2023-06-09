@@ -15,7 +15,6 @@ import {
 import { Link } from "react-router-dom";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
-import EditUserModal from "../Components/EditUserModal";
 import DeleteUserModal from "../Components/DeleteUserModal";
 import { CSVLink } from "react-csv";
 import shortid from "shortid";
@@ -41,34 +40,15 @@ const USER_KEYS = [
 
 function User() {
   const {
-    isOpen: isEditOpen,
-    onOpen: onEditOpen_,
-    onClose: onEditClose_,
-  } = useDisclosure();
-  const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen_,
     onClose: onDeleteClose_,
   } = useDisclosure();
 
-  const [editId, setEditId] = useState("");
   const [deleteId, setDeleteId] = useState("");
-  const [userData, setUserData] = useState({});
   const [deleteLoading, setDeleteLoading] = useState(false);
   const { users, setUsers } = useContext(DataContext);
   const { token } = useContext(AuthContext);
-
-  const onEditOpen = (id, data) => () => {
-    setEditId(id);
-    setUserData(data);
-    onEditOpen_();
-  };
-
-  const onEditClose = () => {
-    setEditId("");
-    setUserData({});
-    onEditClose_();
-  };
 
   const onDeleteOpen = (id) => () => {
     setDeleteId(id);
@@ -104,12 +84,6 @@ function User() {
         <Box padding="15px 15px 15px 15px" fontSize="30px" fontWeight="600">
           User
         </Box>
-        <EditUserModal
-          isOpen={isEditOpen}
-          onClose={onEditClose}
-          userId={editId}
-          userData={userData}
-        />
         <DeleteUserModal
           isOpen={isDeleteOpen}
           onClose={onDeleteClose_}
@@ -182,12 +156,6 @@ function User() {
                             onClick={onDeleteOpen(user._id)}
                           >
                             Delete
-                          </Button>
-                          <Button
-                            colorScheme="red"
-                            onClick={onEditOpen(user._id, user)}
-                          >
-                            Edit
                           </Button>
                         </HStack>
                       </Td>

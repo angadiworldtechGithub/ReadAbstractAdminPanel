@@ -56,7 +56,7 @@ export default function EditAuthorModal({
         }
       );
       setAuthors((authors) => {
-        const index = authors.findIndex((author_) => author_.id === authorId);
+        const index = authors.findIndex((author_) => author_._id === authorId);
         authors[index] = { ...author };
         return [...authors];
       });
@@ -85,7 +85,7 @@ export default function EditAuthorModal({
           </FormControl>
 
           <FormControl>
-            <FormLabel>Author name</FormLabel>
+            <FormLabel>Author Name</FormLabel>
             <Input
               placeholder="Author name"
               value={name}

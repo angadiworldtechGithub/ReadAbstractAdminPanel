@@ -11,7 +11,7 @@ export default function Layout({ children }) {
       <Header />
       <Flex>
         {token !== "" ? <Sidebar /> : <></>}
-        <Box minH="500px">{children}</Box>
+        <Box minH="80vh">{children}</Box>
       </Flex>
       <Box
         h="50px"

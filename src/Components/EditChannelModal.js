@@ -1,5 +1,5 @@
-import { useRef } from "react";
-
+import { useContext, useRef, useState, useMemo } from "react";
+import axios from "axios";
 import {
   Modal,
   ModalOverlay,
@@ -14,6 +14,10 @@ import {
   Input,
   HStack,
 } from "@chakra-ui/react";
+import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
+import { FILE_HEADERS } from "../utilities";
+import SpinnerButton from "./SpinnerButton";
 
 export default function EditChannelModal({
   isOpen,
@@ -24,7 +28,46 @@ export default function EditChannelModal({
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
-  const onEdit = () => {};
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
+  useMemo(() => {
+    setName(channelData.channel);
+    setDescription(channelData.channeldiscription);
+  }, [channelData]);
+
+  const { token } = useContext(AuthContext);
+  const { setChannels } = useContext(DataContext);
+
+  const onEdit = async () => {
+    if (name !== "" && description !== "") {
+      setLoading(true);
+      const {
+        data: { channel },
+      } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/editchannel/${channelId}`,
+        {
+          channelimage: initialRef.current.files[0],
+          channel: name,
+          channeldiscription: description,
+        },
+        {
+          headers: FILE_HEADERS(token),
+        }
+      );
+      console.log(channel);
+      setChannels((channels) => {
+        const index = channels.findIndex(
+          (channel_) => channel_._id === channelId
+        );
+        channels[index] = { ...channel };
+        return [...channels];
+      });
+      onClose();
+      setLoading(false);
+    }
+  };
 
   return (
     <Modal
@@ -46,19 +89,24 @@ export default function EditChannelModal({
           </FormControl>
 
           <FormControl>
-            <FormLabel>Channel name</FormLabel>
+            <FormLabel>Channel Name</FormLabel>
             <Input
-              ref={initialRef}
               placeholder="Channel name"
-              value={channelData.channel}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </FormControl>
 
           <FormControl mt={4}>
-            <FormLabel>Channel description</FormLabel>
+            <FormLabel>Channel Description</FormLabel>
             <Input
               placeholder="Channel description"
-              value={channelData.discription}
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
             />
           </FormControl>
         </ModalBody>
@@ -66,9 +114,14 @@ export default function EditChannelModal({
         <ModalFooter>
           <HStack spacing="20px">
             <Button onClick={onClose}>Close</Button>
-            <Button onClick={onEdit} colorScheme="blue" mr={3}>
+            <SpinnerButton
+              loading={loading}
+              onClick={onEdit}
+              colorScheme="blue"
+              mr={3}
+            >
               Add Channel
-            </Button>
+            </SpinnerButton>
           </HStack>
         </ModalFooter>
       </ModalContent>
