@@ -32,6 +32,7 @@ function Slider() {
   } = useDisclosure();
 
   const [deleteId, setDeleteId] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const {
     isOpen: isDeleteOpen,
@@ -45,6 +46,7 @@ function Slider() {
   };
 
   const onDelete = async () => {
+    setDeleteLoading(true);
     await axios.post(
       `${process.env.REACT_APP_API_URL}/deleteslider/${deleteId}`,
       {},
@@ -55,6 +57,7 @@ function Slider() {
     setSliders([...sliders.filter((slider) => slider._id !== deleteId)]);
     setDeleteId("");
     onDeleteClose_();
+    setDeleteLoading(false);
   };
 
   return (
@@ -73,6 +76,7 @@ function Slider() {
           isOpen={isDeleteOpen}
           onClose={onDeleteClose_}
           onDelete={onDelete}
+          loading={deleteLoading}
         />
       </Box>
 
