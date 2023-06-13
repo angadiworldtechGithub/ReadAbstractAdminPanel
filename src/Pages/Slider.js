@@ -16,12 +16,14 @@ import { TableContainer } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AddSliderModal from "../Components/AddSliderModal";
 import { DataContext } from "../Context/DataContext";
+import { AuthContext } from "../Context/AuthContext";
 import DeleteSliderModal from "../Components/DeleteSliderModal";
 import { HEADERS } from "../utilities";
 import axios from "axios";
 
 function Slider() {
   const { sliders, setSliders } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
 
   const {
     isOpen: isAddOpen,
@@ -47,7 +49,7 @@ function Slider() {
       `${process.env.REACT_APP_API_URL}/deleteslider/${deleteId}`,
       {},
       {
-        headers: HEADERS,
+        headers: HEADERS(token),
       }
     );
     setSliders([...sliders.filter((slider) => slider._id !== deleteId)]);
