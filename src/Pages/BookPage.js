@@ -1,7 +1,7 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useCallback } from "react";
 import { HStack } from "@chakra-ui/react";
 
-import { Checkbox } from "@chakra-ui/react";
+import { Checkbox, Textarea } from "@chakra-ui/react";
 import {
   Button,
   FormControl,
@@ -16,6 +16,7 @@ import { FILE_HEADERS } from "../utilities";
 import axios from "axios";
 import { DataContext } from "../Context/DataContext";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 const BOOK_TEMPLATE = {
   is: true,
@@ -26,6 +27,7 @@ const BOOK_TEMPLATE = {
 
 export default function BookPage() {
   const { channels, authors, setBooks } = useContext(DataContext);
+  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const fileRef = useRef(null);
@@ -45,8 +47,7 @@ export default function BookPage() {
   const [hindi, setHindi] = useState(BOOK_TEMPLATE);
   const [kannada, setKannada] = useState(BOOK_TEMPLATE);
 
-  const onAdd = async () => {
-    console.log("!!!");
+  const onAdd = useCallback(async () => {
     if (
       fileRef.current.files.length &&
       title !== "" &&
@@ -84,14 +85,28 @@ export default function BookPage() {
           channelid: channelId,
         },
         {
-          headers: FILE_HEADERS,
+          headers: FILE_HEADERS(token),
         }
       );
       setBooks((books) => [...books.concat([{ ...book }])]);
       setLoading(false);
       navigate("/books");
     }
-  };
+  }, [
+    author,
+    booktype,
+    channelId,
+    english,
+    hindi,
+    kannada,
+    minutes,
+    navigate,
+    setBooks,
+    title,
+    token,
+    type,
+    year,
+  ]);
 
   return (
     <Box padding="20px 20px 20px 20px">
@@ -252,7 +267,8 @@ export default function BookPage() {
                   </Checkbox>
                 </li>
                 <Stack spacing={3}>
-                  <Input
+                  <Textarea
+                    style={{ height: "100px" }}
                     type="text"
                     placeholder="Quick"
                     value={english.quick}
@@ -263,7 +279,8 @@ export default function BookPage() {
                       }));
                     }}
                   />
-                  <Input
+                  <Textarea
+                    style={{ height: "200px" }}
                     type="text"
                     placeholder="Summary"
                     value={english.summary}
@@ -274,7 +291,8 @@ export default function BookPage() {
                       }));
                     }}
                   />
-                  <Input
+                  <Textarea
+                    style={{ height: "100px" }}
                     type="text"
                     placeholder="Conclusion"
                     value={english.conclusion}
@@ -288,6 +306,7 @@ export default function BookPage() {
                 </Stack>
                 <li>
                   <Checkbox
+                    style={{ marginTop: "30px" }}
                     value={kannada.is}
                     onChange={(e) => {
                       setKannada((kannada) => ({
@@ -300,7 +319,8 @@ export default function BookPage() {
                   </Checkbox>
                 </li>
                 <Stack spacing={3}>
-                  <Input
+                  <Textarea
+                    style={{ height: "100px" }}
                     type="text"
                     placeholder="Quick"
                     value={kannada.quick}
@@ -311,7 +331,8 @@ export default function BookPage() {
                       }));
                     }}
                   />
-                  <Input
+                  <Textarea
+                    style={{ height: "200px" }}
                     type="text"
                     placeholder="Summary"
                     value={kannada.summary}
@@ -322,7 +343,8 @@ export default function BookPage() {
                       }));
                     }}
                   />
-                  <Input
+                  <Textarea
+                    style={{ height: "100px" }}
                     type="text"
                     placeholder="Conclusion"
                     value={kannada.conclusion}
@@ -336,6 +358,7 @@ export default function BookPage() {
                 </Stack>
                 <li>
                   <Checkbox
+                    style={{ marginTop: "30px" }}
                     checked={hindi.is}
                     onChange={(e) => {
                       setHindi((hindi) => ({
@@ -348,7 +371,8 @@ export default function BookPage() {
                   </Checkbox>
                 </li>
                 <Stack spacing={3}>
-                  <Input
+                  <Textarea
+                    style={{ height: "100px" }}
                     type="text"
                     placeholder="Quick"
                     value={hindi.quick}
@@ -359,7 +383,8 @@ export default function BookPage() {
                       }));
                     }}
                   />
-                  <Input
+                  <Textarea
+                    style={{ height: "200px" }}
                     type="text"
                     placeholder="Summary"
                     value={hindi.summary}
@@ -370,7 +395,8 @@ export default function BookPage() {
                       }));
                     }}
                   />
-                  <Input
+                  <Textarea
+                    style={{ height: "100px" }}
                     type="text"
                     placeholder="Conclusion"
                     value={hindi.conclusion}
@@ -385,11 +411,11 @@ export default function BookPage() {
               </ul>
             </Box>
           </Box>
+          <Button colorScheme="green" onClick={onAdd}>
+            {loading ? <Spinner /> : "Add Book"}
+          </Button>
         </Box>
       </Box>
-      <Button colorScheme="green" onClick={onAdd}>
-        {loading ? <Spinner /> : "Add Book"}
-      </Button>
     </Box>
   );
 }
