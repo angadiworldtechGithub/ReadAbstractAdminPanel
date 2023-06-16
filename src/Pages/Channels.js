@@ -26,12 +26,13 @@ import { HEADERS } from "../utilities";
 import Search from "../Components/Search";
 
 const CHANNEL_HEADERS = [
+  "Channel Id",
   "Channel Name",
   "Channel Image",
   "Channel Description",
 ];
 
-const CHANNEL_KEYS = ["channel", "channelimage", "discription"];
+const CHANNEL_KEYS = ["_id", "channel", "channelimage", "discription"];
 
 function Channels() {
   const {
@@ -147,6 +148,7 @@ function Channels() {
           <Table variant="simple">
             <Thead>
               <Tr borderBottom="2px solid black">
+                <Th>Channel Id</Th>
                 <Th>Channel Name</Th>
                 <Th>Channel Image</Th>
                 <Box maxWidth="100%">
@@ -164,6 +166,7 @@ function Channels() {
                 channels.map((channel) => {
                   return (
                     <Tr key={channel._id}>
+                      <Td>{channel._id}</Td>
                       <Td>{channel.channel}</Td>
                       <Td>
                         <img

@@ -41,7 +41,7 @@ export default function AddSliderModal({ isOpen, onClose, setSliders }) {
           headers: FILE_HEADERS(token),
         }
       );
-      setSliders((sliders) => [...sliders.concat([{ slider: slider.slider }])]);
+      setSliders((sliders) => [...sliders.concat([{ ...slider }])]);
       onClose();
       setLoading(false);
     }

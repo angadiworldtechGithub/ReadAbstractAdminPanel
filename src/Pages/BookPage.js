@@ -15,7 +15,7 @@ import { Spinner } from "@chakra-ui/react";
 import { FILE_HEADERS } from "../utilities";
 import axios from "axios";
 import { DataContext } from "../Context/DataContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 
 const BOOK_TEMPLATE = {
@@ -23,6 +23,7 @@ const BOOK_TEMPLATE = {
   summary: "",
   quick: "",
   conclusion: "",
+  feature: "",
 };
 
 export default function BookPage() {
@@ -42,7 +43,7 @@ export default function BookPage() {
   });
   const [booktype, setBookType] = useState("Article");
   const [type, setType] = useState("premium");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState("10");
   const [english, setEnglish] = useState(BOOK_TEMPLATE);
   const [hindi, setHindi] = useState(BOOK_TEMPLATE);
   const [kannada, setKannada] = useState(BOOK_TEMPLATE);
@@ -70,15 +71,19 @@ export default function BookPage() {
           authorname: author.split(":")[1],
           booktype,
           type,
+          rating,
           english: english.is,
+          feature: english.feature,
           quick: english.quick,
           summary: english.summary,
           conclusion: english.conclusion,
           hindi: hindi.is,
+          hindifeature: hindi.feature,
           hindiquick: hindi.quick,
           hindisummary: hindi.summary,
           hindiconclusion: hindi.conclusion,
           kannada: kannada.is,
+          kannadafeature: kannada.feature,
           kannadaquick: kannada.quick,
           kannadasummary: kannada.summary,
           kannadaconclusion: kannada.conclusion,
@@ -96,11 +101,24 @@ export default function BookPage() {
     author,
     booktype,
     channelId,
-    english,
-    hindi,
-    kannada,
+    english.conclusion,
+    english.feature,
+    english.is,
+    english.quick,
+    english.summary,
+    hindi.conclusion,
+    hindi.feature,
+    hindi.is,
+    hindi.quick,
+    hindi.summary,
+    kannada.conclusion,
+    kannada.feature,
+    kannada.is,
+    kannada.quick,
+    kannada.summary,
     minutes,
     navigate,
+    rating,
     setBooks,
     title,
     token,
@@ -168,7 +186,9 @@ export default function BookPage() {
             </Box>
             <Box w="350px" h="10" bg="white" paddingTop="25px">
               <FormControl isRequired>
-                <FormLabel w="200px">Select Author</FormLabel>
+                <FormLabel w="250px">
+                  Select Author or (<Link to="/author">Add Author</Link>)
+                </FormLabel>
                 <Select
                   placeholder="Select Author"
                   value={author}
@@ -267,6 +287,17 @@ export default function BookPage() {
                   </Checkbox>
                 </li>
                 <Stack spacing={3}>
+                  <Input
+                    type="text"
+                    placeholder="Feature"
+                    value={english.feature}
+                    onChange={(e) => {
+                      setEnglish((english) => ({
+                        ...english,
+                        feature: e.target.value,
+                      }));
+                    }}
+                  />
                   <Textarea
                     style={{ height: "100px" }}
                     type="text"
@@ -319,6 +350,17 @@ export default function BookPage() {
                   </Checkbox>
                 </li>
                 <Stack spacing={3}>
+                  <Input
+                    type="text"
+                    placeholder="Feature"
+                    value={kannada.feature}
+                    onChange={(e) => {
+                      setKannada((kannada) => ({
+                        ...kannada,
+                        feature: e.target.value,
+                      }));
+                    }}
+                  />
                   <Textarea
                     style={{ height: "100px" }}
                     type="text"
@@ -371,6 +413,17 @@ export default function BookPage() {
                   </Checkbox>
                 </li>
                 <Stack spacing={3}>
+                  <Input
+                    type="text"
+                    placeholder="Feature"
+                    value={hindi.feature}
+                    onChange={(e) => {
+                      setHindi((hindi) => ({
+                        ...hindi,
+                        feature: e.target.value,
+                      }));
+                    }}
+                  />
                   <Textarea
                     style={{ height: "100px" }}
                     type="text"
