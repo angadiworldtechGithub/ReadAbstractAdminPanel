@@ -246,11 +246,9 @@ export default function BookPage() {
                   setRating(e.target.value);
                 }}
               >
-                {["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"].map(
-                  (num) => (
-                    <option value={num}>{num}</option>
-                  )
-                )}
+                {["0", "1", "2", "3", "4", "5"].map((num) => (
+                  <option value={num}>{num}</option>
+                ))}
               </Select>
             </Box>
             <Box w="350px" h="10" bg="white" paddingTop="25px">
