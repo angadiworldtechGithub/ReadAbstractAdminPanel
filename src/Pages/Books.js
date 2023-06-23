@@ -24,9 +24,14 @@ import { AuthContext } from "../Context/AuthContext";
 import { HEADERS } from "../utilities";
 import Search from "../Components/Search";
 
-const BOOK_HEADERS = ["Book Title", "Book Image", "Author Name", "Channel Id"];
+const BOOK_HEADERS = [
+  "Book Title",
+  "Book Image",
+  "Author Name",
+  "Channel Name",
+];
 
-const BOOK_KEYS = ["title", "bookimage", "authorname", "channelid"];
+const BOOK_KEYS = ["title", "bookimage", "authorname", "channel"];
 
 function Books() {
   const [deleteId, setDeleteId] = useState("");
@@ -132,7 +137,7 @@ function Books() {
                         ></img>
                       </Td>
                       <Td>{book.authorname}</Td>
-                      <Td>{book.channelid}</Td>
+                      <Td>{book.channel}</Td>
                       <Td>
                         <HStack spacing="10px">
                           <Button

@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
-import Header from "./Components/Header";
 import Dashboard from "./Pages/Dashboard";
 import Channels from "./Pages/Channels";
 import Author from "./Pages/Author";
@@ -16,7 +15,7 @@ import Slider from "./Pages/Slider";
 import User from "./Pages/User";
 import Login from "./Pages/Login";
 import { ChakraProvider } from "@chakra-ui/react";
-import BookPage from "./Pages/BookPage";
+import AddBookPage from "./Pages/AddBookPage";
 import Pagination from "./Components/Pagination";
 import { DataContextProvider } from "./Context/DataContext";
 import Protect from "./Protect";
@@ -53,7 +52,7 @@ function App() {
                   ></Route>
                   <Route path="/slider" element={<Slider />}></Route>
                   <Route path="/user" element={<User />}></Route>
-                  <Route path="/bookpages" element={<BookPage />}></Route>
+                  <Route path="/bookpages" element={<AddBookPage />}></Route>
                 </Routes>
               </Layout>
             </Protect>
